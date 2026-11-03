@@ -1,0 +1,3 @@
+# Carpet 假人到底支持哪些 action？——直接问服务端要用法（比猜可靠 ✓）
+player Bot
+help player

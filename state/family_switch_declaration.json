@@ -1,0 +1,99 @@
+{
+ "schema": "family_switch_declaration@1",
+ "decided_by": "用户 2026-10-24：★不需要完全声明每一项改动 ✗ 仅说明改动了哪几个族的几项★",
+ "meaning": "★切到碰撞表时 ✗ 物理答案会按**族**整片变化 ✗ 本文件**按族**声明：每个族怎么变（0→1／1→0）＋ 影响几条 ✗ 不逐项列✗★",
+ "principle": "★物理只听碰撞 ✗ 名字只在名字层；变化按铁律②**在族粒度上声明**✗★",
+ "families": {
+  "fence_15": {
+   "family": "fence_15",
+   "blocks": 1052,
+   "shape": "fence",
+   "is_floor_to": 0,
+   "blocks_space_to": 1,
+   "is_floor_changed": 168,
+   "blocks_space_changed": 86,
+   "floor_true_before": 168,
+   "space_true_before": 966
+  },
+  "slab": {
+   "family": "slab",
+   "blocks": 1961,
+   "shape": "slab",
+   "is_floor_to": 1,
+   "blocks_space_to": 1,
+   "is_floor_changed": 376,
+   "blocks_space_changed": 309,
+   "floor_true_before": 1585,
+   "space_true_before": 1652
+  },
+  "full": {
+   "family": "full",
+   "blocks": 17588,
+   "shape": "full",
+   "is_floor_to": 1,
+   "blocks_space_to": 1,
+   "is_floor_changed": 3290,
+   "blocks_space_changed": 2028,
+   "floor_true_before": 14298,
+   "space_true_before": 15560
+  },
+  "snow_layer": {
+   "family": "snow_layer",
+   "blocks": 1703,
+   "shape": "pass",
+   "is_floor_to": 0,
+   "blocks_space_to": 0,
+   "is_floor_changed": 689,
+   "blocks_space_changed": 1240,
+   "floor_true_before": 689,
+   "space_true_before": 1240
+  },
+  "liquid": {
+   "family": "liquid",
+   "blocks": 132,
+   "shape": "liquid",
+   "is_floor_to": 0,
+   "blocks_space_to": 0,
+   "is_floor_changed": 125,
+   "blocks_space_changed": 125,
+   "floor_true_before": 125,
+   "space_true_before": 125
+  },
+  "none": {
+   "family": "none",
+   "blocks": 2342,
+   "shape": "pass",
+   "is_floor_to": 0,
+   "blocks_space_to": 0,
+   "is_floor_changed": 587,
+   "blocks_space_changed": 614,
+   "floor_true_before": 587,
+   "space_true_before": 614
+  },
+  "other": {
+   "family": "other",
+   "blocks": 1,
+   "shape": "other",
+   "is_floor_to": 0,
+   "blocks_space_to": 1,
+   "is_floor_changed": 1,
+   "blocks_space_changed": 0,
+   "floor_true_before": 1,
+   "space_true_before": 1
+  }
+ },
+ "totals": {
+  "is_floor_changed": 5236,
+  "blocks_space_changed": 4402,
+  "all_changed": 9638,
+  "changed_families": [
+   "fence_15",
+   "full",
+   "liquid",
+   "none",
+   "other",
+   "slab",
+   "snow_layer"
+  ]
+ }
+}

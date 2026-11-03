@@ -1,0 +1,894 @@
+{
+ "schema": "dshbridge/soak_scorecard@1",
+ "generated_at": "2026-11-02T19:24:49+0800",
+ "generated_unix": 1793618689.443977,
+ "verdict": "FAIL",
+ "exit_code": 1,
+ "profile": "mixed",
+ "duration_sec": 738.7,
+ "duration_planned_sec": 1200.0,
+ "duration_ok": false,
+ "started_at": "2026-11-02T19:12:30+0800",
+ "ended_at": "2026-11-02T19:24:49+0800",
+ "calls": 1016,
+ "calls_action": 842,
+ "calls_oracle": 174,
+ "calls_full_bar": 2000,
+ "d3_calls_min": 2000,
+ "d3_duration_min_sec": 10260.0,
+ "full_bar": false,
+ "full_spec_mixed_3h": false,
+ "rounds": {
+  "total": 80,
+  "by_kind": {
+   "idle": 16,
+   "walk": 24,
+   "work": 40
+  },
+  "mix_ratio": {
+   "idle": 0.2,
+   "walk": 0.3,
+   "work": 0.5
+  }
+ },
+ "activity": {
+  "rounds": 80,
+  "by_kind": {
+   "idle": 16,
+   "walk": 24,
+   "work": 40
+  },
+  "distinct_cells": 30,
+  "distinct_xz": 29,
+  "walk_attempts": 24,
+  "walk_reached": 22,
+  "walk_refused": 2,
+  "walk_max_moved": 8.21,
+  "work_attempts": 37,
+  "place_world_true": 34,
+  "dig_world_true": 34,
+  "idle_rounds": 16,
+  "idle_humanoid_confirmed": true,
+  "idle_strolls_delta": 2,
+  "samples": 255,
+  "activity_ok": true
+ },
+ "hard_failures": [
+  {
+   "code": "H_ITEM_LOSS",
+   "detail": "work 轮：items 74 ⇒ 73（本轮起点 74，已解释消耗 0）",
+   "at": "2026-11-02T19:24:49+0800",
+   "round": "work",
+   "count": 2,
+   "last": "收尾 items 73 < 基线 74 − 已解释 0"
+  }
+ ],
+ "soft_failures": [
+  {
+   "code": "S_EVENT_FLOOD",
+   "detail": "事件流很密（≈62 条/秒，如 yaw 写者每 tick 两条）⇒ 改为切片高频 drain 保住 oracle；这本身是事件环可读性问题",
+   "at": "2026-11-02T19:12:30+0800"
+  },
+  {
+   "code": "S_PICKUP_SLOW",
+   "detail": "等了 10.5 秒没自动捡起来 ⇒ 走过去捡",
+   "at": "2026-11-02T19:13:16+0800"
+  },
+  {
+   "code": "S_PLACE_FAILED",
+   "detail": "place 在 [4121, 71, 6] 没生效（dshplace: useItemOn=FAIL but 4121, 71, 6 is still minecraft:air (support 4121, 7）⇒ 换邻格再试",
+   "at": "2026-11-02T19:13:17+0800"
+  },
+  {
+   "code": "S_PICKUP_SLOW",
+   "detail": "等了 10.5 秒没自动捡起来 ⇒ 走过去捡",
+   "at": "2026-11-02T19:14:08+0800"
+  },
+  {
+   "code": "S_PLACE_FAILED",
+   "detail": "place 在 [4128, 71, 9] 没生效（dshplace: useItemOn=FAIL but 4128, 71, 9 is still minecraft:air (support 4128, 7）⇒ 换邻格再试",
+   "at": "2026-11-02T19:14:46+0800"
+  },
+  {
+   "code": "S_WORK_NO_HEADROOM",
+   "detail": "候选 [4127, 71, 10] 头顶不是空气 ⇒ 跳过（站不进去）",
+   "at": "2026-11-02T19:14:46+0800"
+  },
+  {
+   "code": "S_WORK_NO_HEADROOM",
+   "detail": "候选 [4127, 71, 10] 头顶不是空气 ⇒ 跳过（站不进去）",
+   "at": "2026-11-02T19:14:46+0800"
+  },
+  {
+   "code": "S_PLACE_FAILED",
+   "detail": "place 在 [4128, 71, 9] 没生效（dshplace: useItemOn=FAIL but 4128, 71, 9 is still minecraft:air (support 4128, 7）⇒ 换邻格再试",
+   "at": "2026-11-02T19:14:46+0800"
+  },
+  {
+   "code": "S_PLACE_FAILED",
+   "detail": "place 在 [4124, 71, 6] 没生效（dshplace: useItemOn=FAIL but 4124, 71, 6 is still minecraft:air (support 4124, 7）⇒ 换邻格再试",
+   "at": "2026-11-02T19:15:21+0800"
+  },
+  {
+   "code": "S_PLACE_FAILED",
+   "detail": "place 在 [4124, 71, 6] 没生效（dshplace: useItemOn=FAIL but 4124, 71, 6 is still minecraft:air (support 4124, 7）⇒ 换邻格再试",
+   "at": "2026-11-02T19:15:55+0800"
+  },
+  {
+   "code": "S_PLACE_FAILED",
+   "detail": "place 在 [4124, 71, 6] 没生效（dshplace: useItemOn=FAIL but 4124, 71, 6 is still minecraft:air (support 4124, 7）⇒ 换邻格再试",
+   "at": "2026-11-02T19:16:33+0800"
+  },
+  {
+   "code": "S_ENTITY_NEARBY",
+   "detail": "半径 2 内有实体 minecraft:text_display@1.6（最近 1.6 格）⇒ 这轮不放方块",
+   "at": "2026-11-02T19:17:09+0800"
+  },
+  {
+   "code": "S_PICKUP_SLOW",
+   "detail": "等了 10.5 秒没自动捡起来 ⇒ 走过去捡",
+   "at": "2026-11-02T19:17:24+0800"
+  },
+  {
+   "code": "S_PLACE_FAILED",
+   "detail": "place 在 [4122, 71, 7] 没生效（dshplace: useItemOn=FAIL but 4122, 71, 7 is still minecraft:air (support 4122, 7）⇒ 换邻格再试",
+   "at": "2026-11-02T19:18:01+0800"
+  },
+  {
+   "code": "S_PICKUP_SLOW",
+   "detail": "等了 10.5 秒没自动捡起来 ⇒ 走过去捡",
+   "at": "2026-11-02T19:18:12+0800"
+  },
+  {
+   "code": "S_WORK_NO_HEADROOM",
+   "detail": "候选 [4127, 71, 10] 头顶不是空气 ⇒ 跳过（站不进去）",
+   "at": "2026-11-02T19:18:47+0800"
+  },
+  {
+   "code": "S_AIRBORNE",
+   "detail": "onground=false（pos=4127.40,72.17,9.62 yaw=-49.2）",
+   "at": "2026-11-02T19:19:23+0800"
+  },
+  {
+   "code": "S_AIRBORNE",
+   "detail": "onground=false（pos=4127.94,71.12,9.70 yaw=-49.2）",
+   "at": "2026-11-02T19:19:24+0800"
+  },
+  {
+   "code": "S_PICKUP_SLOW",
+   "detail": "等了 10.5 秒没自动捡起来 ⇒ 走过去捡",
+   "at": "2026-11-02T19:19:38+0800"
+  },
+  {
+   "code": "S_PLACE_FAILED",
+   "detail": "place 在 [4125, 71, 7] 没生效（dshplace: useItemOn=FAIL but 4125, 71, 7 is still minecraft:air (support 4125, 7）⇒ 换邻格再试",
+   "at": "2026-11-02T19:20:13+0800"
+  },
+  {
+   "code": "S_PLACE_FAILED",
+   "detail": "place 在 [4123, 71, 12] 没生效（dshplace: useItemOn=FAIL but 4123, 71, 12 is still minecraft:air (support 4123, ）⇒ 换邻格再试",
+   "at": "2026-11-02T19:20:17+0800"
+  },
+  {
+   "code": "S_PICKUP_SLOW",
+   "detail": "等了 10.5 秒没自动捡起来 ⇒ 走过去捡",
+   "at": "2026-11-02T19:20:31+0800"
+  },
+  {
+   "code": "S_PLACE_FAILED",
+   "detail": "place 在 [4123, 71, 8] 没生效（dshplace: useItemOn=FAIL but 4123, 71, 8 is still minecraft:air (support 4123, 7）⇒ 换邻格再试",
+   "at": "2026-11-02T19:21:05+0800"
+  },
+  {
+   "code": "S_PICKUP_SLOW",
+   "detail": "等了 10.5 秒没自动捡起来 ⇒ 走过去捡",
+   "at": "2026-11-02T19:21:17+0800"
+  },
+  {
+   "code": "S_PICKUP_SLOW",
+   "detail": "等了 10.5 秒没自动捡起来 ⇒ 走过去捡",
+   "at": "2026-11-02T19:22:04+0800"
+  },
+  {
+   "code": "S_ENTITY_NEARBY",
+   "detail": "半径 2 内有实体 create:seat@1.6（最近 1.6 格）⇒ 这轮不放方块",
+   "at": "2026-11-02T19:22:42+0800"
+  },
+  {
+   "code": "S_ENTITY_NEARBY",
+   "detail": "半径 2 内有实体 create:seat@1.6（最近 1.6 格）⇒ 这轮不放方块",
+   "at": "2026-11-02T19:22:42+0800"
+  },
+  {
+   "code": "S_PLACE_FAILED",
+   "detail": "place 在 [4128, 71, 8] 没生效（dshplace: useItemOn=FAIL but 4128, 71, 8 is still minecraft:air (support 4128, 7）⇒ 换邻格再试",
+   "at": "2026-11-02T19:23:56+0800"
+  },
+  {
+   "code": "S_AIRBORNE",
+   "detail": "onground=false（pos=4129.50,70.91,8.50 yaw=116.6）",
+   "at": "2026-11-02T19:23:58+0800"
+  },
+  {
+   "code": "S_AIRBORNE",
+   "detail": "onground=false（pos=4129.50,70.91,8.50 yaw=116.6）",
+   "at": "2026-11-02T19:23:59+0800"
+  },
+  {
+   "code": "S_AIRBORNE",
+   "detail": "onground=false（pos=4129.50,70.91,8.50 yaw=116.6）",
+   "at": "2026-11-02T19:24:01+0800"
+  },
+  {
+   "code": "S_AIRBORNE",
+   "detail": "onground=false（pos=4129.50,70.91,8.50 yaw=116.6）",
+   "at": "2026-11-02T19:24:02+0800"
+  },
+  {
+   "code": "S_AIRBORNE",
+   "detail": "onground=false（pos=4129.50,70.91,8.50 yaw=116.6）",
+   "at": "2026-11-02T19:24:04+0800"
+  },
+  {
+   "code": "S_AIRBORNE",
+   "detail": "onground=false（pos=4129.50,70.91,8.50 yaw=116.6）",
+   "at": "2026-11-02T19:24:05+0800"
+  },
+  {
+   "code": "S_AIRBORNE",
+   "detail": "onground=false（pos=4129.50,70.91,8.50 yaw=116.6）",
+   "at": "2026-11-02T19:24:07+0800"
+  },
+  {
+   "code": "S_PICKUP_SLOW",
+   "detail": "等了 10.5 秒没自动捡起来 ⇒ 走过去捡",
+   "at": "2026-11-02T19:24:08+0800"
+  },
+  {
+   "code": "S_AIRBORNE",
+   "detail": "onground=false（pos=4129.50,70.91,8.50 yaw=53.1）",
+   "at": "2026-11-02T19:24:09+0800"
+  },
+  {
+   "code": "S_AIRBORNE",
+   "detail": "onground=false（pos=4129.50,70.91,8.50 yaw=53.1）",
+   "at": "2026-11-02T19:24:10+0800"
+  },
+  {
+   "code": "S_AIRBORNE",
+   "detail": "onground=false（pos=4129.50,70.91,8.50 yaw=53.1）",
+   "at": "2026-11-02T19:24:11+0800"
+  },
+  {
+   "code": "S_AIRBORNE",
+   "detail": "onground=false（pos=4129.50,70.91,8.50 yaw=53.1）",
+   "at": "2026-11-02T19:24:12+0800"
+  },
+  {
+   "code": "S_AIRBORNE",
+   "detail": "onground=false（pos=4129.50,70.91,8.50 yaw=53.1）",
+   "at": "2026-11-02T19:24:13+0800"
+  },
+  {
+   "code": "S_AIRBORNE",
+   "detail": "onground=false（pos=4129.50,70.91,8.50 yaw=53.1）",
+   "at": "2026-11-02T19:24:14+0800"
+  },
+  {
+   "code": "S_AIRBORNE",
+   "detail": "onground=false（pos=4129.50,70.91,8.50 yaw=53.1）",
+   "at": "2026-11-02T19:24:15+0800"
+  },
+  {
+   "code": "S_AIRBORNE",
+   "detail": "onground=false（pos=4129.50,70.91,8.50 yaw=53.1）",
+   "at": "2026-11-02T19:24:16+0800"
+  },
+  {
+   "code": "S_AIRBORNE",
+   "detail": "onground=false（pos=4129.50,70.91,8.50 yaw=33.7）",
+   "at": "2026-11-02T19:24:17+0800"
+  },
+  {
+   "code": "S_AIRBORNE",
+   "detail": "onground=false（pos=4129.50,70.91,8.50 yaw=33.7）",
+   "at": "2026-11-02T19:24:18+0800"
+  },
+  {
+   "code": "S_AIRBORNE",
+   "detail": "onground=false（pos=4129.50,70.91,8.50 yaw=33.7）",
+   "at": "2026-11-02T19:24:19+0800"
+  },
+  {
+   "code": "S_AIRBORNE",
+   "detail": "onground=false（pos=4129.50,70.91,8.50 yaw=33.7）",
+   "at": "2026-11-02T19:24:20+0800"
+  },
+  {
+   "code": "S_AIRBORNE",
+   "detail": "onground=false（pos=4129.50,70.91,8.50 yaw=33.7）",
+   "at": "2026-11-02T19:24:21+0800"
+  },
+  {
+   "code": "S_AIRBORNE",
+   "detail": "onground=false（pos=4129.50,70.91,8.50 yaw=33.7）",
+   "at": "2026-11-02T19:24:22+0800"
+  },
+  {
+   "code": "S_AIRBORNE",
+   "detail": "onground=false（pos=4129.50,70.91,8.50 yaw=33.7）",
+   "at": "2026-11-02T19:24:23+0800"
+  },
+  {
+   "code": "S_AIRBORNE",
+   "detail": "onground=false（pos=4129.50,70.91,8.50 yaw=33.7）",
+   "at": "2026-11-02T19:24:24+0800"
+  },
+  {
+   "code": "S_AIRBORNE",
+   "detail": "onground=false（pos=4129.50,70.91,8.50 yaw=53.1）",
+   "at": "2026-11-02T19:24:25+0800"
+  },
+  {
+   "code": "S_AIRBORNE",
+   "detail": "onground=false（pos=4129.50,70.91,8.50 yaw=53.1）",
+   "at": "2026-11-02T19:24:26+0800"
+  },
+  {
+   "code": "S_AIRBORNE",
+   "detail": "onground=false（pos=4129.50,70.91,8.50 yaw=53.1）",
+   "at": "2026-11-02T19:24:27+0800"
+  },
+  {
+   "code": "S_AIRBORNE",
+   "detail": "onground=false（pos=4129.50,70.91,8.50 yaw=53.1）",
+   "at": "2026-11-02T19:24:29+0800"
+  },
+  {
+   "code": "S_AIRBORNE",
+   "detail": "onground=false（pos=4129.50,70.91,8.50 yaw=53.1）",
+   "at": "2026-11-02T19:24:30+0800"
+  },
+  {
+   "code": "S_AIRBORNE",
+   "detail": "onground=false（pos=4129.50,70.91,8.50 yaw=53.1）",
+   "at": "2026-11-02T19:24:31+0800"
+  },
+  {
+   "code": "S_AIRBORNE",
+   "detail": "onground=false（pos=4129.50,70.91,8.50 yaw=53.1）",
+   "at": "2026-11-02T19:24:32+0800"
+  },
+  {
+   "code": "S_AIRBORNE",
+   "detail": "onground=false（pos=4129.50,70.91,8.50 yaw=53.1）",
+   "at": "2026-11-02T19:24:33+0800"
+  },
+  {
+   "code": "S_AIRBORNE",
+   "detail": "onground=false（pos=4129.50,70.91,8.50 yaw=33.7）",
+   "at": "2026-11-02T19:24:34+0800"
+  },
+  {
+   "code": "S_AIRBORNE",
+   "detail": "onground=false（pos=4129.50,70.91,8.50 yaw=33.7）",
+   "at": "2026-11-02T19:24:35+0800"
+  },
+  {
+   "code": "S_AIRBORNE",
+   "detail": "onground=false（pos=4129.50,70.91,8.50 yaw=33.7）",
+   "at": "2026-11-02T19:24:36+0800"
+  },
+  {
+   "code": "S_AIRBORNE",
+   "detail": "onground=false（pos=4129.50,70.91,8.50 yaw=33.7）",
+   "at": "2026-11-02T19:24:37+0800"
+  },
+  {
+   "code": "S_AIRBORNE",
+   "detail": "onground=false（pos=4129.50,70.91,8.50 yaw=33.7）",
+   "at": "2026-11-02T19:24:38+0800"
+  },
+  {
+   "code": "S_AIRBORNE",
+   "detail": "onground=false（pos=4129.50,70.91,8.50 yaw=33.7）",
+   "at": "2026-11-02T19:24:39+0800"
+  },
+  {
+   "code": "S_AIRBORNE",
+   "detail": "onground=false（pos=4129.50,70.91,8.50 yaw=33.7）",
+   "at": "2026-11-02T19:24:40+0800"
+  },
+  {
+   "code": "S_AIRBORNE",
+   "detail": "同类软失败超过 40 条，后续只计数",
+   "at": "2026-11-02T19:24:41+0800",
+   "count": 41
+  }
+ ],
+ "soft_codes": {
+  "S_EVENT_FLOOD": 1,
+  "S_PICKUP_SLOW": 9,
+  "S_PLACE_FAILED": 11,
+  "S_WORK_NO_HEADROOM": 3,
+  "S_ENTITY_NEARBY": 3,
+  "S_AIRBORNE": 50
+ },
+ "inconclusive_reasons": [],
+ "hard_count": 1,
+ "soft_count": 77,
+ "oracle": {
+  "cursor_start": 985,
+  "cursor_end": 1688,
+  "drains": 173,
+  "events_seen": 703,
+  "gaps": 0,
+  "truncated_drains": 0,
+  "event_rate_peak": 10.2,
+  "noise_events": 459,
+  "bot_died": 0,
+  "damage": 0,
+  "inv_neg": 0,
+  "inv_large_drop": 0,
+  "mode": 0,
+  "humanoid": 33,
+  "auto_eat": 0,
+  "walk_start": 37,
+  "walk_done": 39,
+  "walk_refuse": 0,
+  "kinds": {
+   "humanoid": 33,
+   "mut": 68,
+   "yaw_bracket": 193,
+   "yaw_write": 193,
+   "inv": 67,
+   "walk_start": 37,
+   "walk_mode": 37,
+   "walk_done": 39,
+   "idle_line": 4,
+   "idle_stroll": 2,
+   "walk_replan": 30
+  }
+ },
+ "world": {
+  "mut_events": 25,
+  "our_cells": 25,
+  "foreign_mut": [],
+  "foreign_mut_count": 0,
+  "work_cells": [
+   {
+    "pos": [
+     4120,
+     71,
+     7
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4121,
+     71,
+     5
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4121,
+     71,
+     6
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4121,
+     71,
+     8
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4121,
+     71,
+     12
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4122,
+     71,
+     5
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4122,
+     71,
+     9
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4122,
+     71,
+     12
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4122,
+     71,
+     13
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4123,
+     71,
+     6
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4123,
+     71,
+     7
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4123,
+     71,
+     9
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4123,
+     71,
+     11
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4123,
+     71,
+     12
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4124,
+     71,
+     6
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4124,
+     71,
+     7
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4124,
+     71,
+     13
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4125,
+     71,
+     5
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4125,
+     71,
+     7
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4125,
+     71,
+     8
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4125,
+     71,
+     9
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4126,
+     71,
+     6
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4127,
+     71,
+     4
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4127,
+     71,
+     6
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4127,
+     71,
+     7
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   }
+  ],
+  "residue": [],
+  "work_atomic_place_dig": true,
+  "walk_pillar": 0
+ },
+ "baseline": {
+  "pos": [
+   4125.54,
+   71.0,
+   9.4
+  ],
+  "mode": "survival",
+  "hp": 20.0,
+  "food": 20,
+  "items": 74,
+  "kinds": 9,
+  "free": 27,
+  "onground": true,
+  "time": 13326,
+  "day": 375,
+  "dim": "minecraft:overworld",
+  "held": "minecraft:dirtx4",
+  "events_cursor": 985,
+  "idle": {
+   "humanoid": true,
+   "radius": 4,
+   "strolls": 5,
+   "looks": 15
+  },
+  "auto_eat": false,
+  "mod_version": "2.56.0",
+  "features": [
+   "scan",
+   "digest",
+   "look",
+   "walk",
+   "events",
+   "auto",
+   "map",
+   "path",
+   "kb",
+   "kbexport",
+   "state",
+   "caps",
+   "turn",
+   "yawtrace",
+   "http",
+   "http2",
+   "token",
+   "origin",
+   "rawmap",
+   "reqid"
+  ],
+  "inventory": [
+   {
+    "slot": 0,
+    "item": "minecraft:dirt",
+    "count": 4
+   },
+   {
+    "slot": 1,
+    "item": "minecraft:lever",
+    "count": 4
+   },
+   {
+    "slot": 2,
+    "item": "create:sticky_mechanical_piston",
+    "count": 4
+   },
+   {
+    "slot": 3,
+    "item": "create:encased_chain_drive",
+    "count": 6
+   },
+   {
+    "slot": 4,
+    "item": "create:creative_motor",
+    "count": 4
+   },
+   {
+    "slot": 5,
+    "item": "create:railway_casing",
+    "count": 40
+   },
+   {
+    "slot": 6,
+    "item": "create:piston_extension_pole",
+    "count": 4
+   },
+   {
+    "slot": 7,
+    "item": "create:mechanical_plough",
+    "count": 4
+   },
+   {
+    "slot": 8,
+    "item": "create:clutch",
+    "count": 4
+   }
+  ]
+ },
+ "final": {
+  "pos": [
+   4129.5,
+   70.91,
+   8.5
+  ],
+  "mode": "survival",
+  "hp": 20.0,
+  "food": 20,
+  "items": 73,
+  "kinds": 9,
+  "onground": false,
+  "time": 4095,
+  "day": 376,
+  "held": "minecraft:dirtx3"
+ },
+ "preconditions": {
+  "bridge": true,
+  "mod_version": "2.56.0",
+  "bot": true,
+  "survival": true,
+  "safe_start": true,
+  "events": true,
+  "idle_status": true,
+  "autoeat_off": true,
+  "inventory": true,
+  "plugin": {
+   "anchor": [
+    4121,
+    71,
+    15
+   ],
+   "radius": 4,
+   "void_platform": [
+    4145,
+    70,
+    2,
+    4160,
+    70,
+    17
+   ],
+   "no_dig": "tools/no_dig.py"
+  },
+  "preflight_ok": true
+ },
+ "params": {
+  "profile": "mixed",
+  "minutes": 20.0,
+  "interval": 30.0,
+  "radius": 4,
+  "seed": 7,
+  "max_calls": 2000,
+  "anchor": [
+   4121,
+   71,
+   15
+  ]
+ },
+ "criteria": {
+  "D3a_zero_death": true,
+  "D3b_zero_item_loss": false,
+  "D3c_no_hang_err": true,
+  "D3d_survival": true,
+  "D3e_no_fall": true,
+  "oracle_complete": true,
+  "activity_exercised": true,
+  "fully_specced_run": false
+ },
+ "aborted_early": true,
+ "aborted_reason": "hard_failure",
+ "cleanup_errors": [],
+ "evidence": {
+  "jsonl": "<repo>/logs/soak_20261102-191230.jsonl",
+  "run_log": "<repo>/logs/soak_20261102-191230.run.log",
+  "scorecard": "<repo>/state/soak_scorecard.json",
+  "jsonl_lines": 1583
+ },
+ "driver": {
+  "calls": 1016,
+  "calls_action": 842,
+  "calls_oracle": 174,
+  "errors": 0,
+  "latency_ms_avg": 6.72
+ }
+}

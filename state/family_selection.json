@@ -1,0 +1,433 @@
+{
+ "schema": "family_selection@2",
+ "decided_by": "用户 2026-10-18：阈值 ≥99%，20 族入选；其余 25 族为「语义标签，形状由导出裁决」",
+ "interpretation_verified": {
+  "族": "tag_census.family_tags() 的 45 个**家族标签类**（family_consistency 打的「家族模式命中 45 个」）",
+  "命中": "经**标签闭包**得到的物种 × 导出里的**碰撞族**（family 字段）",
+  "一致率": "多数派占比（只数导出里有的成员）",
+  "为什么这么定": "★两个独立数字都对上★：≥99% ⇒ 20（用户说 20）／其余 ⇒ 25（用户说 25）"
+ },
+ "threshold": 0.99,
+ "n_classes": 45,
+ "selected": [
+  "forge矿",
+  "半砖",
+  "原木",
+  "叶子",
+  "地毯",
+  "小花",
+  "按钮",
+  "旗",
+  "木板",
+  "栅栏",
+  "栅栏门",
+  "树苗",
+  "活板门",
+  "火",
+  "玻璃",
+  "珊瑚",
+  "石基",
+  "矿石",
+  "羊毛",
+  "花盆"
+ ],
+ "semantic_only": [
+  "剑快挖",
+  "压力板",
+  "可挖",
+  "可替换",
+  "土",
+  "墙",
+  "岩浆",
+  "庄稼",
+  "斧可挖",
+  "楼梯",
+  "沙",
+  "牌子",
+  "箱子类",
+  "能爬",
+  "花",
+  "蜡烛",
+  "要工具",
+  "要石具",
+  "要钻具",
+  "要铁具",
+  "铁轨",
+  "锄可挖",
+  "锹可挖",
+  "镐可挖",
+  "门"
+ ],
+ "no_members": [],
+ "multi_covered": {
+  "multi_species": 21268,
+  "species_total": 22060,
+  "blocks_total": 24779,
+  "export": "2.19.0__dshbridge_registry_blocks@1__2026-10-18.json"
+ },
+ "rows": [
+  {
+   "family": "forge矿",
+   "species": 156,
+   "in_export": 156,
+   "rate": 1.0,
+   "mode": "full",
+   "class": "geometric"
+  },
+  {
+   "family": "剑快挖",
+   "species": 1050,
+   "in_export": 1050,
+   "rate": 0.6019,
+   "mode": "none",
+   "class": "semantic"
+  },
+  {
+   "family": "半砖",
+   "species": 638,
+   "in_export": 638,
+   "rate": 1.0,
+   "mode": "slab",
+   "class": "geometric"
+  },
+  {
+   "family": "压力板",
+   "species": 231,
+   "in_export": 231,
+   "rate": 0.9784,
+   "mode": "none",
+   "class": "semantic"
+  },
+  {
+   "family": "原木",
+   "species": 995,
+   "in_export": 995,
+   "rate": 1.0,
+   "mode": "full",
+   "class": "geometric"
+  },
+  {
+   "family": "可挖",
+   "species": 21391,
+   "in_export": 21236,
+   "rate": 0.7197,
+   "mode": "full",
+   "class": "semantic"
+  },
+  {
+   "family": "可替换",
+   "species": 430,
+   "in_export": 430,
+   "rate": 0.8465,
+   "mode": "full",
+   "class": "semantic"
+  },
+  {
+   "family": "叶子",
+   "species": 367,
+   "in_export": 367,
+   "rate": 0.9918,
+   "mode": "full",
+   "class": "geometric"
+  },
+  {
+   "family": "土",
+   "species": 92,
+   "in_export": 92,
+   "rate": 0.9348,
+   "mode": "full",
+   "class": "semantic"
+  },
+  {
+   "family": "地毯",
+   "species": 354,
+   "in_export": 353,
+   "rate": 1.0,
+   "mode": "snow_layer",
+   "class": "geometric"
+  },
+  {
+   "family": "墙",
+   "species": 658,
+   "in_export": 612,
+   "rate": 0.732,
+   "mode": "fence_15",
+   "class": "semantic"
+  },
+  {
+   "family": "小花",
+   "species": 38,
+   "in_export": 38,
+   "rate": 1.0,
+   "mode": "none",
+   "class": "geometric"
+  },
+  {
+   "family": "岩浆",
+   "species": 35,
+   "in_export": 22,
+   "rate": 0.5,
+   "mode": "full",
+   "class": "semantic"
+  },
+  {
+   "family": "庄稼",
+   "species": 266,
+   "in_export": 266,
+   "rate": 0.8947,
+   "mode": "none",
+   "class": "semantic"
+  },
+  {
+   "family": "按钮",
+   "species": 213,
+   "in_export": 213,
+   "rate": 0.9953,
+   "mode": "none",
+   "class": "geometric"
+  },
+  {
+   "family": "斧可挖",
+   "species": 8505,
+   "in_export": 8363,
+   "rate": 0.6312,
+   "mode": "full",
+   "class": "semantic"
+  },
+  {
+   "family": "旗",
+   "species": 50,
+   "in_export": 50,
+   "rate": 1.0,
+   "mode": "none",
+   "class": "geometric"
+  },
+  {
+   "family": "木板",
+   "species": 618,
+   "in_export": 618,
+   "rate": 1.0,
+   "mode": "full",
+   "class": "geometric"
+  },
+  {
+   "family": "栅栏",
+   "species": 353,
+   "in_export": 353,
+   "rate": 1.0,
+   "mode": "fence_15",
+   "class": "geometric"
+  },
+  {
+   "family": "栅栏门",
+   "species": 256,
+   "in_export": 256,
+   "rate": 1.0,
+   "mode": "fence_15",
+   "class": "geometric"
+  },
+  {
+   "family": "树苗",
+   "species": 211,
+   "in_export": 211,
+   "rate": 0.9905,
+   "mode": "none",
+   "class": "geometric"
+  },
+  {
+   "family": "楼梯",
+   "species": 632,
+   "in_export": 632,
+   "rate": 0.9351,
+   "mode": "full",
+   "class": "semantic"
+  },
+  {
+   "family": "沙",
+   "species": 17,
+   "in_export": 17,
+   "rate": 0.9412,
+   "mode": "full",
+   "class": "semantic"
+  },
+  {
+   "family": "活板门",
+   "species": 632,
+   "in_export": 632,
+   "rate": 1.0,
+   "mode": "snow_layer",
+   "class": "geometric"
+  },
+  {
+   "family": "火",
+   "species": 3,
+   "in_export": 3,
+   "rate": 1.0,
+   "mode": "none",
+   "class": "geometric"
+  },
+  {
+   "family": "牌子",
+   "species": 769,
+   "in_export": 769,
+   "rate": 0.749,
+   "mode": "none",
+   "class": "semantic"
+  },
+  {
+   "family": "玻璃",
+   "species": 476,
+   "in_export": 476,
+   "rate": 0.9937,
+   "mode": "full",
+   "class": "geometric"
+  },
+  {
+   "family": "珊瑚",
+   "species": 30,
+   "in_export": 30,
+   "rate": 1.0,
+   "mode": "none",
+   "class": "geometric"
+  },
+  {
+   "family": "石基",
+   "species": 18,
+   "in_export": 18,
+   "rate": 1.0,
+   "mode": "full",
+   "class": "geometric"
+  },
+  {
+   "family": "矿石",
+   "species": 156,
+   "in_export": 156,
+   "rate": 1.0,
+   "mode": "full",
+   "class": "geometric"
+  },
+  {
+   "family": "箱子类",
+   "species": 63,
+   "in_export": 63,
+   "rate": 0.6667,
+   "mode": "full",
+   "class": "semantic"
+  },
+  {
+   "family": "羊毛",
+   "species": 336,
+   "in_export": 336,
+   "rate": 1.0,
+   "mode": "full",
+   "class": "geometric"
+  },
+  {
+   "family": "能爬",
+   "species": 51,
+   "in_export": 51,
+   "rate": 0.549,
+   "mode": "full",
+   "class": "semantic"
+  },
+  {
+   "family": "花",
+   "species": 80,
+   "in_export": 80,
+   "rate": 0.95,
+   "mode": "none",
+   "class": "semantic"
+  },
+  {
+   "family": "花盆",
+   "species": 141,
+   "in_export": 141,
+   "rate": 1.0,
+   "mode": "snow_layer",
+   "class": "geometric"
+  },
+  {
+   "family": "蜡烛",
+   "species": 22,
+   "in_export": 22,
+   "rate": 0.7727,
+   "mode": "snow_layer",
+   "class": "semantic"
+  },
+  {
+   "family": "要工具",
+   "species": 1452,
+   "in_export": 1452,
+   "rate": 0.8326,
+   "mode": "full",
+   "class": "semantic"
+  },
+  {
+   "family": "要石具",
+   "species": 590,
+   "in_export": 590,
+   "rate": 0.8864,
+   "mode": "full",
+   "class": "semantic"
+  },
+  {
+   "family": "要钻具",
+   "species": 301,
+   "in_export": 301,
+   "rate": 0.9336,
+   "mode": "full",
+   "class": "semantic"
+  },
+  {
+   "family": "要铁具",
+   "species": 536,
+   "in_export": 536,
+   "rate": 0.7257,
+   "mode": "full",
+   "class": "semantic"
+  },
+  {
+   "family": "铁轨",
+   "species": 29,
+   "in_export": 29,
+   "rate": 0.6897,
+   "mode": "none",
+   "class": "semantic"
+  },
+  {
+   "family": "锄可挖",
+   "species": 288,
+   "in_export": 288,
+   "rate": 0.9132,
+   "mode": "full",
+   "class": "semantic"
+  },
+  {
+   "family": "锹可挖",
+   "species": 630,
+   "in_export": 630,
+   "rate": 0.7968,
+   "mode": "full",
+   "class": "semantic"
+  },
+  {
+   "family": "镐可挖",
+   "species": 10803,
+   "in_export": 10803,
+   "rate": 0.8116,
+   "mode": "full",
+   "class": "semantic"
+  },
+  {
+   "family": "门",
+   "species": 646,
+   "in_export": 646,
+   "rate": 0.9613,
+   "mode": "full",
+   "class": "semantic"
+  }
+ ],
+ "order_class": {
+  "note": "★「同时命中 ≥2 族规则」的 1260 仍未对上（本篇不算它）✗ 见 §79.309✗★"
+ }
+}

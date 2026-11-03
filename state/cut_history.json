@@ -1,0 +1,40 @@
+[
+ {
+  "cuts": {
+   "mysticalagriculture": {
+    "source": "table+fallback",
+    "why": "你选的第一刀: 224 个方块, 数据层实测零改动",
+    "at": "2026-10-08 20:23:42",
+    "measured_change": 0,
+    "measured_blocks": 224
+   }
+  },
+  "scope": [
+   "mysticalagriculture"
+  ],
+  "note": "作用域只含点名的命名空间；整档回退 = cut.py rollback"
+ },
+ {
+  "cuts": {
+   "mysticalagriculture": {
+    "source": "table+fallback",
+    "why": "你选的第一刀: 224 个方块, 数据层实测零改动",
+    "at": "2026-10-08 20:23:42",
+    "measured_change": 0,
+    "measured_blocks": 224
+   },
+   "mcwdoors": {
+    "source": "table+fallback",
+    "why": "（没写为什么，补上）",
+    "at": "2026-10-18 14:58:41",
+    "measured_change": 201,
+    "measured_blocks": 245
+   }
+  },
+  "scope": [
+   "mcwdoors",
+   "mysticalagriculture"
+  ],
+  "note": "作用域只含点名的命名空间；整档回退 = cut.py rollback"
+ }
+]

@@ -1,0 +1,43 @@
+// ══════════════════════════════════════════════════════════════════════════════
+// pluginManagement：★本地镜像**可选**✗★（79.534 发布准备：别人 clone 后不再依赖 127.0.0.1:8789）
+//
+//   取值（优先级）：`-PdshMirror=<url>` > 环境变量 `DSH_MAVEN_MIRROR` > **不用镜像**（公开仓）
+//   · 本机：tools/build_jar.ps1 会探测 :8789 并设置 DSH_MAVEN_MIRROR ⇒ 行为与旧版一致 ✓
+//   · 别人的机器：什么都不设 ⇒ 只用公开仓（Maven Central / Forge / BMCLAPI / Plugin Portal）✓
+//
+//   ★为什么本机需要镜像✗★（这个理由只对本机成立 ✓ 不是普适设计 ✗）：
+//     本机上游按 **User-Agent** 拒绝工具型客户端：Python-urllib → 403 ✗ / curl → 200 ✓ /
+//     Java/17 → 200 ✓；而 Gradle 用工具型 UA ⇒ 直连吃闭门羹 ⇒ 本机才需要 127.0.0.1:8789 中转 ✓
+//   ★顺序纪律✗★：**元数据与 jar 都有的源放最前**（/forge ↔ maven.minecraftforge.net）✓
+//     —— 否则 Gradle 会在只有 marker pom 的仓里认定模块、之后却取不到 jar ✗（详见历史注释）
+// ══════════════════════════════════════════════════════════════════════════════
+pluginManagement {
+    def dshMirror = (System.getenv('DSH_MAVEN_MIRROR') ?: '')
+    try {
+        def p = gradle.startParameter.projectProperties['dshMirror']
+        if (p != null && p.toString().trim()) {
+            dshMirror = p.toString()
+        }
+    } catch (Exception ignored) {
+        // ★读不到属性也绝不崩配置✗★（退回 env/公开仓 ✓）
+    }
+    dshMirror = dshMirror.toString().trim()
+    repositories {
+        if (dshMirror) {
+            // 本地镜像（明文 HTTP ⇒ allowInsecureProtocol ✓；端口/主机由 DSH_MAVEN_MIRROR 决定）
+            maven { url dshMirror + '/forge'; allowInsecureProtocol = dshMirror.startsWith('http://') }
+            maven { url dshMirror + '/central'; allowInsecureProtocol = dshMirror.startsWith('http://') }
+            maven { url dshMirror + '/bmclapi'; allowInsecureProtocol = dshMirror.startsWith('http://') }
+            maven { url dshMirror + '/portal'; allowInsecureProtocol = dshMirror.startsWith('http://') }
+        }
+        // 公开仓（没镜像时是唯一来源；有镜像时排后面当后备）
+        maven { url 'https://maven.minecraftforge.net/' }
+        mavenCentral()
+        maven { url 'https://bmclapi2.bangbang93.com/maven/' }
+        maven { url 'https://plugins.gradle.org/m2/' }
+    }
+}
+
+// ⚠ 这里原来有一行 `plugins { id 'org.gradle.toolchains.foojay-resolver-convention' version '0.7.0' }` ✗
+//   已删除 ✓（2026-09-20）原因：它只用来"自动下载 JDK 工具链"✗ 而本机构建把 JAVA_HOME 指向本地 JDK ✓
+//   ⇒ 它毫无用处 ✗ 却带来一个真实的失败点（镜像上该坐标 404 ✗）⇒ 用不到的便利插件一律删掉 ✓

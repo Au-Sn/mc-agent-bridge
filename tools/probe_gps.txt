@@ -1,0 +1,11 @@
+# GPS 主机的调制解调器还在不在？（我这一轮 /setblock air 误删过一批 modem）
+data get block 4120 71 16
+data get block 4125 72 16
+data get block 4132 71 16
+data get block 4118 71 10
+# 三台 GPS 主机与"空"的那台计算机本体
+data get block 4121 71 16
+data get block 4124 72 16
+data get block 4131 71 16
+data get block 4119 71 10
+data get block 4109 71 1

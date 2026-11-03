@@ -1,0 +1,36 @@
+{
+ "schema": "dshbridge/temporary@1",
+ "why": "临时声明的唯一去处。每条必须写清：是什么／为什么暂时这样／什么条件下删掉它（替换触发）／谁在看着（判据）。登记册第 4 条：临时的东西必须带 TEMPORARY ＋ 复核触发。",
+ "entries": [
+  {
+   "id": "canopy_deletes_cell",
+   "what": "树冠（CANOPY）在判定里被挡在可落脚集合之外，等于不可通行（is_landing = is_floor 且 非树冠）",
+   "where": "mapread.is_landing 里的 not _kb_canopy ⇒ Map.surface(floor_only=True) 会过滤掉它",
+   "why_temporary": "用户裁决 C4 的目标态是真成本项：树冠可走、但计入惩罚、紧急避险合法；现状是布尔禁止（is_landing 直接 False）。而**今天连那个禁止都还是潜在状态** ✗ 目标态与现状差一次改造。",
+   "since": "2026-10-05（is_landing 引入时）",
+   "replace_trigger": "真成本项落地（规划器能吃「走树冠要付代价」）就删掉本声明，并改 mapread.is_landing 不再当过滤条件。",
+   "watched_by": "environment_test E8（政策只减不加）＋ passclass_test P5",
+   "today_state": "两档分别写清 (sec 79.457): blacklist 档 => is_floor(oak_leaves) == False, is_landing == False, canopy 那一半不生效 (叶子本来就不算地板); export 档 => is_floor(oak_leaves) == True (导出 full/1.0, 能站), is_canopy(oak_leaves) == True => is_landing == False, canopy 那一半真的在咬. 两档的 is_landing 都是 False."
+  },
+  {
+   "id": "tag_family_handwritten_18",
+   "what": "divergence.TAG_FAMILY 里有 18 个类别的判定族还是手写",
+   "where": "tools/divergence.py 的 TAG_FAMILY（真源没覆盖的那 18 个）",
+   "why_temporary": "用户裁决 A1 的目标态是整张由真源推；而那要先让真源（GEOMETRIC_CATEGORY）覆盖这些类别；那要 max_height，也就是要导出，而导出现在不在盘上。",
+   "since": "2026-10-13（§79.242 量出来时）",
+   "replace_trigger": "真源补到这 18 个类别，就删掉本声明，并把 TAG_FAMILY 改成由真源推导（family_source_test 的 F4 是这条触发的机械形态）。",
+   "watched_by": "family_source_test F3（推导路一致）＋ F4（这 18 条必须声明）",
+   "today_state": "★今天就**在生效**✗★：那 18 个类别的判定族**现在**就是手写值在说话（★F3 只管得住**两边都有**的 11 个类别✓★）"
+  },
+  {
+   "id": "fire_shadowed_by_lava",
+   "what": "类别 火 目前被 岩浆 完全遮蔽，一个物种也落不到它头上",
+   "where": "state/tags_category.json 的 PRIORITY（岩浆第 0、火第 1）",
+   "why_temporary": "每个火方块同时是热源（fire 命中 heat_sources／cauldron／boiler），按优先级都归了 岩浆；两者都归 DANGER，行为一样；留着 火 是语义上该分开，不是为了改判定。",
+   "since": "2026-10-13（§79.221）",
+   "replace_trigger": "要么把 火 从类别表里去掉（承认语义上不必分），要么给火方块一个只属于火的判据（不是那个同时是热源的）。",
+   "watched_by": "passclass_test P6／P6b ＋ danger_test D1~D5",
+   "today_state": "★今天就**在生效**✗★：`火` 一个物种也拿不到（★岩浆优先级更高✗★）⇒ ★它现在纯粹是**语义上的预留** ✗ 判定上不起作用✗★"
+  }
+ ]
+}

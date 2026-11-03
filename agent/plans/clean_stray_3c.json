@@ -1,0 +1,32 @@
+{
+  "name": "clean_stray_3c",
+  "note": "回收误放木板 v3。修掉 v2 的真问题：CC 海龟**只用『当前选中的槽位』当工具** ✗ —— 背包里『有斧头』不等于『用上斧头』✗（上一轮就是这么失败的 ✓ 回报 No tool to dig with ✓ 而 inv_list 里明明有 diamond_axe ✓）。所以第 2 步先 select_item 选中斧头 ✓（选中槽位会一直保持 ✓ 后面所有挖都被它覆盖 ✓）。其余同 v2：每格先升空到 y=76 再平移到目标 x/z，再降到 y=71 正上方，然后 dig_down + suck_down。",
+  "steps": [
+    { "skill": "turtle", "args": { "cmd": "status" }, "note": "起始状态" },
+    { "skill": "turtle", "args": { "cmd": "select_item", "name": "minecraft:diamond_axe" },
+      "note": "★ 关键：把斧头选为当前槽位（否则挖不动 ✗）" },
+    { "skill": "turtle", "args": { "cmd": "inv_list" }, "note": "确认背包与选中的是谁" },
+
+    { "skill": "turtle", "args": { "cmd": "goto", "x": 4109, "y": 76, "z": 1, "max_steps": 60 },
+      "note": "第 1 格：升空再平移" },
+    { "skill": "turtle", "args": { "cmd": "goto", "x": 4109, "y": 71, "z": 1, "max_steps": 40 },
+      "note": "降到正上方" },
+    { "skill": "turtle", "args": { "cmd": "dig_down" }, "note": "挖掉下面的木板" },
+    { "skill": "turtle", "args": { "cmd": "suck_down" }, "note": "吸起掉落物" },
+
+    { "skill": "turtle", "args": { "cmd": "goto", "x": 4110, "y": 76, "z": 1, "max_steps": 60 },
+      "note": "第 2 格" },
+    { "skill": "turtle", "args": { "cmd": "goto", "x": 4110, "y": 71, "z": 1, "max_steps": 40 } },
+    { "skill": "turtle", "args": { "cmd": "dig_down" } },
+    { "skill": "turtle", "args": { "cmd": "suck_down" } },
+
+    { "skill": "turtle", "args": { "cmd": "goto", "x": 4111, "y": 76, "z": 1, "max_steps": 60 },
+      "note": "第 3 格" },
+    { "skill": "turtle", "args": { "cmd": "goto", "x": 4111, "y": 71, "z": 1, "max_steps": 40 } },
+    { "skill": "turtle", "args": { "cmd": "dig_down" } },
+    { "skill": "turtle", "args": { "cmd": "suck_down" } },
+
+    { "skill": "turtle", "args": { "cmd": "inv_list" }, "note": "验收：木板应从 30 变多（回收成功）" },
+    { "skill": "turtle", "args": { "cmd": "status" }, "note": "收尾" }
+  ]
+}

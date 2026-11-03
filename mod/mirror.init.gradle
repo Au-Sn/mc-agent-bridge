@@ -1,0 +1,32 @@
+// mirror.init.gradle —— 把所有仓库指向**本地镜像**（tools/maven_mirror.py ✓）
+//
+// 环境事实（实测 ✓ 不是猜的 ✗）：这台机器网络正常 ✓
+//   挡住的是**上游按 User-Agent 拒绝**✗：
+//     Python-urllib/3.11 → 403 Forbidden ✗
+//     curl/8.4.0         → 200 ✓
+//     浏览器 UA          → 200 ✓
+//     Java/17.0.20       → 200 ✓
+//   ⇒ Gradle 用工具型 UA ✗ ⇒ 直连(或走隧道代理 ✗ 因为隧道里改不了 UA ✗)都不行 ✗
+//   ⇒ 正解：Gradle → 明文 HTTP → 本地镜像 → （浏览器 UA）→ 上游 ✓
+//
+// 用法：gradle build --init-script mirror.init.gradle …   （★仅在用镜像时✗★）
+//   79.534：URL 由 env `DSH_MAVEN_MIRROR` 决定（默认仍是本机旧的 http://127.0.0.1:8789 ✓）
+//   ★不用镜像就**不要传**这个 init script ✗★ —— build.gradle/settings.gradle 已内置公开仓 ✓
+def mirror = System.getenv('DSH_MAVEN_MIRROR') ?: 'http://127.0.0.1:8789'
+
+allprojects {
+    buildscript {
+        repositories {
+            maven { url mirror + '/forge'; allowInsecureProtocol = true }
+            maven { url mirror + '/bmclapi'; allowInsecureProtocol = true }
+            maven { url mirror + '/central'; allowInsecureProtocol = true }
+            maven { url mirror + '/portal'; allowInsecureProtocol = true }
+        }
+    }
+    repositories {
+        maven { url mirror + '/forge'; allowInsecureProtocol = true }
+        maven { url mirror + '/bmclapi'; allowInsecureProtocol = true }
+        maven { url mirror + '/central'; allowInsecureProtocol = true }
+        maven { url mirror + '/mojang'; allowInsecureProtocol = true }
+    }
+}

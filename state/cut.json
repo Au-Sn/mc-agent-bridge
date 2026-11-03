@@ -1,0 +1,23 @@
+{
+ "cuts": {
+  "mysticalagriculture": {
+   "source": "table+fallback",
+   "why": "你选的第一刀: 224 个方块, 数据层实测零改动",
+   "at": "2026-10-08 20:23:42",
+   "measured_change": 0,
+   "measured_blocks": 224
+  },
+  "mcwdoors": {
+   "source": "table+fallback",
+   "why": "B4 的收益刀（用户原话：收益刀必须选「会改但方向安全」的，如那 548 条 blocks_space False⇒True）。实测：245 块里 201 处会变，全部是 is_floor False⇒True，挡人变化 0、收紧 0 ⇒ 方向安全（物理上也对：关着的门顶面就是硬的）。对照 mcwtrpdoors（169 改/134 收紧）、create、mcwfurnitures 都有收紧 ⇒ 不选。出处：§79.286 / tmp/b4_direction.py",
+   "at": "2026-10-18 14:58:41",
+   "measured_change": 201,
+   "measured_blocks": 245
+  }
+ },
+ "scope": [
+  "mcwdoors",
+  "mysticalagriculture"
+ ],
+ "note": "作用域只含点名的命名空间；整档回退 = cut.py rollback"
+}

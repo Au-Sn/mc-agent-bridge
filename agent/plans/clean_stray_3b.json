@@ -1,0 +1,28 @@
+{
+  "name": "clean_stray_3b",
+  "note": "小批次回收 v2：海龟在基地地面被方块围住，同高度横向走不动（'两个轴都被挡住，已走 0 步'）。goto 是【先对齐 y 再水平】的，所以每格拆成两步：先 goto 到高空同一 x/z（= 升空后平移），再 goto 到目标格正上方（= 纯下降），然后 dig_down + suck_down。3 格一批，逐格验收。",
+  "steps": [
+    { "skill": "turtle", "args": { "cmd": "status" }, "note": "记下起始状态（位置/燃料/背包）" },
+
+    { "skill": "turtle", "args": { "cmd": "goto", "x": 4109, "y": 76, "z": 1, "max_steps": 60 },
+      "note": "第 1 格：升空到 y=76 再平移到 (4109,z=1)" },
+    { "skill": "turtle", "args": { "cmd": "goto", "x": 4109, "y": 71, "z": 1, "max_steps": 40 },
+      "note": "降到目标正上方" },
+    { "skill": "turtle", "args": { "cmd": "dig_down" }, "note": "挖掉下面的木板" },
+    { "skill": "turtle", "args": { "cmd": "suck_down" }, "note": "把掉落物吸上来" },
+
+    { "skill": "turtle", "args": { "cmd": "goto", "x": 4110, "y": 76, "z": 1, "max_steps": 60 },
+      "note": "第 2 格" },
+    { "skill": "turtle", "args": { "cmd": "goto", "x": 4110, "y": 71, "z": 1, "max_steps": 40 } },
+    { "skill": "turtle", "args": { "cmd": "dig_down" } },
+    { "skill": "turtle", "args": { "cmd": "suck_down" } },
+
+    { "skill": "turtle", "args": { "cmd": "goto", "x": 4111, "y": 76, "z": 1, "max_steps": 60 },
+      "note": "第 3 格" },
+    { "skill": "turtle", "args": { "cmd": "goto", "x": 4111, "y": 71, "z": 1, "max_steps": 40 } },
+    { "skill": "turtle", "args": { "cmd": "dig_down" } },
+    { "skill": "turtle", "args": { "cmd": "suck_down" } },
+
+    { "skill": "turtle", "args": { "cmd": "status" }, "note": "收尾：报位置/燃料/背包（背包木板 +3 = 回收成功）" }
+  ]
+}

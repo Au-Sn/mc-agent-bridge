@@ -1,0 +1,23 @@
+{
+  "name": "verify_rail",
+  "note": "用海龟自己的 inspect 复核上一轮那片护栏（世界状态验证 ✓ 不依赖 cmd0 ✓）。抽查 x=4119 的 z=8/10/12/14/16 五格：飞到每格正上方 y=72，inspect 下方一格。预期：上一轮 placed 的那些格现在应是 minecraft:oak_planks；失败的格应显示它们本来是什么（多半是 GPS 主机/命令计算机等方块，正好解释为什么放不下）。",
+  "steps": [
+    { "skill": "turtle", "args": { "cmd": "goto", "x": 4119, "y": 72, "z": 8, "max_steps": 80 },
+      "note": "到 (4119,72,8)" },
+    { "skill": "turtle", "args": { "cmd": "inspect", "dir": "down" }, "note": "看 (4119,71,8)" },
+
+    { "skill": "turtle", "args": { "cmd": "goto", "x": 4119, "y": 72, "z": 10, "max_steps": 40 } },
+    { "skill": "turtle", "args": { "cmd": "inspect", "dir": "down" }, "note": "看 (4119,71,10) —— 这里是 GPS 主机，预期不是木板" },
+
+    { "skill": "turtle", "args": { "cmd": "goto", "x": 4119, "y": 72, "z": 12, "max_steps": 40 } },
+    { "skill": "turtle", "args": { "cmd": "inspect", "dir": "down" }, "note": "看 (4119,71,12)" },
+
+    { "skill": "turtle", "args": { "cmd": "goto", "x": 4119, "y": 72, "z": 14, "max_steps": 40 } },
+    { "skill": "turtle", "args": { "cmd": "inspect", "dir": "down" }, "note": "看 (4119,71,14)" },
+
+    { "skill": "turtle", "args": { "cmd": "goto", "x": 4119, "y": 72, "z": 16, "max_steps": 40 } },
+    { "skill": "turtle", "args": { "cmd": "inspect", "dir": "down" }, "note": "看 (4119,71,16)" },
+
+    { "skill": "turtle", "args": { "cmd": "inv_list" }, "note": "顺带核对木板数（应为 30）" }
+  ]
+}

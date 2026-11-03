@@ -1,0 +1,15 @@
+{
+  "name": "smoke",
+  "note": "只读冒烟测试：确认 通道 / 感知 / 技能 / 验收 / 说话 全链路通畅。不改变世界，不需要 API。",
+  "steps": [
+    { "skill": "scan", "args": { "radius": 4 },
+      "note": "先看清周边（只读）" },
+    { "skill": "locate", "args": {},
+      "note": "GPS 定位；基站还没搭好时它必然失败，所以这一步不严格",
+      "strict": false },
+    { "skill": "verify", "args": { "x": 4119, "y": 70, "z": 9 },
+      "note": "查假人脚下那一格到底是什么方块（验收的正确姿势）" },
+    { "skill": "say", "args": { "text": "agent layer smoke test ok" },
+      "note": "冒烟测试完毕，说一句让玩家也能看到" }
+  ]
+}

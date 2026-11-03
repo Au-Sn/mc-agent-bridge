@@ -1,0 +1,125 @@
+# 仓库忽略清单 ✓（2026-09-23 起 ✓ 见 docs/错题本.md P91 那次"没有 git 只能靠字节码捞"✓）
+
+# —— 编译产物 / 工具链（可重下 ✓ 不该进库 ✗）
+mod/build/
+mod/.gradle/
+mod/jdk/
+mod/mirrorcache/
+mod/run/
+mod/src/main/resources/META-INF/  # 由 build.gradle 生成（mods.toml 模板在别处 ✓）
+
+# —— 依赖
+node_modules/
+**/node_modules/
+.venv/
+__pycache__/
+*.pyc
+
+# —— 日志（体积大 ✓ 且是"运行痕迹"✗）：只留目录占位 ✓
+logs/*.log
+logs/*.err
+logs/*.jsonl
+logs/*.txt
+logs/map_cache/
+logs/runs/
+logs/jobs/
+!logs/.gitkeep
+
+# —— 截图 / 临时
+*.png.bak
+tmp/
+*.tmp
+
+# —— 网关**运行痕迹** ✗（P98 那次提交一次混进 +1222 行 ✗ 与 logs/ 同类 ✓
+#   配置不在这些文件里 ✓ 它们只是"上一秒发生了什么"✗ ⇒ 留盘上 ✓ 不进库 ✗）
+bridge/log.jsonl
+bridge/log.jsonl.*
+bridge/state.json
+# ★★网关处理过的原始报文**也是运行痕迹**★★ ✗（2026-09-29 用户审计 ✓）
+#   实测 ✓：801 个文件（74.5 KB ✓）曾经**在库里** ✗ —— 每天还在长 ✗
+#   ⇒ 已 `git rm -r --cached` ✓（磁盘上留着 ✓）＋ 忽略 ✓
+#   ⇒ 生命周期交给 `tools/prune_runtime.py` ✓（默认 7 天 ✓ 默认 dry ✓ 要删得写 --yes ✓）
+bridge/processed/
+
+# —— 运行旗子（中继暂停用 ✓ 每次跑验收都会被建/删 ✗ 不该进库 ✗）
+logs/relay_hold
+
+# —— 我自己用的"过路文件"✗ 别进库 ✗（P98 附带的坑：`git add -A` 把提交信息文件也收进去了 ✗）
+#   提交信息：写 docs/_commitmsg.txt ⇒ `git commit -F` ⇒ 立刻删 ✓
+#   文档追加片段：写 docs/_append*.md ⇒ 让 Python 按 UTF-8 追加进正文 ⇒ 立刻删 ✓
+docs/_commitmsg.txt
+docs/_append*.md
+
+# —— 系统
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# ★★密钥一律**不进库**★★ ✗（2026-09-29 用户审计指出 ✓ 我的错 ✓）
+#   实情 ✓：`secrets/deepseek.key`（36 字节 ✓）**从初始提交 `59cbbd7` 起就被跟踪**✗
+#     ⇒ 值本身**没扩散**（全库只有这一个文件有它 ✓ 已核实 ✓）
+#     ⇒ 但**它在 git 历史里** ✗ ⇒ 任何拿到仓库副本的人（包括以后某次误 `git push` ✗）都能拿到 ✓
+#   处置 ✓：`git rm --cached`（**磁盘上文件留着** ✓ 服务照常能读 ✓）＋ 这一条忽略 ✓
+#   ★要用户做的★ ✗：**把这个 key 当作已泄露 ⇒ 去 DeepSeek 控制台轮换掉** ✓
+#     （本仓库**没有 remote** ✓ ⇒ 目前只影响本地副本 ✓；轮换是唯一彻底的处置 ✓）
+#   代码侧 ✓：`tools/talk.py` 本来就是**先读环境变量** ✓（`AGENT_API_KEY` ✓）
+#     ⇒ 推荐用法：设 `AGENT_API_KEY` 环境变量 ✓；`secrets/*.key` 只是**本机兜底**✗ 不许入库 ✓
+secrets/
+*.key
+*.token
+*.pem
+.env
+.env.*
+
+# ★故意**不**忽略的东西★ ✗：
+#   docs/ ✓  tools/ ✓  personas/ ✓  skins/ ✓  mod/src/ ✓
+#   —— 这些是"这项目的记忆与本钱" ✓ 必须进库 ✓
+#   ★2026-11 开源发布轮修正✗★：`jobs/`（运行时任务卡）与 `memory/`（运行时私人记忆）含个人游戏数据
+#   ⇒ 移出版本库（盘上保留；公开快照不带私人运行数据）。本地仍照常读写。
+
+# 运行时私人数据（公开仓不含；本地保留 ✓）
+jobs/
+memory/
+
+# —— 第 30 轮：改动之前的地图缓存 ✓（里面存的**全是"字母名"**✗ 留着备查 ✓ 不进库 ✗）
+#   挪走而不是删掉 ✓：万一还想回头看"当时图上到底是什么样" ✓
+logs/map_cache_stale30/
+logs/*.bak*
+# 截图（重启验证 / 模拟人现场图 ✗ 一次性产物 ⇒ 不进库 ✓ 2026-11-02 接手轮加）
+logs/*.png
+
+# --- 构建用的 gradle 家（工作区内, 绕开 ~/.gradle 的权限问题）
+mod/.gradlehome/
+# 网关**收件箱**（运行痕迹 ✍ 与 bridge/log.jsonl 同类）—— 2026-10-13 归档：它一直是 untracked，每天弄脏 git status
+bridge/inbox/
+
+# ══════════════════════════════════════════════════════════════════════════
+# ★★2026-11 开源发布轮：工具链 / 第三方产物 / 运行痕迹 一律不入库★★
+#   原因（用户口径）："检查深绑本机环境的情况、缺的补完、将来上 GitHub"
+#   · 工具链 468MB（jdk17.zip 178MB + gradle zip 119MB + gdist 119MB）——
+#     单文件 >100MB 会被 GitHub 直接拒收，且任何人都不该从 git 里拉一份 JDK
+#   · downloads/ 是第三方 mod jar（Carpet/AP/CC 等）—— 不随本仓库分发，
+#     安装说明见 docs/INSTALL.md（去各自官方源下载）
+#   · logs/ 运行痕迹（含本机会话/截图/玩家名）—— 不入公开仓库；盘上保留
+#   · dsh.env 是本机环境事实 —— 入库的只有 dsh.env.example
+#   · mod/ 根目录的 _api*.txt/_probe*/build*.log 是当年 javap/构建排障转储
+#     两者在磁盘上全部保留，只是不再进版本库（历史 commit 里仍可查）
+# ══════════════════════════════════════════════════════════════════════════
+mod/jdk17.zip
+mod/gradle-8.1.1-bin.zip
+mod/gdist/
+mod/_*.txt
+mod/_*.jar
+mod/_*.pom
+mod/build*.log
+mod/jstack*.txt
+mod/build_skin.log
+mod/mdk.zip
+downloads/
+backups/
+dsh.env
+_api8.txt
+rehearsal_lines.txt
+logs/*
+!logs/.gitkeep
+

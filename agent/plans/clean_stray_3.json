@@ -1,0 +1,22 @@
+{
+  "name": "clean_stray_3",
+  "note": "小批次回收误放的木板：3 格一批。每格 = 用 worker 的 goto 飞到正上方 → dig_down → suck_down。刻意不自写导航（自己写的版本每步都要一次 GPS 定位，最坏 7 分钟/格）。任务类型为第 4 条验收的『多步 GPS 作业』。",
+  "steps": [
+    { "skill": "turtle", "args": { "cmd": "goto", "x": 4109, "y": 71, "z": 1, "max_steps": 40 },
+      "note": "第 1 格：飞到 (4109,71,1)" },
+    { "skill": "turtle", "args": { "cmd": "dig_down" }, "note": "挖掉它下面的木板" },
+    { "skill": "turtle", "args": { "cmd": "suck_down" }, "note": "把掉落物吸上来" },
+
+    { "skill": "turtle", "args": { "cmd": "goto", "x": 4110, "y": 71, "z": 1, "max_steps": 40 },
+      "note": "第 2 格" },
+    { "skill": "turtle", "args": { "cmd": "dig_down" } },
+    { "skill": "turtle", "args": { "cmd": "suck_down" } },
+
+    { "skill": "turtle", "args": { "cmd": "goto", "x": 4111, "y": 71, "z": 1, "max_steps": 40 },
+      "note": "第 3 格" },
+    { "skill": "turtle", "args": { "cmd": "dig_down" } },
+    { "skill": "turtle", "args": { "cmd": "suck_down" } },
+
+    { "skill": "turtle", "args": { "cmd": "status" }, "note": "收尾：报位置/燃料/背包" }
+  ]
+}

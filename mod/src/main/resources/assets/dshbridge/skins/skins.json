@@ -1,0 +1,14 @@
+{
+  "_comment": "dshbridge 内置皮肤清单。加皮肤 = 丢一张 64x64 RGBA 的 PNG 进本目录 + 在这里加一行（不加也能被发现，会用默认值）。",
+  "_schema": {
+    "file": "相对本文件的 PNG 文件名（必填）",
+    "name": "对外显示/指令里用的名字（省略则用文件名去掉扩展名）",
+    "model": "wide（经典粗手臂）或 slim（细手臂）；省略 = wide",
+    "note": "给自己看的备注，会出现在 /dskskin 列表里"
+  },
+  "skins": [
+    { "file": "deepseek.png", "name": "deepseek", "model": "wide", "note": "蓝色大肥鱼 DeepSeek 版" },
+    { "file": "catgirl.png", "name": "catgirl", "model": "wide", "note": "蓝色大肥鱼 猫娘版" },
+    { "file": "yuyu.png", "name": "yuyu", "model": "wide", "note": "玉玉心羽鲈" }
+  ]
+}

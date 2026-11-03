@@ -1,0 +1,20 @@
+{
+  "name": "build_rail",
+  "note": "第 4 条验收的『多步 GPS 建造作业』，而且是一件真有用的事：在平台西缘 x=4119、z=8..16 的 y=71 处竖一道 9 格高的 1 格护栏。为什么有用：假人潜行不防坠（MC-93117），会直接走下平台，1 格高的护栏能挡住它。为什么必然成功：底座是 y=70 的西缘环（实心方块，完整支撑）。验收不看自述：比对 inv_list 的木板数（36 → 27）＋ place_row 自报的 placed/failed。",
+  "steps": [
+    { "skill": "turtle", "args": { "cmd": "inv_list" },
+      "note": "起始库存（预期 oak_planks = 36）" },
+
+    { "skill": "turtle", "args": { "cmd": "goto", "x": 4119, "y": 72, "z": 8, "max_steps": 80 },
+      "note": "飞到西缘环正上方 y=72（放方块时朝下放，落在 y=71）" },
+
+    { "skill": "turtle", "args": { "cmd": "place_row", "n": 9, "dir": "south" },
+      "note": "向南铺 9 格护栏（z=8..16）" },
+
+    { "skill": "turtle", "args": { "cmd": "inv_list" },
+      "note": "验收：木板应减少 9（36 → 27）" },
+
+    { "skill": "turtle", "args": { "cmd": "status" },
+      "note": "收尾：报位置与燃料" }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+ "schema": "dshbridge/soak_freeze@1",
+ "generated_at": "2026-11-02T20:49:50+0800",
+ "generated_unix": 1793623790.45365,
+ "files": {
+  "tools/soak_suite.py": "b29f4b0ceeaa6c888f3f16d54864e4975223c3a7a5ff857df3d5f9cb8ea1f02c",
+  "tools/soak_suite_test.py": "8e135f92d32a487661b0549cf9414743cb8ed7874da21e05d4c128e72f17f844",
+  "tools/d3_soak.py": "eeb933070357e0c40c4275db3e988abf364d9746550d489c2deabee30777e703",
+  "tools/soak_night.ps1": "a4c44cb35ec60853162dc2faea8fe6ffce0b50e0a7699c472dd2928d476a20b8"
+ }
+}

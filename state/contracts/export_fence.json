@@ -1,0 +1,65 @@
+{
+ "schema": "dshbridge/registry_blocks@1",
+ "mod_version": "2.19.0",
+ "count": 24779,
+ "blocks_sha256_12": "ee8fc9dd1092",
+ "recorded_at": "2026-10-18 15:29:03",
+ "sample": {
+  "absentbydesign:fence_cherry": {
+   "family": "fence_15",
+   "max_height": 1.5,
+   "has_block_entity": false,
+   "destroy_time": 2.0,
+   "empty": false
+  },
+  "absentbydesign:fence_crimson": {
+   "family": "fence_15",
+   "max_height": 1.5,
+   "has_block_entity": false,
+   "destroy_time": 2.0,
+   "empty": false
+  },
+  "absentbydesign:fence_log_acacia": {
+   "family": "fence_15",
+   "max_height": 1.5,
+   "has_block_entity": false,
+   "destroy_time": 2.0,
+   "empty": false
+  },
+  "absentbydesign:fence_log_birch": {
+   "family": "fence_15",
+   "max_height": 1.5,
+   "has_block_entity": false,
+   "destroy_time": 2.0,
+   "empty": false
+  },
+  "absentbydesign:fence_log_darkoak": {
+   "family": "fence_15",
+   "max_height": 1.5,
+   "has_block_entity": false,
+   "destroy_time": 2.0,
+   "empty": false
+  },
+  "absentbydesign:fence_log_jungle": {
+   "family": "fence_15",
+   "max_height": 1.5,
+   "has_block_entity": false,
+   "destroy_time": 2.0,
+   "empty": false
+  },
+  "absentbydesign:fence_log_oak": {
+   "family": "fence_15",
+   "max_height": 1.5,
+   "has_block_entity": false,
+   "destroy_time": 2.0,
+   "empty": false
+  },
+  "absentbydesign:fence_log_spruce": {
+   "family": "fence_15",
+   "max_height": 1.5,
+   "has_block_entity": false,
+   "destroy_time": 2.0,
+   "empty": false
+  }
+ }
+}

@@ -1,0 +1,838 @@
+{
+ "schema": "dshbridge/soak_scorecard@1",
+ "generated_at": "2026-11-02T19:48:27+0800",
+ "generated_unix": 1793620107.9399774,
+ "verdict": "PASS",
+ "exit_code": 0,
+ "profile": "mixed",
+ "duration_sec": 1215.3,
+ "duration_planned_sec": 1200.0,
+ "duration_ok": true,
+ "started_at": "2026-11-02T19:28:12+0800",
+ "ended_at": "2026-11-02T19:48:27+0800",
+ "calls": 1572,
+ "calls_action": 1331,
+ "calls_oracle": 241,
+ "calls_full_bar": 2000,
+ "d3_calls_min": 2000,
+ "d3_duration_min_sec": 10260.0,
+ "full_bar": false,
+ "full_spec_mixed_3h": false,
+ "rounds": {
+  "total": 138,
+  "by_kind": {
+   "idle": 28,
+   "walk": 41,
+   "work": 69
+  },
+  "mix_ratio": {
+   "idle": 0.2,
+   "walk": 0.3,
+   "work": 0.5
+  }
+ },
+ "activity": {
+  "rounds": 138,
+  "by_kind": {
+   "idle": 28,
+   "walk": 41,
+   "work": 69
+  },
+  "distinct_cells": 43,
+  "distinct_xz": 39,
+  "walk_attempts": 41,
+  "walk_reached": 41,
+  "walk_refused": 0,
+  "walk_max_moved": 7.93,
+  "work_attempts": 56,
+  "place_world_true": 56,
+  "dig_world_true": 56,
+  "idle_rounds": 28,
+  "idle_humanoid_confirmed": true,
+  "idle_strolls_delta": 0,
+  "samples": 394,
+  "activity_ok": true
+ },
+ "hard_failures": [],
+ "soft_failures": [
+  {
+   "code": "S_EVENT_FLOOD",
+   "detail": "事件流很密（≈21 条/秒，如 yaw 写者每 tick 两条）⇒ 改为切片高频 drain 保住 oracle；这本身是事件环可读性问题",
+   "at": "2026-11-02T19:28:12+0800"
+  },
+  {
+   "code": "S_PICKUP_SLOW",
+   "detail": "等了 10.5 秒没自动捡起来 ⇒ 走过去捡",
+   "at": "2026-11-02T19:29:40+0800"
+  },
+  {
+   "code": "S_PICKUP_SLOW",
+   "detail": "等了 10.5 秒没自动捡起来 ⇒ 走过去捡",
+   "at": "2026-11-02T19:30:28+0800"
+  },
+  {
+   "code": "S_PICKUP_SLOW",
+   "detail": "等了 10.5 秒没自动捡起来 ⇒ 走过去捡",
+   "at": "2026-11-02T19:30:41+0800"
+  },
+  {
+   "code": "S_PLACE_FAILED",
+   "detail": "place 在 [4151, 71, 13] 没生效（dshplace: useItemOn=FAIL but 4151, 71, 13 is still minecraft:air (support 4151, ）⇒ 换邻格再试",
+   "at": "2026-11-02T19:31:53+0800"
+  },
+  {
+   "code": "S_PLACE_FAILED",
+   "detail": "place 在 [4154, 71, 13] 没生效（dshplace: useItemOn=FAIL but 4154, 71, 13 is still minecraft:air (support 4154, ）⇒ 换邻格再试",
+   "at": "2026-11-02T19:31:56+0800"
+  },
+  {
+   "code": "S_PICKUP_SLOW",
+   "detail": "等了 10.5 秒没自动捡起来 ⇒ 走过去捡",
+   "at": "2026-11-02T19:32:08+0800"
+  },
+  {
+   "code": "S_PICKUP_SLOW",
+   "detail": "等了 10.5 秒没自动捡起来 ⇒ 走过去捡",
+   "at": "2026-11-02T19:32:54+0800"
+  },
+  {
+   "code": "S_PICKUP_SLOW",
+   "detail": "等了 10.5 秒没自动捡起来 ⇒ 走过去捡",
+   "at": "2026-11-02T19:34:20+0800"
+  },
+  {
+   "code": "S_ENTITY_NEARBY",
+   "detail": "半径 2 内有实体 minecraft:wandering_trader@1.3（最近 1.3 格）⇒ 这轮不放方块",
+   "at": "2026-11-02T19:35:36+0800"
+  },
+  {
+   "code": "S_ENTITY_NEARBY",
+   "detail": "半径 2 内有实体 minecraft:wandering_trader@1.3（最近 1.3 格）⇒ 这轮不放方块",
+   "at": "2026-11-02T19:35:36+0800"
+  },
+  {
+   "code": "S_ENTITY_NEARBY",
+   "detail": "半径 2 内有实体 minecraft:wandering_trader@0.9（最近 0.9 格）⇒ 这轮不放方块",
+   "at": "2026-11-02T19:36:09+0800"
+  },
+  {
+   "code": "S_PICKUP_SLOW",
+   "detail": "等了 10.5 秒没自动捡起来 ⇒ 走过去捡",
+   "at": "2026-11-02T19:36:24+0800"
+  },
+  {
+   "code": "S_PICKUP_SLOW",
+   "detail": "等了 10.5 秒没自动捡起来 ⇒ 走过去捡",
+   "at": "2026-11-02T19:36:37+0800"
+  },
+  {
+   "code": "S_AIRBORNE",
+   "detail": "onground=false（pos=4151.73,72.25,12.88 yaw=-55.6）",
+   "at": "2026-11-02T19:36:39+0800"
+  },
+  {
+   "code": "S_PICKUP_SLOW",
+   "detail": "等了 10.5 秒没自动捡起来 ⇒ 走过去捡",
+   "at": "2026-11-02T19:37:25+0800"
+  },
+  {
+   "code": "S_PLACE_FAILED",
+   "detail": "place 在 [4149, 71, 15] 没生效（dshplace: useItemOn=FAIL but 4149, 71, 15 is still minecraft:air (support 4149, ）⇒ 换邻格再试",
+   "at": "2026-11-02T19:38:05+0800"
+  },
+  {
+   "code": "S_PLACE_FAILED",
+   "detail": "place 在 [4151, 71, 15] 没生效（dshplace: useItemOn=FAIL but 4151, 71, 15 is still minecraft:air (support 4151, ）⇒ 换邻格再试",
+   "at": "2026-11-02T19:38:05+0800"
+  },
+  {
+   "code": "S_PLACE_FAILED",
+   "detail": "place 在 [4150, 71, 14] 没生效（dshplace: useItemOn=FAIL but 4150, 71, 14 is still minecraft:air (support 4150, ）⇒ 换邻格再试",
+   "at": "2026-11-02T19:38:05+0800"
+  },
+  {
+   "code": "S_PLACE_FAILED",
+   "detail": "place 在 [4155, 71, 16] 没生效（dshplace: useItemOn=FAIL but 4155, 71, 16 is still minecraft:air (support 4155, ）⇒ 换邻格再试",
+   "at": "2026-11-02T19:38:41+0800"
+  },
+  {
+   "code": "S_PICKUP_SLOW",
+   "detail": "等了 10.5 秒没自动捡起来 ⇒ 走过去捡",
+   "at": "2026-11-02T19:39:30+0800"
+  },
+  {
+   "code": "S_ENTITY_NEARBY",
+   "detail": "半径 2 内有实体 minecraft:wandering_trader@1.3（最近 1.3 格）⇒ 这轮不放方块",
+   "at": "2026-11-02T19:39:33+0800"
+  },
+  {
+   "code": "S_ENTITY_NEARBY",
+   "detail": "半径 2 内有实体 minecraft:wandering_trader@1.3（最近 1.3 格）⇒ 这轮不放方块",
+   "at": "2026-11-02T19:39:33+0800"
+  },
+  {
+   "code": "S_AIRBORNE",
+   "detail": "onground=false（pos=4151.72,72.00,14.29 yaw=-139.0）",
+   "at": "2026-11-02T19:40:13+0800"
+  },
+  {
+   "code": "S_PLACE_FAILED",
+   "detail": "place 在 [4152, 71, 13] 没生效（dshplace: useItemOn=FAIL but 4152, 71, 13 is still minecraft:air (support 4152, ）⇒ 换邻格再试",
+   "at": "2026-11-02T19:40:45+0800"
+  },
+  {
+   "code": "S_PICKUP_SLOW",
+   "detail": "等了 10.5 秒没自动捡起来 ⇒ 走过去捡",
+   "at": "2026-11-02T19:41:00+0800"
+  },
+  {
+   "code": "S_ENTITY_NEARBY",
+   "detail": "半径 2 内有实体 minecraft:trader_llama@1.8（最近 1.8 格）⇒ 这轮不放方块",
+   "at": "2026-11-02T19:41:01+0800"
+  },
+  {
+   "code": "S_ENTITY_NEARBY",
+   "detail": "半径 2 内有实体 minecraft:trader_llama@1.1（最近 1.1 格）⇒ 这轮不放方块",
+   "at": "2026-11-02T19:42:13+0800"
+  },
+  {
+   "code": "S_ENTITY_NEARBY",
+   "detail": "半径 2 内有实体 minecraft:trader_llama@1.1（最近 1.1 格）⇒ 这轮不放方块",
+   "at": "2026-11-02T19:42:14+0800"
+  },
+  {
+   "code": "S_PLACE_FAILED",
+   "detail": "place 在 [4149, 71, 13] 没生效（dshplace: useItemOn=FAIL but 4149, 71, 13 is still minecraft:air (support 4149, ）⇒ 换邻格再试",
+   "at": "2026-11-02T19:42:48+0800"
+  },
+  {
+   "code": "S_ENTITY_NEARBY",
+   "detail": "半径 2 内有实体 minecraft:trader_llama@1.3（最近 1.3 格）⇒ 这轮不放方块",
+   "at": "2026-11-02T19:43:27+0800"
+  },
+  {
+   "code": "S_ENTITY_NEARBY",
+   "detail": "半径 2 内有实体 minecraft:trader_llama@1.3（最近 1.3 格）⇒ 这轮不放方块",
+   "at": "2026-11-02T19:43:27+0800"
+  },
+  {
+   "code": "S_ENTITY_NEARBY",
+   "detail": "半径 2 内有实体 minecraft:trader_llama@1.2（最近 1.2 格）⇒ 这轮不放方块",
+   "at": "2026-11-02T19:44:01+0800"
+  },
+  {
+   "code": "S_ENTITY_NEARBY",
+   "detail": "半径 2 内有实体 minecraft:trader_llama@1.2（最近 1.2 格）⇒ 这轮不放方块",
+   "at": "2026-11-02T19:44:01+0800"
+  },
+  {
+   "code": "S_AIRBORNE",
+   "detail": "onground=false（pos=4152.74,72.02,12.44 yaw=16.3）",
+   "at": "2026-11-02T19:44:05+0800"
+  },
+  {
+   "code": "S_PLACE_FAILED",
+   "detail": "place 在 [4151, 71, 13] 没生效（dshplace: useItemOn=FAIL but 4151, 71, 13 is still minecraft:air (support 4151, ）⇒ 换邻格再试",
+   "at": "2026-11-02T19:44:35+0800"
+  },
+  {
+   "code": "S_PICKUP_SLOW",
+   "detail": "等了 10.5 秒没自动捡起来 ⇒ 走过去捡",
+   "at": "2026-11-02T19:44:47+0800"
+  },
+  {
+   "code": "S_ENTITY_NEARBY",
+   "detail": "半径 2 内有实体 minecraft:trader_llama@1.5（最近 1.5 格）⇒ 这轮不放方块",
+   "at": "2026-11-02T19:44:48+0800"
+  },
+  {
+   "code": "S_PLACE_FAILED",
+   "detail": "place 在 [4149, 71, 11] 没生效（dshplace: useItemOn=FAIL but 4149, 71, 11 is still minecraft:air (support 4149, ）⇒ 换邻格再试",
+   "at": "2026-11-02T19:44:50+0800"
+  },
+  {
+   "code": "S_PICKUP_SLOW",
+   "detail": "等了 10.5 秒没自动捡起来 ⇒ 走过去捡",
+   "at": "2026-11-02T19:45:37+0800"
+  },
+  {
+   "code": "S_PLACE_FAILED",
+   "detail": "place 在 [4154, 71, 16] 没生效（dshplace: useItemOn=FAIL but 4154, 71, 16 is still minecraft:air (support 4154, ）⇒ 换邻格再试",
+   "at": "2026-11-02T19:46:17+0800"
+  },
+  {
+   "code": "S_PLACE_FAILED",
+   "detail": "place 在 [4155, 71, 15] 没生效（dshplace: useItemOn=FAIL but 4155, 71, 15 is still minecraft:air (support 4155, ）⇒ 换邻格再试",
+   "at": "2026-11-02T19:46:17+0800"
+  },
+  {
+   "code": "S_AIRBORNE",
+   "detail": "onground=false（pos=4152.82,72.02,13.75 yaw=138.2）",
+   "at": "2026-11-02T19:46:20+0800"
+  },
+  {
+   "code": "S_PLACE_FAILED",
+   "detail": "place 在 [4155, 71, 10] 没生效（dshplace: useItemOn=FAIL but 4155, 71, 10 is still minecraft:air (support 4155, ）⇒ 换邻格再试",
+   "at": "2026-11-02T19:46:52+0800"
+  },
+  {
+   "code": "S_PLACE_FAILED",
+   "detail": "place 在 [4154, 71, 9] 没生效（dshplace: useItemOn=FAIL but 4154, 71, 9 is still minecraft:air (support 4154, 7）⇒ 换邻格再试",
+   "at": "2026-11-02T19:46:52+0800"
+  },
+  {
+   "code": "S_PICKUP_SLOW",
+   "detail": "等了 10.5 秒没自动捡起来 ⇒ 走过去捡",
+   "at": "2026-11-02T19:47:03+0800"
+  },
+  {
+   "code": "S_PICKUP_SLOW",
+   "detail": "等了 10.5 秒没自动捡起来 ⇒ 走过去捡",
+   "at": "2026-11-02T19:47:50+0800"
+  }
+ ],
+ "soft_codes": {
+  "S_EVENT_FLOOD": 1,
+  "S_PICKUP_SLOW": 15,
+  "S_PLACE_FAILED": 14,
+  "S_ENTITY_NEARBY": 13,
+  "S_AIRBORNE": 4
+ },
+ "inconclusive_reasons": [],
+ "hard_count": 0,
+ "soft_count": 47,
+ "oracle": {
+  "cursor_start": 1744,
+  "cursor_end": 2810,
+  "drains": 240,
+  "events_seen": 1066,
+  "gaps": 0,
+  "truncated_drains": 0,
+  "event_rate_peak": 8.6,
+  "noise_events": 626,
+  "bot_died": 0,
+  "damage": 0,
+  "inv_neg": 0,
+  "inv_large_drop": 0,
+  "mode": 0,
+  "humanoid": 56,
+  "auto_eat": 0,
+  "walk_start": 80,
+  "walk_done": 80,
+  "walk_refuse": 0,
+  "kinds": {
+   "mut": 112,
+   "yaw_bracket": 268,
+   "yaw_write": 268,
+   "inv": 112,
+   "walk_start": 80,
+   "walk_mode": 80,
+   "walk_done": 80,
+   "humanoid": 56,
+   "auto_greet": 10
+  }
+ },
+ "world": {
+  "mut_events": 31,
+  "our_cells": 31,
+  "foreign_mut": [],
+  "foreign_mut_count": 0,
+  "work_cells": [
+   {
+    "pos": [
+     4148,
+     71,
+     10
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4148,
+     71,
+     11
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4149,
+     71,
+     11
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4150,
+     71,
+     12
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4150,
+     71,
+     13
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4150,
+     71,
+     14
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4150,
+     71,
+     15
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4150,
+     71,
+     16
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4151,
+     71,
+     11
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4151,
+     71,
+     12
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4151,
+     71,
+     13
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4151,
+     71,
+     15
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4151,
+     71,
+     16
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4152,
+     71,
+     12
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4152,
+     71,
+     14
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4153,
+     71,
+     10
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4153,
+     71,
+     12
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4153,
+     71,
+     13
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4153,
+     71,
+     15
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4153,
+     71,
+     16
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4154,
+     71,
+     11
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4154,
+     71,
+     12
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4154,
+     71,
+     14
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4154,
+     71,
+     15
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4155,
+     71,
+     10
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4155,
+     71,
+     11
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4155,
+     71,
+     14
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4155,
+     71,
+     15
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4156,
+     71,
+     10
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4156,
+     71,
+     11
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   },
+   {
+    "pos": [
+     4156,
+     71,
+     13
+    ],
+    "placed": true,
+    "dug": true,
+    "item": "minecraft:dirt"
+   }
+  ],
+  "residue": [],
+  "work_atomic_place_dig": true,
+  "walk_pillar": 0
+ },
+ "baseline": {
+  "pos": [
+   4152.5,
+   71.0,
+   13.5
+  ],
+  "mode": "survival",
+  "hp": 20.0,
+  "food": 20,
+  "items": 73,
+  "kinds": 9,
+  "free": 27,
+  "onground": true,
+  "time": 8163,
+  "day": 376,
+  "dim": "minecraft:overworld",
+  "held": "minecraft:dirtx3",
+  "events_cursor": 1744,
+  "idle": {
+   "humanoid": false,
+   "radius": 4,
+   "strolls": 8,
+   "looks": 28
+  },
+  "auto_eat": false,
+  "mod_version": "2.56.0",
+  "features": [
+   "scan",
+   "digest",
+   "look",
+   "walk",
+   "events",
+   "auto",
+   "map",
+   "path",
+   "kb",
+   "kbexport",
+   "state",
+   "caps",
+   "turn",
+   "yawtrace",
+   "http",
+   "http2",
+   "token",
+   "origin",
+   "rawmap",
+   "reqid"
+  ],
+  "inventory": [
+   {
+    "slot": 0,
+    "item": "minecraft:dirt",
+    "count": 3
+   },
+   {
+    "slot": 1,
+    "item": "minecraft:lever",
+    "count": 4
+   },
+   {
+    "slot": 2,
+    "item": "create:sticky_mechanical_piston",
+    "count": 4
+   },
+   {
+    "slot": 3,
+    "item": "create:encased_chain_drive",
+    "count": 6
+   },
+   {
+    "slot": 4,
+    "item": "create:creative_motor",
+    "count": 4
+   },
+   {
+    "slot": 5,
+    "item": "create:railway_casing",
+    "count": 40
+   },
+   {
+    "slot": 6,
+    "item": "create:piston_extension_pole",
+    "count": 4
+   },
+   {
+    "slot": 7,
+    "item": "create:mechanical_plough",
+    "count": 4
+   },
+   {
+    "slot": 8,
+    "item": "create:clutch",
+    "count": 4
+   }
+  ]
+ },
+ "final": {
+  "pos": [
+   4152.57,
+   71.0,
+   13.55
+  ],
+  "mode": "survival",
+  "hp": 20.0,
+  "food": 20,
+  "items": 73,
+  "kinds": 9,
+  "onground": true,
+  "time": 8469,
+  "day": 377,
+  "held": "minecraft:dirtx3"
+ },
+ "preconditions": {
+  "bridge": true,
+  "mod_version": "2.56.0",
+  "bot": true,
+  "survival": true,
+  "safe_start": true,
+  "events": true,
+  "idle_status": true,
+  "autoeat_off": true,
+  "inventory": true,
+  "plugin": {
+   "anchor": [
+    4152,
+    71,
+    13
+   ],
+   "radius": 3,
+   "void_platform": [
+    4145,
+    70,
+    2,
+    4160,
+    70,
+    17
+   ],
+   "no_dig": "tools/no_dig.py"
+  },
+  "open_3x3": true,
+  "preflight_ok": true
+ },
+ "params": {
+  "profile": "mixed",
+  "minutes": 20.0,
+  "interval": 30.0,
+  "radius": 3,
+  "seed": 7,
+  "max_calls": 2000,
+  "anchor": [
+   4152,
+   71,
+   13
+  ],
+  "allow_void_platform": true
+ },
+ "criteria": {
+  "D3a_zero_death": true,
+  "D3b_zero_item_loss": true,
+  "D3c_no_hang_err": true,
+  "D3d_survival": true,
+  "D3e_no_fall": true,
+  "oracle_complete": true,
+  "activity_exercised": true,
+  "fully_specced_run": false
+ },
+ "aborted_early": false,
+ "aborted_reason": null,
+ "cleanup_errors": [],
+ "evidence": {
+  "jsonl": "<repo>/logs/soak_20261102-192812.jsonl",
+  "run_log": "<repo>/logs/soak_20261102-192812.run.log",
+  "scorecard": "<repo>/state/soak_scorecard.json",
+  "jsonl_lines": 2439
+ },
+ "driver": {
+  "calls": 1572,
+  "calls_action": 1331,
+  "calls_oracle": 241,
+  "errors": 0,
+  "latency_ms_avg": 5.66
+ }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "build_sieve_pad",
+  "note": "为第 2 条验收铺地基：平台西缘 (x=4119) 往西铺一块 5×5 地基（x 4114..4118, z 8..12, y=70），留给将来的 5×5 筛矿阵列。为什么必然能放：每列从东往西铺（dir=west），每个新格的东邻都是已经实心的块（第 0 列靠平台西缘的 x=4119 环），符合已实测的『placeDown 只需一侧实心邻居』规则。验收：inv_list 木板 30 → 5（用了 25 个）；再用 inspect 抽读几格确认是 oak_planks。",
+  "steps": [
+    { "skill": "turtle", "args": { "cmd": "inv_list" }, "note": "起始库存（预期 30）" },
+
+    { "skill": "turtle", "args": { "cmd": "goto", "x": 4118, "y": 71, "z": 8, "max_steps": 80 } },
+    { "skill": "turtle", "args": { "cmd": "place_row", "n": 5, "dir": "west" }, "note": "第 1 行 z=8" },
+
+    { "skill": "turtle", "args": { "cmd": "goto", "x": 4118, "y": 71, "z": 9, "max_steps": 40 } },
+    { "skill": "turtle", "args": { "cmd": "place_row", "n": 5, "dir": "west" }, "note": "第 2 行 z=9" },
+
+    { "skill": "turtle", "args": { "cmd": "goto", "x": 4118, "y": 71, "z": 10, "max_steps": 40 } },
+    { "skill": "turtle", "args": { "cmd": "place_row", "n": 5, "dir": "west" }, "note": "第 3 行 z=10" },
+
+    { "skill": "turtle", "args": { "cmd": "goto", "x": 4118, "y": 71, "z": 11, "max_steps": 40 } },
+    { "skill": "turtle", "args": { "cmd": "place_row", "n": 5, "dir": "west" }, "note": "第 4 行 z=11" },
+
+    { "skill": "turtle", "args": { "cmd": "goto", "x": 4118, "y": 71, "z": 12, "max_steps": 40 } },
+    { "skill": "turtle", "args": { "cmd": "place_row", "n": 5, "dir": "west" }, "note": "第 5 行 z=12" },
+
+    { "skill": "turtle", "args": { "cmd": "inv_list" }, "note": "验收：木板应剩 5 个（用掉 25）" },
+
+    { "skill": "turtle", "args": { "cmd": "goto", "x": 4116, "y": 71, "z": 10, "max_steps": 40 } },
+    { "skill": "turtle", "args": { "cmd": "inspect", "dir": "down" }, "note": "抽读 (4116,70,10)" },
+    { "skill": "turtle", "args": { "cmd": "goto", "x": 4114, "y": 71, "z": 12, "max_steps": 40 } },
+    { "skill": "turtle", "args": { "cmd": "inspect", "dir": "down" }, "note": "抽读 (4114,70,12)" },
+
+    { "skill": "turtle", "args": { "cmd": "locate" }, "note": "收尾坐标" }
+  ]
+}

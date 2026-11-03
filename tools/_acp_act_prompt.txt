@@ -1,0 +1,7 @@
+用你的 Minecraft 工具真的做一次动作，按顺序来：
+1) 调 bot_state，读出 Bot 现在的坐标（x,y,z）；
+2) 调 walk_to，让 Bot 朝任意一个方向走至少 5 格（目标坐标你自己选，必须写整数 x/y/z，y 用当前 y）；
+3) 再调 bot_state，读出走完之后的坐标。
+然后只回一行，格式严格如下（不要解释、不要多余文字）：
+START=x,y,z END=x,y,z TOOL=walk_to
+如果 walk_to 失败或被拒绝，就把 END 写成失败的原始返回。

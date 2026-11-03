@@ -1,0 +1,34 @@
+{
+ "schema": "dshbridge/u1_account@1",
+ "why": "铁律②「不一致可以有 ✗ 但一条都不许没声明」的**账**✗。★口径✗★：★这个数**只许变小** ✗ 变大就必须红✗ ✓",
+ "measured_at": "2026-10-18",
+ "decision_level": 2162,
+ "undeclared": 0,
+ "by_namespace_top": {
+  "chipped": 202,
+  "productivetrees": 156,
+  "mcwtrpdoors": 134,
+  "botania": 50,
+  "minecraft": 40,
+  "absentbydesign": 21,
+  "forbidden_arcanus": 8,
+  "supplementaries": 3,
+  "create": 2,
+  "enderio": 2,
+  "framedblocks": 2,
+  "ars_nouveau": 1,
+  "immersiveengineering": 1,
+  "silentgear": 1,
+  "thermal": 1
+ },
+ "next": "★现在**只剩**导出也没覆盖的那一层 ✗ 以及阶段 4／5 的推进（★A2 阈值 ✗ A3 A/B ✗ B4 收益刀✗★）✓",
+ "blocked_on": "★**已经不需要了**✗★★ —— 2026-10-18 导出回来（24779 块 ✗ errors=0）⇒ `declare_collision --apply` 从**真导出**拿了 624 条 `collision` 证据 ✗ 写成物理主张 ⇒ **未声明 624 → 0** ✓",
+ "semantic_side": "★语义那一侧（★冲突型 29 条✗★）**已全部声明**（★未声明 0 ✓★）✗ ⇒ ★能离线补的那一半**已经补完了**✗★ ✓",
+ "sample": [
+  "absentbydesign:trapdoor_amethyst（★名字模型 fence ✗ 标签期望 pass✗★）",
+  "absentbydesign:trapdoor_andesite",
+  "absentbydesign:trapdoor_basalt"
+ ],
+ "semantic_undeclared": 0,
+ "how_reached_zero": "★按纪律达成的✗★：★不是拿标签凑 ✗ 是**每条都带 `collision` 证据**✗★（★R7／L6 会拦着不让乱写 ✗ 3379 条现在全部合规✓★）"
+}

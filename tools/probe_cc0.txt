@@ -1,0 +1,21 @@
+# cc0 生死核对（一行一条指令）
+# 1) 交接文档记录的 id0 两个位置，现在还是不是计算机？
+data get block 4122 71 5
+data get block 4101 70 24
+# 2) 我这一轮 /setblock air 打掉的其他位置，也一并核对
+data get block 4136 79 28
+data get block 4122 69 45
+data get block 4121 67 4
+# 3) (4122,71,5) 的六个邻居：调制解调器如果还在，就说明"只丢了主机、网络还在"
+data get block 4122 72 5
+data get block 4122 70 5
+data get block 4121 71 5
+data get block 4123 71 5
+data get block 4122 71 4
+data get block 4122 71 6
+# 4) 另一处 id0 位置 (4101,70,24) 的邻居
+data get block 4101 71 24
+data get block 4102 70 24
+data get block 4100 70 24
+# 5) 权威清单：现在世界上还有哪些 CC 设备
+computercraft dump

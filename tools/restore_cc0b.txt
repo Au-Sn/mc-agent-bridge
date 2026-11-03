@@ -1,0 +1,7 @@
+# turn-on 0 报"0/1"没开成 ✗ —— 改成**直接写 On 标签**（CC 保存状态用的就是它 ✓）
+data merge block 4122 71 5 {On:1b}
+data get block 4122 71 5
+computercraft dump
+# 再试一次显式 turn-on（两种写法都试）
+computercraft turn-on #0
+data get block 4122 71 5

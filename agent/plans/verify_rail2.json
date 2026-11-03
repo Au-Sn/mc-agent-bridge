@@ -1,0 +1,19 @@
+{
+  "name": "verify_rail2",
+  "note": "补齐护栏的世界状态验证（上一轮读了 z=8/10/12/14/16，本次读 z=9/11/13/15，两轮合起来 9 格全覆盖）。同时它也是『世界重启后建造仍在』的回归检查：世界于 09-18 00:03 重新载入过，海龟与 cc0 的程序都被重新拉取了。",
+  "steps": [
+    { "skill": "turtle", "args": { "cmd": "goto", "x": 4119, "y": 72, "z": 9, "max_steps": 80 } },
+    { "skill": "turtle", "args": { "cmd": "inspect", "dir": "down" }, "note": "看 (4119,71,9)" },
+
+    { "skill": "turtle", "args": { "cmd": "goto", "x": 4119, "y": 72, "z": 11, "max_steps": 40 } },
+    { "skill": "turtle", "args": { "cmd": "inspect", "dir": "down" }, "note": "看 (4119,71,11)" },
+
+    { "skill": "turtle", "args": { "cmd": "goto", "x": 4119, "y": 72, "z": 13, "max_steps": 40 } },
+    { "skill": "turtle", "args": { "cmd": "inspect", "dir": "down" }, "note": "看 (4119,71,13)" },
+
+    { "skill": "turtle", "args": { "cmd": "goto", "x": 4119, "y": 72, "z": 15, "max_steps": 40 } },
+    { "skill": "turtle", "args": { "cmd": "inspect", "dir": "down" }, "note": "看 (4119,71,15)" },
+
+    { "skill": "turtle", "args": { "cmd": "locate" }, "note": "顺带记下海龟的 GPS 坐标（应为 4119,72,15 附近）" }
+  ]
+}

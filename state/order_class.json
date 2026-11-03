@@ -1,0 +1,127 @@
+{
+ "schema": "order_class@2",
+ "decided_by": "用户 2026-10-24 选 B：作废 1260，按碰撞优先原则重新定义顺序类，新基线由新定义算出",
+ "definition": "★顺序类候选★ ＝ 一个方块 ✗ ① 名字同时命中 ≥2 个族关键词组（顺序敏感）✗ ② 名字判出来的形状 ≠ 导出碰撞族判出来的形状（名字确实错了）",
+ "criterion": "该集合的基数必须为 0（★先不加 ✗ 用户原话✗★）",
+ "principle": "★碰撞优先✗★：名字形状只用 `mapread.shape`（纯名字）；碰撞族以导出为准",
+ "baseline": {
+  "count": 554,
+  "total": 24779,
+  "ratio": 0.0224,
+  "multi_hit_blocks": 590
+ },
+ "samples": [
+  {
+   "species": "absentbydesign:wall_bamboo_planks",
+   "hits": [
+    "墙",
+    "木板"
+   ],
+   "name_shape": "pass",
+   "collision_shape": "fence"
+  },
+  {
+   "species": "absentbydesign:wall_stone_slab",
+   "hits": [
+    "半砖",
+    "墙"
+   ],
+   "name_shape": "slab",
+   "collision_shape": "fence"
+  },
+  {
+   "species": "amendments:carpet_stairs",
+   "hits": [
+    "楼梯",
+    "地毯"
+   ],
+   "name_shape": "slab",
+   "collision_shape": "full"
+  },
+  {
+   "species": "amendments:skull_candle_soul_wall",
+   "hits": [
+    "墙",
+    "蜡烛"
+   ],
+   "name_shape": "pass",
+   "collision_shape": "slab"
+  },
+  {
+   "species": "amendments:skull_candle_wall",
+   "hits": [
+    "墙",
+    "蜡烛"
+   ],
+   "name_shape": "pass",
+   "collision_shape": "slab"
+  },
+  {
+   "species": "botania:dreamwood_planks_stairs",
+   "hits": [
+    "楼梯",
+    "木板"
+   ],
+   "name_shape": "slab",
+   "collision_shape": "full"
+  },
+  {
+   "species": "botania:livingwood_planks_stairs",
+   "hits": [
+    "楼梯",
+    "木板"
+   ],
+   "name_shape": "slab",
+   "collision_shape": "full"
+  },
+  {
+   "species": "botania:shimmerwood_planks_stairs",
+   "hits": [
+    "楼梯",
+    "木板"
+   ],
+   "name_shape": "slab",
+   "collision_shape": "full"
+  },
+  {
+   "species": "chipped:d_sign_stripped_acacia_log",
+   "hits": [
+    "原木",
+    "牌子"
+   ],
+   "name_shape": "pass",
+   "collision_shape": "full"
+  },
+  {
+   "species": "chipped:d_sign_stripped_birch_log",
+   "hits": [
+    "原木",
+    "牌子"
+   ],
+   "name_shape": "pass",
+   "collision_shape": "full"
+  },
+  {
+   "species": "chipped:d_sign_stripped_cherry_log",
+   "hits": [
+    "原木",
+    "牌子"
+   ],
+   "name_shape": "pass",
+   "collision_shape": "full"
+  },
+  {
+   "species": "chipped:d_sign_stripped_dark_oak_log",
+   "hits": [
+    "原木",
+    "牌子"
+   ],
+   "name_shape": "pass",
+   "collision_shape": "full"
+  }
+ ],
+ "⚠": "★这是**新定义**下的基线 ✗ 与用户 2026-10-18 给的 1260 **不是同一件事**（那个数已作废）✗★",
+ "criterion_status": [
+  "★先不加✗★（★用户 2026-10-18 原话 ✗ 到 2026-10-24 选 B 时**没有**改这一条✗★）✗ 今天只报**新基线 554**"
+ ]
+}

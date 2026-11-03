@@ -1,0 +1,85 @@
+{
+ "cells": {
+  "4145,70,2": {
+   "ok": false,
+   "reply": "dshplace: useItemOn=PASS but 4145, 70, 2 is still minecraft:air (support 4144, 70, 2 face=",
+   "at": "22:56:34"
+  },
+  "4145,70,3": {
+   "ok": false,
+   "reply": "dshplace: useItemOn=PASS but 4145, 70, 3 is still minecraft:air (support 4144, 70, 3 face=",
+   "at": "22:56:34"
+  },
+  "4145,70,4": {
+   "ok": false,
+   "reply": "dshplace: useItemOn=PASS but 4145, 70, 4 is still minecraft:air (support 4144, 70, 4 face=",
+   "at": "22:56:34"
+  },
+  "4145,70,5": {
+   "ok": false,
+   "reply": "dshplace: useItemOn=PASS but 4145, 70, 5 is still minecraft:air (support 4144, 70, 5 face=",
+   "at": "22:56:34"
+  },
+  "4146,70,2": {
+   "ok": false,
+   "reply": "dshplace: no usable support face around 4146, 70, 2 (all 6 neighbours are air or non-solid",
+   "at": "22:56:34"
+  },
+  "4146,70,3": {
+   "ok": false,
+   "reply": "dshplace: no usable support face around 4146, 70, 3 (all 6 neighbours are air or non-solid",
+   "at": "22:56:34"
+  },
+  "4146,70,4": {
+   "ok": false,
+   "reply": "dshplace: no usable support face around 4146, 70, 4 (all 6 neighbours are air or non-solid",
+   "at": "22:56:34"
+  },
+  "4146,70,5": {
+   "ok": false,
+   "reply": "dshplace: no usable support face around 4146, 70, 5 (all 6 neighbours are air or non-solid",
+   "at": "22:56:34"
+  },
+  "4147,70,2": {
+   "ok": false,
+   "reply": "dshplace: no usable support face around 4147, 70, 2 (all 6 neighbours are air or non-solid",
+   "at": "22:56:34"
+  },
+  "4147,70,3": {
+   "ok": false,
+   "reply": "dshplace: no usable support face around 4147, 70, 3 (all 6 neighbours are air or non-solid",
+   "at": "22:56:34"
+  },
+  "4147,70,4": {
+   "ok": false,
+   "reply": "dshplace: no usable support face around 4147, 70, 4 (all 6 neighbours are air or non-solid",
+   "at": "22:56:34"
+  },
+  "4147,70,5": {
+   "ok": false,
+   "reply": "dshplace: no usable support face around 4147, 70, 5 (all 6 neighbours are air or non-solid",
+   "at": "22:56:34"
+  },
+  "4148,70,2": {
+   "ok": false,
+   "reply": "dshplace: no usable support face around 4148, 70, 2 (all 6 neighbours are air or non-solid",
+   "at": "22:56:34"
+  },
+  "4148,70,3": {
+   "ok": false,
+   "reply": "dshplace: no usable support face around 4148, 70, 3 (all 6 neighbours are air or non-solid",
+   "at": "22:56:34"
+  },
+  "4148,70,4": {
+   "ok": false,
+   "reply": "dshplace: no usable support face around 4148, 70, 4 (all 6 neighbours are air or non-solid",
+   "at": "22:56:34"
+  },
+  "4148,70,5": {
+   "ok": false,
+   "reply": "dshplace: no usable support face around 4148, 70, 5 (all 6 neighbours are air or non-solid",
+   "at": "22:56:34"
+  }
+ },
+ "done_strips": []
+}

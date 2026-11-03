@@ -1,0 +1,12 @@
+# Jade HUD 机制探测（一行一条指令）
+# A) ASCII 文本 + SNBT 双引号 + 转义内层引号 —— 能不能改成功？
+data merge entity @e[tag=dsh_jade,limit=1] {text:"{\"text\":\"hello-ascii\"}"}
+data get entity @e[tag=dsh_jade,limit=1] text
+# B) 空 extra 结构（HUD 真实载荷的形状，但全 ASCII）
+data merge entity @e[tag=dsh_jade,limit=1] {text:"{\"text\":\"\",\"extra\":[{\"text\":\"oak_planks\",\"color\":\"white\"},{\"text\":\"\\n\"},{\"text\":\"(4128, 70, 12)  dist 3.07  face west\",\"color\":\"gray\"}]}"}
+data get entity @e[tag=dsh_jade,limit=1] text
+# C) 换行转义在 SNBT 里是否被解释成真换行（HUD 多行要用它）
+data get entity @e[tag=dsh_jade,limit=1] text
+# D) 中文：不经 serializeJSON（直接写原始 UTF-8 字节）能否存活
+data merge entity @e[tag=dsh_jade,limit=1] {text:"{\"text\":\"中文测试\"}"}
+data get entity @e[tag=dsh_jade,limit=1] text

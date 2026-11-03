@@ -1,0 +1,1 @@
+{"steps": [{"t": "f", "d": "east", "n": 1}, {"t": "f", "d": "north", "n": 1}, {"t": "f", "d": "east", "n": 1}, {"t": "d", "n": 1}, {"t": "pf", "d": "south"}, {"t": "mark"}], "walk": 71}

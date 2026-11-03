@@ -1,0 +1,717 @@
+{
+ "gateway/agent_gateway.py": {
+  "lines": [
+   151,
+   226,
+   230,
+   306
+  ],
+  "why": [
+   "★假阳性★",
+   "★写响应时客户端已断开（BrokenPipeError）✗无补救动作 ✗ fail-safe✗★",
+   "假阳性：日志轮转失败⇒**不轮转** ✗ 紧接着的 append **照写**（★不丢数据✗★ ✗ 只不切文件）",
+   "★行号位移（★§79.452✗★）：★同文件插行后老 fail-safe 段的行号变了 ✗ 本条不是新豁免 ✗★"
+  ]
+ },
+ "tools/_diag_walk.py": {
+  "lines": [
+   51
+  ],
+  "why": [
+   "假阳性：印不出去只是少一行调试输出"
+  ]
+ },
+ "tools/acp_act_test.py": {
+  "lines": [
+   76
+  ],
+  "why": [
+   "假阳性：读/解析失败 ⇒ 轮询继续 ⇒ 300s 后判 **FAIL**（方向是红，不是假绿）"
+  ]
+ },
+ "tools/acp_serve.py": {
+  "lines": [
+   194,
+   201
+  ],
+  "why": [
+   "假阳性：坏行跳过（协议噪声），不会用错数据",
+   "★inbox 坏行 ⇒ 跳过 ✗ 协议噪声 ✗ 不是数据通道✗★"
+  ]
+ },
+ "tools/acp_talk.py": {
+  "lines": [
+   173,
+   203,
+   229,
+   444
+  ],
+  "why": [
+   "假阳性：诊断账少一行",
+   "假阳性：少数一条只影响\"我做过什么\"的自述",
+   "假阳性：坏行跳过，等下一行/超时",
+   "假阳性：心跳文件只是**诊断**（写失败＝没有心跳 ✗ 循环照跑 ✗ 不改任何数据）"
+  ]
+ },
+ "tools/act.py": {
+  "lines": [
+   66,
+   70
+  ],
+  "why": [
+   "假阳性：解析链中间一步（后面还有 float/None）",
+   "★`int→float→str` 解析链的中间一步 ✗ 返回值就是原字符串✗★"
+  ]
+ },
+ "tools/bridge_tail.py": {
+  "lines": [
+   64,
+   92
+  ],
+  "why": [
+   "假阳性：读不到只是少一段尾巴（工具自己会报空）",
+   "假阳性：坏行跳过（诊断工具）"
+  ]
+ },
+ "tools/cc_devices.py": {
+  "lines": [
+   49
+  ],
+  "why": [
+   "假阳性：坏行跳过（诊断）"
+  ]
+ },
+ "tools/cc_logs.py": {
+  "lines": [
+   45
+  ],
+  "why": [
+   "假阳性：参数解析失败保留默认"
+  ]
+ },
+ "tools/cfg_check.py": {
+  "lines": [
+   37
+  ],
+  "why": [
+   "假阳性：试探循环的一步（全失败另有出路）"
+  ]
+ },
+ "tools/check_all.py": {
+  "lines": [
+   288,
+   289,
+   290,
+   291,
+   292,
+   293,
+   294,
+   295,
+   296,
+   297,
+   298,
+   300,
+   302,
+   303,
+   304,
+   305,
+   306,
+   307,
+   308,
+   309,
+   310,
+   311,
+   312,
+   313,
+   314,
+   375,
+   376,
+   377,
+   378,
+   379,
+   380,
+   381,
+   382,
+   383,
+   384,
+   385,
+   387,
+   389,
+   390,
+   391,
+   392,
+   393,
+   394,
+   395,
+   396,
+   397,
+   398,
+   399,
+   400,
+   401,
+   405,
+   406,
+   407,
+   408,
+   409,
+   410,
+   411,
+   412,
+   413,
+   414,
+   415,
+   417,
+   419,
+   420,
+   421,
+   422,
+   423,
+   424,
+   425,
+   426,
+   427,
+   428,
+   429,
+   430,
+   431
+  ],
+  "why": [
+   "假阳性：表是同一文件里的**字面元组** ✗ row[0] 取不到只可能是编码写错；且失败方向是该项**不被当离线**（更严 ✗ 只会假红 ✗ 不会假绿）",
+   "假阳性：写的是**每脚本证据日志** ✗ 判定早就从捕获的 out 算完 ✗ 失败只少一份现场文件",
+   "假阳性：删暂停旗失败 ⇒ 中继**不自动续跑**（★安全方向✗★ ✗ 停滞可见 ✗ 不会用错数据）",
+   "line-shift realignment (sec 79.456): same old fail-safe blocks, line numbers moved because the file was edited; not a new exemption",
+   "line-shift realignment (sec 79.456): same old fail-safe blocks, line numbers moved because the file was edited; not a new exemption",
+   "line-shift realignment (sec 79.456): same old fail-safe blocks, line numbers moved because the file was edited; not a new exemption",
+   "line-shift realignment (sec 79.456): same old fail-safe blocks, line numbers moved because the file was edited; not a new exemption",
+   "line-shift realignment (sec 79.456): same old fail-safe blocks, line numbers moved because the file was edited; not a new exemption",
+   "line-shift realignment (sec 79.456): same old fail-safe blocks, line numbers moved because the file was edited; not a new exemption",
+   "line-shift realignment (sec 79.456): same old fail-safe blocks, line numbers moved because the file was edited; not a new exemption",
+   "line-shift realignment (sec 79.456): same old fail-safe blocks, line numbers moved because the file was edited; not a new exemption",
+   "line-shift realignment (sec 79.456): same old fail-safe blocks, line numbers moved because the file was edited; not a new exemption",
+   "line-shift realignment (sec 79.456): same old fail-safe blocks, line numbers moved because the file was edited; not a new exemption",
+   "line-shift realignment (sec 79.456): same old fail-safe blocks, line numbers moved because the file was edited; not a new exemption",
+   "line-shift realignment (sec 79.456): same old fail-safe blocks, line numbers moved because the file was edited; not a new exemption",
+   "line-shift realignment (sec 79.456): same old fail-safe blocks, line numbers moved because the file was edited; not a new exemption",
+   "line-shift realignment (sec 79.456): same old fail-safe blocks, line numbers moved because the file was edited; not a new exemption",
+   "line-shift realignment (sec 79.456): same old fail-safe blocks, line numbers moved because the file was edited; not a new exemption",
+   "line-shift realignment (sec 79.456): same old fail-safe blocks, line numbers moved because the file was edited; not a new exemption",
+   "line-shift realignment (sec 79.456): same old fail-safe blocks, line numbers moved because the file was edited; not a new exemption",
+   "line-shift realignment (sec 79.456): same old fail-safe blocks, line numbers moved because the file was edited; not a new exemption",
+   "line-shift realignment (sec 79.456): same old fail-safe blocks, line numbers moved because the file was edited; not a new exemption",
+   "line-shift realignment (sec 79.456): same old fail-safe blocks, line numbers moved because the file was edited; not a new exemption",
+   "line-shift realignment (sec 79.456): same old fail-safe blocks, line numbers moved because the file was edited; not a new exemption",
+   "line-shift realignment (sec 79.456): same old fail-safe blocks, line numbers moved because the file was edited; not a new exemption",
+   "line-shift realignment (sec 79.456): same old fail-safe blocks, line numbers moved because the file was edited; not a new exemption",
+   "line-shift realignment (sec 79.456): same old fail-safe blocks, line numbers moved because the file was edited; not a new exemption"
+  ]
+ },
+ "tools/check_carpet_load.py": {
+  "lines": [
+   66,
+   142
+  ],
+  "why": [
+   "假阳性：候选日志路径 getmtime 失败＝那条**不存在** ⇒ 跳过它挑下一条 ✗ 诊断脚本",
+   "假阳性：崩溃报告 listdir 后 getmtime 失败＝文件刚消失 ⇒ 只是少列一条**诊断清单**"
+  ]
+ },
+ "tools/d3_soak.py": {
+  "lines": [
+   241
+  ],
+  "why": [
+   "假阳性：编码设置（fail-safe）",
+   "行号位移（§79.523，2026-11-02 接手轮）：d3_soak 从 agent.channel 迁到直连 direct 后 stdout.reconfigure 那几行下移（211→241），同一条不是因为新豁免"
+  ]
+ },
+ "tools/dsh_acp.py": {
+  "lines": [
+   74,
+   110,
+   167,
+   169,
+   179,
+   184
+  ],
+  "why": [
+   "假阳性：协议噪声",
+   "假阳性：`queue.Empty` 另处理，坏行跳过",
+   "★解析一行 ACP 应答失败 ⇒ `continue` 等下一行 ✗ 协议噪声✗★",
+   "假阳性：`_rec` 写的是 **ACP 帧流水日志**（诊断用） ✗ 不进任何数据通道",
+   "假阳性：close() 里 `session/close` 是**尽力而为的清理** ✗ 失败只是服务端多留一会会话",
+   "假阳性：close() 里关 stdin 是**尽力而为的清理** ✗ 不影响任何已返回的数据"
+  ]
+ },
+ "tools/dsh_live.py": {
+  "lines": [
+   60,
+   98,
+   108,
+   113,
+   155,
+   159
+  ],
+  "why": [
+   "假阳性：调试转录少一行",
+   "假阳性：协议",
+   "假阳性：清理路径，后面还会关 stdin/wait",
+   "假阳性：`queue.Empty` 是**轮询控制流**（队列空＝正常） ✗ 根本不是吞错误"
+  ]
+ },
+ "tools/dshrun.py": {
+  "lines": [
+   115,
+   121,
+   145,
+   205,
+   232
+  ],
+  "why": [
+   "假阳性：读不到 ⇒ 输出为空 ⇒ `rc` 判失败（方向红）",
+   "假阳性：删不掉只是多留一个文件",
+   "假阳性：回调异常不影响回合结论",
+   "★读 `err` 文件失败 ⇒ 诊断少一段 ✗ 主通道 `o` 不受影响✗★"
+  ]
+ },
+ "tools/entity_nbt_diff.py": {
+  "lines": [
+   53
+  ],
+  "why": [
+   "假阳性：诊断"
+  ]
+ },
+ "tools/environment.py": {
+  "lines": [
+   91,
+   127
+  ],
+  "why": [
+   "假阳性：**设计如此的契约**——`is_floor` 答不出 ⇒ 返回 **None（未知 ✗ 一等值）** ✗ 不是猜一个值；方向保守（★offline_purity_test P3 守的就是这个✗★）",
+   "假阳性：同上——`is_landing` 答不出 ⇒ **None（未知）** ✗ 不许猜（★§79.171 口径✗★）"
+  ]
+ },
+ "tools/errata_archive.py": {
+  "lines": [
+   257
+  ],
+  "why": [
+   "假阳性：编码设置"
+  ]
+ },
+ "tools/extend_outward.py": {
+  "lines": [
+   43,
+   60
+  ],
+  "why": [
+   "假阳性：诊断"
+  ]
+ },
+ "tools/family_consistency.py": {
+  "lines": [
+   76
+  ],
+  "why": [
+   "假阳性：世界读不到 ⇒ 回 `None`（判不了，不猜）"
+  ]
+ },
+ "tools/gen_action_schema.py": {
+  "lines": [
+   832
+  ],
+  "why": [
+   "假阳性：`stream.reconfigure` 只是**编码装饰** ✗ 真失败会在后面 print 时**响亮地** 抛 UnicodeEncodeError ✗ 不是静默用错数据"
+  ]
+ },
+ "tools/gen_contract.py": {
+  "lines": [
+   133
+  ],
+  "why": [
+   "假阳性：编码设置"
+  ]
+ },
+ "tools/grave_recover.py": {
+  "lines": [
+   110
+  ],
+  "why": [
+   "假阳性：默认值"
+  ]
+ },
+ "tools/http_proxy.py": {
+  "lines": [
+   32,
+   48,
+   54,
+   91
+  ],
+  "why": [
+   "假阳性：编码设置",
+   "假阳性：单连接错误必须吞（代理要活着）",
+   "假阳性：清理"
+  ]
+ },
+ "tools/inspect_jar.py": {
+  "lines": [
+   93
+  ],
+  "why": [
+   "假阳性：回 `None`（尽力而为的探测）"
+  ]
+ },
+ "tools/jar_strings.py": {
+  "lines": [
+   61
+  ],
+  "why": [
+   "假阳性：跳过一个条目（诊断）"
+  ]
+ },
+ "tools/last_result.py": {
+  "lines": [
+   52,
+   75
+  ],
+  "why": [
+   "假阳性：诊断"
+  ]
+ },
+ "tools/leash_test.py": {
+  "lines": [
+   51
+  ],
+  "why": [
+   "假阳性：测试夹具里 `next(it)` 的 `StopIteration` 是**控制流**（样本用完 ⇒ None）"
+  ]
+ },
+ "tools/legacy/bench_v26.py": {
+  "lines": [
+   210
+  ],
+  "why": [
+   "假阳性：legacy 一次性基准"
+  ]
+ },
+ "tools/legacy/dsh_live2.py": {
+  "lines": [
+   60,
+   100,
+   111,
+   116
+  ],
+  "why": [
+   "假阳性：legacy",
+   "假阳性：**legacy 探针**的 close() 里 shutdown 是尽力而为清理",
+   "假阳性：**legacy 探针**的 close() 里关 stdin 是尽力而为清理"
+  ]
+ },
+ "tools/legacy/dsh_live3.py": {
+  "lines": [
+   60,
+   78,
+   109,
+   119,
+   124
+  ],
+  "why": [
+   "假阳性：legacy",
+   "假阳性：**legacy 探针**的 clean() 里 `queue.Empty` 是控制流（倒空为止）",
+   "假阳性：**legacy 探针**的 close() 里 shutdown 是尽力而为清理",
+   "假阳性：**legacy 探针**的 close() 里关 stdin 是尽力而为清理"
+  ]
+ },
+ "tools/mapread.py": {
+  "lines": [
+   255,
+   272,
+   309,
+   313,
+   326,
+   330,
+   346,
+   363,
+   774,
+   788,
+   804,
+   835,
+   839,
+   849,
+   853,
+   865,
+   869,
+   872,
+   886,
+   902,
+   915,
+   976,
+   980,
+   1013,
+   1368,
+   1429,
+   1433,
+   1466,
+   1638,
+   1699,
+   1703,
+   1736
+  ],
+  "why": [
+   "假阳性：内存里已更新，盘上少一份只影响下次",
+   "假阳性：跳过 ⇒ 不算\"验过\"（方向保守）",
+   "假阳性：只影响冲突报告条数",
+   "★行号位移（★§79.452✗★）：★同文件插行后老 fail-safe 段的行号变了 ✗ 本条不是新豁免 ✗★",
+   "line-shift realignment (sec 79.456): same old fail-safe blocks, line numbers moved because the file was edited; not a new exemption",
+   "line-shift realignment (sec 79.456): same old fail-safe blocks, line numbers moved because the file was edited; not a new exemption"
+  ]
+ },
+ "tools/mc_mcp.py": {
+  "lines": [
+   953
+  ],
+  "why": [
+   "假阳性：把 stdin/stdout/stderr 钉成 UTF-8 是**编码装饰** ✗ 失败后写中文会响亮抛错（这正是 §P39 那个真事故的修法 ✗ 不是数据通道）"
+  ]
+ },
+ "tools/mcp_gesture.py": {
+  "lines": [
+   36
+  ],
+  "why": [
+   "★`stdout.reconfigure` ✗ 纯装饰 ✗ 不影响数据✗★"
+  ]
+ },
+ "tools/mcp_probe.py": {
+  "lines": [
+   89
+  ],
+  "why": [
+   "★关子进程 stdin 失败 ✗ 纯清理 ✗ fail-safe✗★"
+  ]
+ },
+ "tools/mcp_surface.py": {
+  "lines": [
+   56
+  ],
+  "why": [
+   "假阳性：`finally: p.kill()` 是**子进程清理** ✗ 失败最多留一个临时子进程 ✗ 不影响回执"
+  ]
+ },
+ "tools/offline_guard.py": {
+  "lines": [
+   39
+  ],
+  "why": [
+   "假阳性：失败 ⇒ 当\"没有世界\"（保守）"
+  ]
+ },
+ "tools/ops_guard_test.py": {
+  "lines": [
+   79
+  ],
+  "why": [
+   "假阳性：★这是测试**故意**的断言机制✗★——假通道 `RuntimeError` 就代表「它真的发出去了」（★注释原话✗★） ✗ 不是吞错误"
+  ]
+ },
+ "tools/pathplan.py": {
+  "lines": [
+   611
+  ],
+  "why": [
+   "假阳性：注释写明\"拿不到回 None 不许猜\""
+  ]
+ },
+ "tools/persona.py": {
+  "lines": [
+   73
+  ],
+  "why": [
+   "假阳性：诊断账"
+  ]
+ },
+ "tools/persona_rehearsal.py": {
+  "lines": [
+   46
+  ],
+  "why": [
+   "假阳性：编码设置"
+  ]
+ },
+ "tools/plan_platform.py": {
+  "lines": [
+   46
+  ],
+  "why": [
+   "假阳性：诊断"
+  ]
+ },
+ "tools/progress.py": {
+  "lines": [
+   79,
+   83
+  ],
+  "why": [
+   "假阳性：只改进度显示",
+   "假阳性：进度显示"
+  ]
+ },
+ "tools/prune_runtime.py": {
+  "lines": [
+   78
+  ],
+  "why": [
+   "假阳性：默认值"
+  ]
+ },
+ "tools/reach_probe.py": {
+  "lines": [
+   213,
+   219,
+   241
+  ],
+  "why": [
+   "假阳性：注释写明\"判不了回 None\"",
+   "假阳性：同上",
+   "假阳性：**设计如此的契约**——`col_fn` 抛 ⇒ 回 **None（判不了 ✗ 未知）** ✗ 不是猜空气；`offline_purity_test P2`／`probe_limit_test L5` 守的就是这条"
+  ]
+ },
+ "tools/recover.py": {
+  "lines": [
+   78,
+   106
+  ],
+  "why": [
+   "假阳性：窄类型＋`None` 哨兵，调用方会报\"读不到\"",
+   "假阳性：调用方（:159）会**大声**说\"读不到 请人工确认\""
+  ]
+ },
+ "tools/relay_guard_test.py": {
+  "lines": [
+   71
+  ],
+  "why": [
+   "假阳性：失败 ⇒ `line` 仍 None ⇒ R5 **红**（方向红）"
+  ]
+ },
+ "tools/safe_edit_test.py": {
+  "lines": [
+   84
+  ],
+  "why": [
+   "★**故意**只吞 `S.UnsafeEdit`（★测试期望的那种✗★）✗不是静默✗★"
+  ]
+ },
+ "tools/sift_loop.py": {
+  "lines": [
+   127
+  ],
+  "why": [
+   "假阳性：窄类型，下一轮会再复核"
+  ]
+ },
+ "tools/speech_relay_live_test.py": {
+  "lines": [
+   161
+  ],
+  "why": [
+   "假阳性：只是少一行诊断"
+  ]
+ },
+ "tools/talk.py": {
+  "lines": [
+   358,
+   404,
+   895,
+   1005,
+   1035,
+   1057,
+   1159
+  ],
+  "why": [
+   "假阳性：候选链，最终会大声报\"找不到人设\"",
+   "假阳性：简报少几行\"做过什么\"",
+   "假阳性：注释写明\"读不到宁可沉默\"",
+   "★行号位移（★§79.452✗★）：★同文件插行后老 fail-safe 段的行号变了 ✗ 本条不是新豁免 ✗★"
+  ]
+ },
+ "tools/u1_declared.py": {
+  "lines": [
+   46
+  ],
+  "why": [
+   "假阳性：注释写明\"读不到就空 ⇒ 仍判冲突\"（方向偏红）"
+  ]
+ },
+ "tools/v2120_check.py": {
+  "lines": [
+   96
+  ],
+  "why": [
+   "假阳性：一次性版本检查的探测"
+  ]
+ },
+ "tools/verify_ring.py": {
+  "lines": [
+   50
+  ],
+  "why": [
+   "假阳性：诊断"
+  ]
+ },
+ "tools/walk_progress_test.py": {
+  "lines": [
+   53,
+   137
+  ],
+  "why": [
+   "假阳性：失败 ⇒ None ⇒ S1/S2/S4 **红**（方向红）",
+   "假阳性：kill() 之后 `child.wait()` 是**测试清理** ✗ 失败不改变任何判定"
+  ]
+ },
+ "tools/world_audit.py": {
+  "lines": [
+   366
+  ],
+  "why": [
+   "假阳性：这是**兜底写机器行** ✗ 它前面紧接着仍然 `print(INCONCLUSIVE…)` **响亮报关** ✗ 文件只是第二通道"
+  ]
+ },
+ "tools/ascii_reason_test.py": {
+  "lines": [
+   29
+  ],
+  "why": [
+   "line-shift realignment (sec 79.456): same old fail-safe blocks, line numbers moved because the file was edited; not a new exemption"
+  ]
+ },
+ "tools/kb_coverage.py": {
+  "lines": [
+   70,
+   72
+  ],
+  "why": [
+   "line-shift realignment (sec 79.456): same old fail-safe blocks, line numbers moved because the file was edited; not a new exemption",
+   "line-shift realignment (sec 79.456): same old fail-safe blocks, line numbers moved because the file was edited; not a new exemption"
+  ]
+ },
+ "tools/reasons.py": {
+  "lines": [
+   92,
+   110,
+   160
+  ],
+  "why": [
+   "line-shift realignment (sec 79.456): same old fail-safe blocks, line numbers moved because the file was edited; not a new exemption"
+  ]
+ },
+ "tools/direct.py": {
+  "lines": [
+   47,
+   49
+  ],
+  "why": [
+   "line-shift realignment (sec 79.456): same old fail-safe blocks, line numbers moved because the file was edited; not a new exemption"
+  ]
+ }
+}

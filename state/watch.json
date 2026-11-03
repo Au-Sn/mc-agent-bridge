@@ -1,0 +1,411 @@
+{
+ "schema": "dshbridge/watch@1",
+ "entries": [
+  {
+   "species": "croptopia:almond_crop",
+   "state": "contradicted",
+   "channels": {
+    "model": "pass",
+    "tags": [
+     "canopy",
+     "pass"
+    ]
+   },
+   "why_isolated": "★两条通道都**有结论**而结论不同 ✗ 而今天**没有**能裁决它的证据（★碰撞形状拿不到 ✗ §79.103✓★）⇒ 隔离 ✗ 不许挑一个✗★（★★标签侧自相冲突✗★：叶子／庄稼✓★）",
+   "recheck": "★导出到来 ⇒ 读碰撞形状重判；或有人给出逐条的世界证据 ⇒ 关掉本条✗★",
+   "since": "2026-10-04"
+  },
+  {
+   "species": "croptopia:apple_crop",
+   "state": "contradicted",
+   "channels": {
+    "model": "pass",
+    "tags": [
+     "canopy",
+     "pass"
+    ]
+   },
+   "why_isolated": "★两条通道都**有结论**而结论不同 ✗ 而今天**没有**能裁决它的证据（★碰撞形状拿不到 ✗ §79.103✓★）⇒ 隔离 ✗ 不许挑一个✗★（★★标签侧自相冲突✗★：叶子／庄稼✓★）",
+   "recheck": "★导出到来 ⇒ 读碰撞形状重判；或有人给出逐条的世界证据 ⇒ 关掉本条✗★",
+   "since": "2026-10-04"
+  },
+  {
+   "species": "croptopia:apricot_crop",
+   "state": "contradicted",
+   "channels": {
+    "model": "pass",
+    "tags": [
+     "canopy",
+     "pass"
+    ]
+   },
+   "why_isolated": "★两条通道都**有结论**而结论不同 ✗ 而今天**没有**能裁决它的证据（★碰撞形状拿不到 ✗ §79.103✓★）⇒ 隔离 ✗ 不许挑一个✗★（★★标签侧自相冲突✗★：叶子／庄稼✓★）",
+   "recheck": "★导出到来 ⇒ 读碰撞形状重判；或有人给出逐条的世界证据 ⇒ 关掉本条✗★",
+   "since": "2026-10-04"
+  },
+  {
+   "species": "croptopia:avocado_crop",
+   "state": "contradicted",
+   "channels": {
+    "model": "pass",
+    "tags": [
+     "canopy",
+     "pass"
+    ]
+   },
+   "why_isolated": "★两条通道都**有结论**而结论不同 ✗ 而今天**没有**能裁决它的证据（★碰撞形状拿不到 ✗ §79.103✓★）⇒ 隔离 ✗ 不许挑一个✗★（★★标签侧自相冲突✗★：叶子／庄稼✓★）",
+   "recheck": "★导出到来 ⇒ 读碰撞形状重判；或有人给出逐条的世界证据 ⇒ 关掉本条✗★",
+   "since": "2026-10-04"
+  },
+  {
+   "species": "croptopia:banana_crop",
+   "state": "contradicted",
+   "channels": {
+    "model": "pass",
+    "tags": [
+     "canopy",
+     "pass"
+    ]
+   },
+   "why_isolated": "★两条通道都**有结论**而结论不同 ✗ 而今天**没有**能裁决它的证据（★碰撞形状拿不到 ✗ §79.103✓★）⇒ 隔离 ✗ 不许挑一个✗★（★★标签侧自相冲突✗★：叶子／庄稼✓★）",
+   "recheck": "★导出到来 ⇒ 读碰撞形状重判；或有人给出逐条的世界证据 ⇒ 关掉本条✗★",
+   "since": "2026-10-04"
+  },
+  {
+   "species": "croptopia:cashew_crop",
+   "state": "contradicted",
+   "channels": {
+    "model": "pass",
+    "tags": [
+     "canopy",
+     "pass"
+    ]
+   },
+   "why_isolated": "★两条通道都**有结论**而结论不同 ✗ 而今天**没有**能裁决它的证据（★碰撞形状拿不到 ✗ §79.103✓★）⇒ 隔离 ✗ 不许挑一个✗★（★★标签侧自相冲突✗★：叶子／庄稼✓★）",
+   "recheck": "★导出到来 ⇒ 读碰撞形状重判；或有人给出逐条的世界证据 ⇒ 关掉本条✗★",
+   "since": "2026-10-04"
+  },
+  {
+   "species": "croptopia:cherry_crop",
+   "state": "contradicted",
+   "channels": {
+    "model": "pass",
+    "tags": [
+     "canopy",
+     "pass"
+    ]
+   },
+   "why_isolated": "★两条通道都**有结论**而结论不同 ✗ 而今天**没有**能裁决它的证据（★碰撞形状拿不到 ✗ §79.103✓★）⇒ 隔离 ✗ 不许挑一个✗★（★★标签侧自相冲突✗★：叶子／庄稼✓★）",
+   "recheck": "★导出到来 ⇒ 读碰撞形状重判；或有人给出逐条的世界证据 ⇒ 关掉本条✗★",
+   "since": "2026-10-04"
+  },
+  {
+   "species": "croptopia:coconut_crop",
+   "state": "contradicted",
+   "channels": {
+    "model": "pass",
+    "tags": [
+     "canopy",
+     "pass"
+    ]
+   },
+   "why_isolated": "★两条通道都**有结论**而结论不同 ✗ 而今天**没有**能裁决它的证据（★碰撞形状拿不到 ✗ §79.103✓★）⇒ 隔离 ✗ 不许挑一个✗★（★★标签侧自相冲突✗★：叶子／庄稼✓★）",
+   "recheck": "★导出到来 ⇒ 读碰撞形状重判；或有人给出逐条的世界证据 ⇒ 关掉本条✗★",
+   "since": "2026-10-04"
+  },
+  {
+   "species": "croptopia:date_crop",
+   "state": "contradicted",
+   "channels": {
+    "model": "pass",
+    "tags": [
+     "canopy",
+     "pass"
+    ]
+   },
+   "why_isolated": "★两条通道都**有结论**而结论不同 ✗ 而今天**没有**能裁决它的证据（★碰撞形状拿不到 ✗ §79.103✓★）⇒ 隔离 ✗ 不许挑一个✗★（★★标签侧自相冲突✗★：叶子／庄稼✓★）",
+   "recheck": "★导出到来 ⇒ 读碰撞形状重判；或有人给出逐条的世界证据 ⇒ 关掉本条✗★",
+   "since": "2026-10-04"
+  },
+  {
+   "species": "croptopia:dragonfruit_crop",
+   "state": "contradicted",
+   "channels": {
+    "model": "pass",
+    "tags": [
+     "canopy",
+     "pass"
+    ]
+   },
+   "why_isolated": "★两条通道都**有结论**而结论不同 ✗ 而今天**没有**能裁决它的证据（★碰撞形状拿不到 ✗ §79.103✓★）⇒ 隔离 ✗ 不许挑一个✗★（★★标签侧自相冲突✗★：叶子／庄稼✓★）",
+   "recheck": "★导出到来 ⇒ 读碰撞形状重判；或有人给出逐条的世界证据 ⇒ 关掉本条✗★",
+   "since": "2026-10-04"
+  },
+  {
+   "species": "croptopia:fig_crop",
+   "state": "contradicted",
+   "channels": {
+    "model": "pass",
+    "tags": [
+     "canopy",
+     "pass"
+    ]
+   },
+   "why_isolated": "★两条通道都**有结论**而结论不同 ✗ 而今天**没有**能裁决它的证据（★碰撞形状拿不到 ✗ §79.103✓★）⇒ 隔离 ✗ 不许挑一个✗★（★★标签侧自相冲突✗★：叶子／庄稼✓★）",
+   "recheck": "★导出到来 ⇒ 读碰撞形状重判；或有人给出逐条的世界证据 ⇒ 关掉本条✗★",
+   "since": "2026-10-04"
+  },
+  {
+   "species": "croptopia:grapefruit_crop",
+   "state": "contradicted",
+   "channels": {
+    "model": "pass",
+    "tags": [
+     "canopy",
+     "pass"
+    ]
+   },
+   "why_isolated": "★两条通道都**有结论**而结论不同 ✗ 而今天**没有**能裁决它的证据（★碰撞形状拿不到 ✗ §79.103✓★）⇒ 隔离 ✗ 不许挑一个✗★（★★标签侧自相冲突✗★：叶子／庄稼✓★）",
+   "recheck": "★导出到来 ⇒ 读碰撞形状重判；或有人给出逐条的世界证据 ⇒ 关掉本条✗★",
+   "since": "2026-10-04"
+  },
+  {
+   "species": "croptopia:kumquat_crop",
+   "state": "contradicted",
+   "channels": {
+    "model": "pass",
+    "tags": [
+     "canopy",
+     "pass"
+    ]
+   },
+   "why_isolated": "★两条通道都**有结论**而结论不同 ✗ 而今天**没有**能裁决它的证据（★碰撞形状拿不到 ✗ §79.103✓★）⇒ 隔离 ✗ 不许挑一个✗★（★★标签侧自相冲突✗★：叶子／庄稼✓★）",
+   "recheck": "★导出到来 ⇒ 读碰撞形状重判；或有人给出逐条的世界证据 ⇒ 关掉本条✗★",
+   "since": "2026-10-04"
+  },
+  {
+   "species": "croptopia:lemon_crop",
+   "state": "contradicted",
+   "channels": {
+    "model": "pass",
+    "tags": [
+     "canopy",
+     "pass"
+    ]
+   },
+   "why_isolated": "★两条通道都**有结论**而结论不同 ✗ 而今天**没有**能裁决它的证据（★碰撞形状拿不到 ✗ §79.103✓★）⇒ 隔离 ✗ 不许挑一个✗★（★★标签侧自相冲突✗★：叶子／庄稼✓★）",
+   "recheck": "★导出到来 ⇒ 读碰撞形状重判；或有人给出逐条的世界证据 ⇒ 关掉本条✗★",
+   "since": "2026-10-04"
+  },
+  {
+   "species": "croptopia:lime_crop",
+   "state": "contradicted",
+   "channels": {
+    "model": "pass",
+    "tags": [
+     "canopy",
+     "pass"
+    ]
+   },
+   "why_isolated": "★两条通道都**有结论**而结论不同 ✗ 而今天**没有**能裁决它的证据（★碰撞形状拿不到 ✗ §79.103✓★）⇒ 隔离 ✗ 不许挑一个✗★（★★标签侧自相冲突✗★：叶子／庄稼✓★）",
+   "recheck": "★导出到来 ⇒ 读碰撞形状重判；或有人给出逐条的世界证据 ⇒ 关掉本条✗★",
+   "since": "2026-10-04"
+  },
+  {
+   "species": "croptopia:mango_crop",
+   "state": "contradicted",
+   "channels": {
+    "model": "pass",
+    "tags": [
+     "canopy",
+     "pass"
+    ]
+   },
+   "why_isolated": "★两条通道都**有结论**而结论不同 ✗ 而今天**没有**能裁决它的证据（★碰撞形状拿不到 ✗ §79.103✓★）⇒ 隔离 ✗ 不许挑一个✗★（★★标签侧自相冲突✗★：叶子／庄稼✓★）",
+   "recheck": "★导出到来 ⇒ 读碰撞形状重判；或有人给出逐条的世界证据 ⇒ 关掉本条✗★",
+   "since": "2026-10-04"
+  },
+  {
+   "species": "croptopia:nectarine_crop",
+   "state": "contradicted",
+   "channels": {
+    "model": "pass",
+    "tags": [
+     "canopy",
+     "pass"
+    ]
+   },
+   "why_isolated": "★两条通道都**有结论**而结论不同 ✗ 而今天**没有**能裁决它的证据（★碰撞形状拿不到 ✗ §79.103✓★）⇒ 隔离 ✗ 不许挑一个✗★（★★标签侧自相冲突✗★：叶子／庄稼✓★）",
+   "recheck": "★导出到来 ⇒ 读碰撞形状重判；或有人给出逐条的世界证据 ⇒ 关掉本条✗★",
+   "since": "2026-10-04"
+  },
+  {
+   "species": "croptopia:nutmeg_crop",
+   "state": "contradicted",
+   "channels": {
+    "model": "pass",
+    "tags": [
+     "canopy",
+     "pass"
+    ]
+   },
+   "why_isolated": "★两条通道都**有结论**而结论不同 ✗ 而今天**没有**能裁决它的证据（★碰撞形状拿不到 ✗ §79.103✓★）⇒ 隔离 ✗ 不许挑一个✗★（★★标签侧自相冲突✗★：叶子／庄稼✓★）",
+   "recheck": "★导出到来 ⇒ 读碰撞形状重判；或有人给出逐条的世界证据 ⇒ 关掉本条✗★",
+   "since": "2026-10-04"
+  },
+  {
+   "species": "croptopia:orange_crop",
+   "state": "contradicted",
+   "channels": {
+    "model": "pass",
+    "tags": [
+     "canopy",
+     "pass"
+    ]
+   },
+   "why_isolated": "★两条通道都**有结论**而结论不同 ✗ 而今天**没有**能裁决它的证据（★碰撞形状拿不到 ✗ §79.103✓★）⇒ 隔离 ✗ 不许挑一个✗★（★★标签侧自相冲突✗★：叶子／庄稼✓★）",
+   "recheck": "★导出到来 ⇒ 读碰撞形状重判；或有人给出逐条的世界证据 ⇒ 关掉本条✗★",
+   "since": "2026-10-04"
+  },
+  {
+   "species": "croptopia:peach_crop",
+   "state": "contradicted",
+   "channels": {
+    "model": "pass",
+    "tags": [
+     "canopy",
+     "pass"
+    ]
+   },
+   "why_isolated": "★两条通道都**有结论**而结论不同 ✗ 而今天**没有**能裁决它的证据（★碰撞形状拿不到 ✗ §79.103✓★）⇒ 隔离 ✗ 不许挑一个✗★（★★标签侧自相冲突✗★：叶子／庄稼✓★）",
+   "recheck": "★导出到来 ⇒ 读碰撞形状重判；或有人给出逐条的世界证据 ⇒ 关掉本条✗★",
+   "since": "2026-10-04"
+  },
+  {
+   "species": "croptopia:pear_crop",
+   "state": "contradicted",
+   "channels": {
+    "model": "pass",
+    "tags": [
+     "canopy",
+     "pass"
+    ]
+   },
+   "why_isolated": "★两条通道都**有结论**而结论不同 ✗ 而今天**没有**能裁决它的证据（★碰撞形状拿不到 ✗ §79.103✓★）⇒ 隔离 ✗ 不许挑一个✗★（★★标签侧自相冲突✗★：叶子／庄稼✓★）",
+   "recheck": "★导出到来 ⇒ 读碰撞形状重判；或有人给出逐条的世界证据 ⇒ 关掉本条✗★",
+   "since": "2026-10-04"
+  },
+  {
+   "species": "croptopia:pecan_crop",
+   "state": "contradicted",
+   "channels": {
+    "model": "pass",
+    "tags": [
+     "canopy",
+     "pass"
+    ]
+   },
+   "why_isolated": "★两条通道都**有结论**而结论不同 ✗ 而今天**没有**能裁决它的证据（★碰撞形状拿不到 ✗ §79.103✓★）⇒ 隔离 ✗ 不许挑一个✗★（★★标签侧自相冲突✗★：叶子／庄稼✓★）",
+   "recheck": "★导出到来 ⇒ 读碰撞形状重判；或有人给出逐条的世界证据 ⇒ 关掉本条✗★",
+   "since": "2026-10-04"
+  },
+  {
+   "species": "croptopia:persimmon_crop",
+   "state": "contradicted",
+   "channels": {
+    "model": "pass",
+    "tags": [
+     "canopy",
+     "pass"
+    ]
+   },
+   "why_isolated": "★两条通道都**有结论**而结论不同 ✗ 而今天**没有**能裁决它的证据（★碰撞形状拿不到 ✗ §79.103✓★）⇒ 隔离 ✗ 不许挑一个✗★（★★标签侧自相冲突✗★：叶子／庄稼✓★）",
+   "recheck": "★导出到来 ⇒ 读碰撞形状重判；或有人给出逐条的世界证据 ⇒ 关掉本条✗★",
+   "since": "2026-10-04"
+  },
+  {
+   "species": "croptopia:plum_crop",
+   "state": "contradicted",
+   "channels": {
+    "model": "pass",
+    "tags": [
+     "canopy",
+     "pass"
+    ]
+   },
+   "why_isolated": "★两条通道都**有结论**而结论不同 ✗ 而今天**没有**能裁决它的证据（★碰撞形状拿不到 ✗ §79.103✓★）⇒ 隔离 ✗ 不许挑一个✗★（★★标签侧自相冲突✗★：叶子／庄稼✓★）",
+   "recheck": "★导出到来 ⇒ 读碰撞形状重判；或有人给出逐条的世界证据 ⇒ 关掉本条✗★",
+   "since": "2026-10-04"
+  },
+  {
+   "species": "croptopia:starfruit_crop",
+   "state": "contradicted",
+   "channels": {
+    "model": "pass",
+    "tags": [
+     "canopy",
+     "pass"
+    ]
+   },
+   "why_isolated": "★两条通道都**有结论**而结论不同 ✗ 而今天**没有**能裁决它的证据（★碰撞形状拿不到 ✗ §79.103✓★）⇒ 隔离 ✗ 不许挑一个✗★（★★标签侧自相冲突✗★：叶子／庄稼✓★）",
+   "recheck": "★导出到来 ⇒ 读碰撞形状重判；或有人给出逐条的世界证据 ⇒ 关掉本条✗★",
+   "since": "2026-10-04"
+  },
+  {
+   "species": "croptopia:walnut_crop",
+   "state": "contradicted",
+   "channels": {
+    "model": "pass",
+    "tags": [
+     "canopy",
+     "pass"
+    ]
+   },
+   "why_isolated": "★两条通道都**有结论**而结论不同 ✗ 而今天**没有**能裁决它的证据（★碰撞形状拿不到 ✗ §79.103✓★）⇒ 隔离 ✗ 不许挑一个✗★（★★标签侧自相冲突✗★：叶子／庄稼✓★）",
+   "recheck": "★导出到来 ⇒ 读碰撞形状重判；或有人给出逐条的世界证据 ⇒ 关掉本条✗★",
+   "since": "2026-10-04"
+  },
+  {
+   "species": "minecraft:cherry_leaves",
+   "state": "contradicted",
+   "channels": {
+    "model": "canopy",
+    "tags": [
+     "canopy",
+     "pass"
+    ]
+   },
+   "why_isolated": "★两条通道都**有结论**而结论不同 ✗ 而今天**没有**能裁决它的证据（★碰撞形状拿不到 ✗ §79.103✓★）⇒ 隔离 ✗ 不许挑一个✗★（★★标签侧自相冲突✗★：叶子／花✓★）",
+   "recheck": "★导出到来 ⇒ 读碰撞形状重判；或有人给出逐条的世界证据 ⇒ 关掉本条✗★",
+   "since": "2026-10-04"
+  },
+  {
+   "species": "minecraft:flowering_azalea_leaves",
+   "state": "contradicted",
+   "channels": {
+    "model": "canopy",
+    "tags": [
+     "canopy",
+     "pass"
+    ]
+   },
+   "why_isolated": "★两条通道都**有结论**而结论不同 ✗ 而今天**没有**能裁决它的证据（★碰撞形状拿不到 ✗ §79.103✓★）⇒ 隔离 ✗ 不许挑一个✗★（★★标签侧自相冲突✗★：叶子／花✓★）",
+   "recheck": "★导出到来 ⇒ 读碰撞形状重判；或有人给出逐条的世界证据 ⇒ 关掉本条✗★",
+   "since": "2026-10-04"
+  },
+  {
+   "species": "productivetrees:purple_spiral_leaves",
+   "state": "contradicted",
+   "channels": {
+    "model": "canopy",
+    "tags": [
+     "canopy",
+     "pass"
+    ]
+   },
+   "why_isolated": "★两条通道都**有结论**而结论不同 ✗ 而今天**没有**能裁决它的证据（★碰撞形状拿不到 ✗ §79.103✓★）⇒ 隔离 ✗ 不许挑一个✗★（★★标签侧自相冲突✗★：叶子／花✓★）",
+   "recheck": "★导出到来 ⇒ 读碰撞形状重判；或有人给出逐条的世界证据 ⇒ 关掉本条✗★",
+   "since": "2026-10-04"
+  }
+ ]
+}

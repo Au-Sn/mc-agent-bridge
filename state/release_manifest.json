@@ -1,0 +1,40 @@
+{
+  "schema": "dshbridge-release-manifest@1",
+  "updated_at": "2026-11-03 15:54:06",
+  "latest": "2.58.0",
+  "releases": {
+    "2.56.0": {
+      "version": "2.56.0",
+      "jar": "dshbridge-2.56.0.jar",
+      "bytes": 139245,
+      "sha256": "79f2a2a9643db498ea26b8c0d360f5c3215cb15f18b26ea958e160d4858e5c6c",
+      "classes": 9,
+      "features_checked": 29,
+      "features_total": 29,
+      "commit": "167e9eb57bcdbb38d687138c082d618fc1b6f855",
+      "recorded_at": "2026-11-02 20:02:33"
+    },
+    "2.57.0": {
+      "version": "2.57.0",
+      "jar": "dshbridge-2.57.0.jar",
+      "bytes": 142815,
+      "sha256": "007b76d977e65fa468b08aad2c70c939cec54668f8347c9c602932013c51728b",
+      "classes": 10,
+      "features_checked": 34,
+      "features_total": 34,
+      "commit": "34d27e902ab8a72c3b564d14b1736877d33df836",
+      "recorded_at": "2026-11-02 21:10:20"
+    },
+    "2.58.0": {
+      "version": "2.58.0",
+      "jar": "dshbridge-2.58.0.jar",
+      "bytes": 143967,
+      "sha256": "6171f023fceb74bafba06f3b9aa3f3c1bb916101bc51c31b9071f929ee9d3405",
+      "classes": 11,
+      "features_checked": 39,
+      "features_total": 39,
+      "commit": "bd9f37773e63f8eae789214a1c7b725c18a58300",
+      "recorded_at": "2026-11-03 15:54:06"
+    }
+  }
+}

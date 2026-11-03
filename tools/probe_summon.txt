@@ -1,0 +1,1 @@
+summon minecraft:item 4127.5 69.5 12.5 {Item:{id:"minecraft:diamond_pickaxe",Count:1b}}

@@ -1,0 +1,1523 @@
+{
+  "generated_from": "cc-tweaked/agent_bridge.lua",
+  "generated_at": "2026-09-19T06:32:07Z",
+  "sha1": "d57febf57d52eef8e68c34077cc61e22bd5b2254",
+  "actions": {
+    "forward": {
+      "args": {
+        "n": {
+          "default": 1,
+          "type": "number"
+        }
+      },
+      "markers": [],
+      "line": 307,
+      "long_running": false,
+      "comment": null
+    },
+    "back": {
+      "args": {
+        "n": {
+          "default": 1,
+          "type": "number"
+        }
+      },
+      "markers": [],
+      "line": 308,
+      "long_running": false,
+      "comment": null
+    },
+    "up": {
+      "args": {
+        "n": {
+          "default": 1,
+          "type": "number"
+        }
+      },
+      "markers": [],
+      "line": 309,
+      "long_running": false,
+      "comment": null
+    },
+    "down": {
+      "args": {
+        "n": {
+          "default": 1,
+          "type": "number"
+        }
+      },
+      "markers": [],
+      "line": 310,
+      "long_running": false,
+      "comment": null
+    },
+    "turn_left": {
+      "args": {},
+      "markers": [],
+      "line": 312,
+      "long_running": false,
+      "comment": null
+    },
+    "turn_right": {
+      "args": {},
+      "markers": [],
+      "line": 319,
+      "long_running": false,
+      "comment": null
+    },
+    "calibrate": {
+      "args": {
+        "facing": {
+          "default": null,
+          "type": "unknown"
+        }
+      },
+      "markers": [],
+      "line": 326,
+      "long_running": false,
+      "comment": null
+    },
+    "cmd": {
+      "args": {
+        "text": {
+          "default": null,
+          "type": "unknown"
+        },
+        "cmd": {
+          "default": null,
+          "type": "unknown"
+        },
+        "line": {
+          "default": null,
+          "type": "unknown"
+        }
+      },
+      "markers": [],
+      "line": 435,
+      "long_running": false,
+      "comment": null
+    },
+    "cmd_async": {
+      "args": {
+        "text": {
+          "default": null,
+          "type": "unknown"
+        },
+        "cmd": {
+          "default": null,
+          "type": "unknown"
+        },
+        "line": {
+          "default": null,
+          "type": "unknown"
+        }
+      },
+      "markers": [],
+      "line": 468,
+      "long_running": false,
+      "comment": "-- /player Bot attack 这类是\"持续动作\"，exec 会一直阻塞到动作结束才返回，\n-- 对键盘/移动这类动作就是\"永远不返回\"。所以另给一个不等结果的版本。"
+    },
+    "survey": {
+      "args": {
+        "x": {
+          "default": null,
+          "type": "number"
+        },
+        "y": {
+          "default": null,
+          "type": "number"
+        },
+        "z": {
+          "default": null,
+          "type": "number"
+        },
+        "radius": {
+          "default": 6,
+          "type": "number"
+        },
+        "radius_y": {
+          "default": null,
+          "type": "number"
+        },
+        "max_list": {
+          "default": 400,
+          "type": "number"
+        },
+        "only": {
+          "default": null,
+          "type": "unknown"
+        },
+        "tile": {
+          "default": 4,
+          "type": "number"
+        }
+      },
+      "markers": [],
+      "line": 509,
+      "long_running": false,
+      "comment": null
+    },
+    "probe_bulk": {
+      "args": {
+        "x": {
+          "default": 0,
+          "type": "number"
+        },
+        "y": {
+          "default": 0,
+          "type": "number"
+        },
+        "z": {
+          "default": 0,
+          "type": "number"
+        },
+        "dim": {
+          "default": "minecraft:overworld",
+          "type": "string"
+        }
+      },
+      "markers": [],
+      "line": 620,
+      "long_running": false,
+      "comment": "-- --- 一次性探针：确定 commands.getBlockInfos 的调用形式 --------------------- --\n-- 背景：单点 getBlockInfo 实测约 50ms/次（走服务器线程），扫一片区域要几分钟，\n-- 不可用。而 getBlockInfos 是批量接口——这才是\"机器人的眼睛\"该用的东西。\n-- 字节码里的 LocalVariableTable 只告诉我们参数名\n-- （minX/minY/minZ/maxX/maxY/maxZ 和一个 dimension），\n-- 但参数顺序、dimension 是否必需，从字节码读不出来。\n-- 与其猜（猜错就是一次\"按键名猜 API\"的老错），不如把候选形式都试一遍，\n-- 让它把真实的成功/报错原样回传，照着写。"
+    },
+    "probe_order": {
+      "args": {
+        "x": {
+          "default": 0,
+          "type": "number"
+        },
+        "y": {
+          "default": 0,
+          "type": "number"
+        },
+        "z": {
+          "default": 0,
+          "type": "number"
+        },
+        "nx": {
+          "default": 3,
+          "type": "number"
+        },
+        "ny": {
+          "default": 2,
+          "type": "number"
+        },
+        "nz": {
+          "default": 2,
+          "type": "number"
+        }
+      },
+      "markers": [],
+      "line": 663,
+      "long_running": false,
+      "comment": "-- --- 排列顺序对照实验 ------------------------------------------------------- --\n-- getBlockInfos 返回的每一项只有 name/state/tags，**不带坐标**。\n-- 那么\"第 i 项对应哪个方块\"就完全取决于 Java 侧的遍历顺序，而这在文档里没有。\n-- 猜错的后果很严重：会把 A 位置的方块名安到 B 位置上，据此下指令就是乱挖。\n-- 做法：同一个箱子，既用批量拿一遍（names），又用单点逐格拿一遍（grid，带坐标），\n-- 两边一起回传，由外部比对反推出真实顺序。用数据说话，不靠假定。"
+    },
+    "bot_inv": {
+      "args": {
+        "bot": {
+          "default": "Bot",
+          "type": "string"
+        }
+      },
+      "markers": [],
+      "line": 719,
+      "long_running": false,
+      "comment": "-- --- 读假人背包 ------------------------------------------------------------- --\n-- Carpet 的 /player 没有\"查背包\"子命令，但假人是**真玩家**，原版 /data 就能读到：\n--   data get entity <bot> Inventory        → [{Slot: 0b, id: \"...\", Count: 1b}, ...]\n--   data get entity <bot> SelectedItemSlot → 当前手持槽位（0-8）\n-- 为什么必须解析而不是让人肉读：假人会继承真人的背包（实测：火把/洒水壶/手册…），\n-- 于是\"手上拿的是不是斧头\"完全不确定——这直接决定砍树是 1 秒还是 3 秒。\n-- 而且后面\"木头变木板\"必须核对数量，读背包是硬前提。\n--\n-- 解析要点：物品可能带嵌套 tag（洒水壶里就有 {Fluid:{...}}），\n-- 所以不能用一个 [^}] 的通配扫到底；做法是\"定位每项开头，再往后找它自己的 Count\"。"
+    },
+    "hold_item": {
+      "args": {
+        "bot": {
+          "default": "Bot",
+          "type": "string"
+        },
+        "item": {
+          "default": null,
+          "type": "unknown"
+        }
+      },
+      "markers": [],
+      "line": 786,
+      "long_running": false,
+      "comment": "-- --- 手持物品 / 右键使用 / 种树苗 ------------------------------------------- --\n-- 让假人手持指定物品（按名字子串找槽位）。\n-- 为什么需要：假人继承真人背包，手上可能是火把（实测就是）。而\"种树苗/放方块\"\n-- 都要求手上拿的正是那个东西，否则 use 只是对着地面空右键。\n-- 槽位不猜：先用 A.bot_inv 读出真实槽位再切（斧头实际在第 5 槽，不是想当然的第 1 槽）。"
+    },
+    "use_once": {
+      "args": {
+        "bot": {
+          "default": "Bot",
+          "type": "string"
+        }
+      },
+      "markers": [],
+      "line": 826,
+      "long_running": false,
+      "comment": "-- 右键使用一次。\n-- ⚠ 必须带 once：不带修饰的 use 可能变成\"一直按住右键\"，放置类操作会乱放一地。"
+    },
+    "plant_sapling": {
+      "args": {
+        "bot": {
+          "default": "Bot",
+          "type": "string"
+        },
+        "x": {
+          "default": null,
+          "type": "number"
+        },
+        "y": {
+          "default": null,
+          "type": "number"
+        },
+        "z": {
+          "default": null,
+          "type": "number"
+        },
+        "item": {
+          "default": "sapling",
+          "type": "string"
+        }
+      },
+      "markers": [],
+      "line": 837,
+      "long_running": false,
+      "comment": "-- 种树苗并**自我验证**：种完立刻读那个方块，确认真的出现了 sapling。\n-- 参数 x/y/z 是\"树苗要占据的那一格\"（通常是空气）；视线对准它下面的方块。"
+    },
+    "walk_to": {
+      "args": {
+        "bot": {
+          "default": "Bot",
+          "type": "string"
+        },
+        "x": {
+          "default": null,
+          "type": "number"
+        },
+        "y": {
+          "default": null,
+          "type": "number"
+        },
+        "z": {
+          "default": null,
+          "type": "number"
+        },
+        "range": {
+          "default": 2.0,
+          "type": "number"
+        },
+        "timeout": {
+          "default": 60,
+          "type": "number"
+        },
+        "clear": {
+          "default": true,
+          "type": "boolean"
+        },
+        "max_clear": {
+          "default": 6,
+          "type": "number"
+        }
+      },
+      "markers": [],
+      "line": 940,
+      "long_running": false,
+      "comment": null
+    },
+    "block_state": {
+      "args": {
+        "x": {
+          "default": null,
+          "type": "number"
+        },
+        "y": {
+          "default": null,
+          "type": "number"
+        },
+        "z": {
+          "default": null,
+          "type": "number"
+        }
+      },
+      "markers": [],
+      "line": 1084,
+      "long_running": false,
+      "comment": "-- --- 读方块状态（blockstate）与方块实体数据 --------------------------------- --\n-- 为什么必须分开读两样：\n--   /data get block 只能读**方块实体**（箱子、筛子这类有库存/进度的方块）；\n--   而很多\"交互到底有没有发生\"的证据只存在于**方块状态**里——\n--   拉杆有没有拉下、门开没开、筛子装没装筛网。\n--   commands.getBlockInfo 会回传 state，正好补上这一块。\n-- 用途：判断假人的右键是否真的产生了方块交互。放置方块能成功不代表方块交互能成功，\n--       两者走的是不同代码路径（放置靠物品的 use，交互靠方块的 use）。"
+    },
+    "crosshair": {
+      "args": {
+        "bot": {
+          "default": null,
+          "type": "unknown"
+        },
+        "reach": {
+          "default": 5.0,
+          "type": "number"
+        },
+        "yaw": {
+          "default": null,
+          "type": "number"
+        },
+        "pitch": {
+          "default": null,
+          "type": "number"
+        },
+        "eye": {
+          "default": 1.62,
+          "type": "number"
+        },
+        "max_cells": {
+          "default": 48,
+          "type": "number"
+        },
+        "raw": {
+          "default": null,
+          "type": "unknown"
+        },
+        "nbt": {
+          "default": null,
+          "type": "unknown"
+        }
+      },
+      "markers": [],
+      "line": 1276,
+      "long_running": false,
+      "comment": "-- 准星查询：**假人正对着什么**（= Jade 那一行 ✓）\n-- 参数：bot ✓ / reach（视距，默认 5 ✓ = 玩家交互距离 ✓）/ eye（眼睛高度 1.62 ✓）\n--       yaw,pitch（显式覆盖 ✓ 用于\"先算后看\"或测试 ✓）/ nbt（附带方块实体数据 ✓）\n--       raw（附带原始方块信息表 ✓ 用来确认上游到底给了哪些字段 ✓）"
+    },
+    "jade": {
+      "args": {
+        "hud": {
+          "default": null,
+          "type": "string"
+        },
+        "bot": {
+          "default": null,
+          "type": "unknown"
+        },
+        "reach": {
+          "default": null,
+          "type": "unknown"
+        },
+        "nbt": {
+          "default": null,
+          "type": "unknown"
+        },
+        "raw": {
+          "default": null,
+          "type": "unknown"
+        }
+      },
+      "markers": [
+        "jobNote"
+      ],
+      "line": 1477,
+      "long_running": true,
+      "comment": "-- 开关 + 读一次：`jade { hud = true }` 打开世界内 HUD ✓；不带 hud 就是纯读 ✓"
+    },
+    "blocks_around": {
+      "args": {
+        "bot": {
+          "default": null,
+          "type": "unknown"
+        },
+        "r": {
+          "default": 3,
+          "type": "number"
+        },
+        "dy": {
+          "default": null,
+          "type": "number"
+        },
+        "dy0": {
+          "default": null,
+          "type": "number"
+        },
+        "dy1": {
+          "default": 1,
+          "type": "number"
+        },
+        "limit": {
+          "default": 40,
+          "type": "number"
+        },
+        "plain": {
+          "default": null,
+          "type": "string"
+        }
+      },
+      "markers": [],
+      "line": 1520,
+      "long_running": false,
+      "comment": "-- ═══ 周边方块读取（\"增强版 Jade\"：不是只看准星那一格，而是把四周看清楚）═══\n-- 为什么必须有它（用户 2026-09-18 晚明确要求 ✓）：\n--   假人过去只会两种\"看\"：\n--     ① `survey` —— 只给**计数** ✓ 不给具体位置 ✗（\"附近有 3 个箱子\" ✗ 在哪？✗）\n--     ② `crosshair` —— 只看**准星那一格** ✗\n--   ⇒ \"我旁边有没有什么不寻常的东西\"这个问题**答不上来** ✗ —— 而它恰恰是最常用的 ✓\n--   真实事故：玩家明明在假人旁边放了一个工作台 ✓ 我们却绕了好几轮、还一度断言\"世界上没有\" ✗\n--   （缺的不是工具也不是流程 ✓ 缺的是**就近的、带坐标的、一眼看懂**的方块读取 ✓）\n--\n-- 参数：\n--   bot     假人名（默认 Bot ✓）\n--   r       水平半径（默认 3 ⇒ 7×7 ✓；4 ⇒ 9×9 更慢 ✓）\n--   dy0/dy1 垂直范围（默认 -2..+1 ✓ —— 脚下两层、头上两层，正好覆盖\"能踩/能撞/能放\" ✓）\n--   dy      只读某一层（给了就忽略 dy0/dy1 ✓）\n--   plain   \"无聊方块\"清单（逗号分隔 ✓）—— 只有**不在这里面**的才进 notable ✓\n--   limit   notable 最多列几条（默认 40 ✓）\n--\n-- ⚠ 一律走 `readBlock`（**不共享 Jade 的缓存** ✗）—— 这种读取常常是在问\"我刚放的东西在不在\" ✓\n--   缓存会让它看到旧值 ✓（那正是最危险的假阳性 ✓ 见 Jade 那一节 ✓）"
+    },
+    "give_slot": {
+      "args": {
+        "bot": {
+          "default": "Bot",
+          "type": "string"
+        },
+        "slot": {
+          "default": null,
+          "type": "number"
+        },
+        "item": {
+          "default": null,
+          "type": "string"
+        },
+        "count": {
+          "default": 1,
+          "type": "number"
+        }
+      },
+      "markers": [],
+      "line": 1631,
+      "long_running": false,
+      "comment": "-- --- 把物品放进假人的**指定快捷栏槽位** ------------------------------------- --\n-- 为什么必须能指定槽位（实测撞到的限制）：\n--   /give 会先填快捷栏，快捷栏满了就丢进背包；而 Carpet 的 hotbar 子命令**只能选快捷栏**\n--   （0-8），假人没有任何办法把背包里的东西拿到手上（它没有客户端、打不开背包界面）。\n--   于是\"给了筛子和沙砾\"却报\"快捷栏里没有该物品\"——东西确实给了，只是够不着。\n-- 用原版 /item replace entity <bot> hotbar.<n> with <item> <count> 精确落到指定格，\n-- 既不覆盖别的东西，也不需要整理背包。"
+    },
+    "install_mesh": {
+      "args": {
+        "bot": {
+          "default": "Bot",
+          "type": "string"
+        },
+        "x": {
+          "default": null,
+          "type": "number"
+        },
+        "y": {
+          "default": null,
+          "type": "number"
+        },
+        "z": {
+          "default": null,
+          "type": "number"
+        },
+        "item": {
+          "default": "mesh",
+          "type": "string"
+        }
+      },
+      "markers": [],
+      "line": 1665,
+      "long_running": false,
+      "comment": "-- --- 给筛子装筛网 ------------------------------------------------------------\n-- 这是查了十几轮才查清的一件事，必须固化成动作，而不是每次手工拼指令：\n--   * 交互在基类 EBlock.use（SieveBlock 自己没有 use）；\n--   * 装满靠右击筛子，且**必须瞄准碗内**（筛子是矮碗形，瞄方块顶面会完全打空）；\n--   * 每个筛子各自需要一个筛网（任务书原文），5×5 同步点击时 25 个都要有；\n--   * 装好后方块实体的 NBT 会出现 mesh 字段——**用它作为判定**，不猜。"
+    },
+    "place_at": {
+      "args": {
+        "bot": {
+          "default": "Bot",
+          "type": "string"
+        },
+        "x": {
+          "default": null,
+          "type": "number"
+        },
+        "y": {
+          "default": null,
+          "type": "number"
+        },
+        "z": {
+          "default": null,
+          "type": "number"
+        },
+        "item": {
+          "default": null,
+          "type": "unknown"
+        }
+      },
+      "markers": [],
+      "line": 1709,
+      "long_running": false,
+      "comment": "-- --- 放置方块 --------------------------------------------------------------- --\n-- 把手上的物品放到地面方块 (x,y,z) 的**上面一格**，并读回验证。\n-- 为什么不用 /setblock：那是作弊，不算\"机器人自己建起来的\"。这里走真玩家的右键路径，\n-- 和真人放置完全同一条代码链（代价是可能被视线角度影响，所以必须读回验证）。"
+    },
+    "sift": {
+      "args": {
+        "bot": {
+          "default": "Bot",
+          "type": "string"
+        },
+        "x": {
+          "default": null,
+          "type": "number"
+        },
+        "y": {
+          "default": null,
+          "type": "number"
+        },
+        "z": {
+          "default": null,
+          "type": "number"
+        },
+        "count": {
+          "default": 16,
+          "type": "number"
+        },
+        "item": {
+          "default": "gravel",
+          "type": "string"
+        },
+        "reach": {
+          "default": 4.0,
+          "type": "number"
+        },
+        "aim": {
+          "default": 0.2,
+          "type": "number"
+        },
+        "seconds": {
+          "default": null,
+          "type": "number"
+        }
+      },
+      "markers": [],
+      "line": 1743,
+      "long_running": false,
+      "comment": "-- --- 筛矿作业（阶段①的核心）------------------------------------------------ --\n-- 一条指令筛完一批：手持可筛方块 → 对着筛子连续右键 → 用**背包前后差异**证明收获。\n-- 为什么必须用背包差异证明：右键的返回值只说明\"指令执行成功\"，不代表筛出了东西\n-- （真实教训：hotbar 差一位那次，指令全部成功但世界里什么都没发生）。\n-- 产出必须从背包里读出来才算数。"
+    },
+    "dig_at": {
+      "args": {
+        "bot": {
+          "default": "Bot",
+          "type": "string"
+        },
+        "x": {
+          "default": null,
+          "type": "number"
+        },
+        "y": {
+          "default": null,
+          "type": "number"
+        },
+        "z": {
+          "default": null,
+          "type": "number"
+        },
+        "timeout": {
+          "default": 8,
+          "type": "number"
+        },
+        "tool": {
+          "default": "_shovel",
+          "type": "string"
+        }
+      },
+      "markers": [],
+      "line": 1907,
+      "long_running": false,
+      "comment": "-- --- 挖掉一个方块 ------------------------------------------------------------\n-- 走真玩家的左键路径（attack continuous）+ 轮询确认方块真的变成空气。\n-- 不像\"挖一下就算成功\"：必须读回空气才作数（本项目反复出现的教训）。"
+    },
+    "place_adjacent": {
+      "args": {
+        "bot": {
+          "default": "Bot",
+          "type": "string"
+        },
+        "x": {
+          "default": null,
+          "type": "number"
+        },
+        "y": {
+          "default": null,
+          "type": "number"
+        },
+        "z": {
+          "default": null,
+          "type": "number"
+        },
+        "item": {
+          "default": null,
+          "type": "unknown"
+        },
+        "walk_closer": {
+          "default": true,
+          "type": "boolean"
+        }
+      },
+      "markers": [],
+      "line": 1944,
+      "long_running": false,
+      "comment": "-- --- 贴着已有方块放一块 ------------------------------------------------------\n-- 与 place_at 的区别：place_at 是\"放在某方块顶上\"；这里只要求\"贴着一个已有方块放下\"，\n-- 具体落到哪个相邻格由射线决定。所以**放完扫描六个邻格找出新方块**，\n-- 而不是预测它会落在哪——预测面朝方向很容易错，而且错了还不报错。"
+    },
+    "build_platform": {
+      "args": {
+        "bot": {
+          "default": "Bot",
+          "type": "string"
+        },
+        "size": {
+          "default": 3,
+          "type": "number"
+        },
+        "x": {
+          "default": null,
+          "type": "number"
+        },
+        "y": {
+          "default": null,
+          "type": "number"
+        },
+        "z": {
+          "default": null,
+          "type": "number"
+        },
+        "item": {
+          "default": "oak_planks",
+          "type": "string"
+        }
+      },
+      "markers": [],
+      "line": 2023,
+      "long_running": false,
+      "comment": "-- --- 搭一块平台 --------------------------------------------------------------\n-- 以给定位置为中心铺 size×size（奇数，机器人站正中）。\n-- 刻意只铺\"够得着\"的范围（默认 3×3，最大 5×5）：放置距离只有 4.5 格，\n-- 铺更大必须靠机器人移动 + 逐块推进，不能在这里假装做得到。"
+    },
+    "extend_platform": {
+      "args": {
+        "bot": {
+          "default": "Bot",
+          "type": "string"
+        },
+        "dir": {
+          "default": "east",
+          "type": "string"
+        },
+        "rows": {
+          "default": 3,
+          "type": "number"
+        },
+        "item": {
+          "default": "oak_planks",
+          "type": "string"
+        },
+        "budget": {
+          "default": 90,
+          "type": "number"
+        }
+      },
+      "markers": [
+        "budget",
+        "jobNote"
+      ],
+      "line": 2092,
+      "long_running": true,
+      "comment": "-- --- 往外扩平台（造桥式推进）-------------------------------------------------\n-- build_platform 是\"以某点为中心铺一块\"（受 4.5 格放置距离限制），\n-- 要真正把平台**往外延伸**，需要的是反复做同一件事：\n--   找前线空格 → 贴着已有方块放一块（与地面同层）→ 走到新块上 → 再来一次。\n-- 这就是真人搭桥的方式，也是唯一不受放置距离限制的做法。"
+    },
+    "sneak_place": {
+      "args": {
+        "bot": {
+          "default": "Bot",
+          "type": "string"
+        },
+        "x": {
+          "default": null,
+          "type": "number"
+        },
+        "y": {
+          "default": null,
+          "type": "number"
+        },
+        "z": {
+          "default": null,
+          "type": "number"
+        },
+        "item": {
+          "default": null,
+          "type": "unknown"
+        },
+        "aim": {
+          "default": 0.5,
+          "type": "number"
+        },
+        "edge_walk": {
+          "default": null,
+          "type": "unknown"
+        }
+      },
+      "markers": [
+        "jobNote"
+      ],
+      "line": 2234,
+      "long_running": true,
+      "comment": "-- --- 潜行贴边放置（玩家确认可行的方法）--------------------------------------- --\n-- 玩家原话：\"用潜行贴边放\"。潜行时不会掉下边缘，且能在**自己脚这一层**把方块放到外侧，\n-- 这是真人搭平桥/扩平台的标准手法。\n-- 关键设计：**不预测落点** ✗ —— 只负责\"潜行 → 瞄准 → 右键\"，然后扫周围把**真实落点**读出来 ✓。\n-- 瞄准高度做成参数（aim），因为\"瞄顶面还是瞄侧面\"必须用实测数据定死，不能靠推演 ✗。"
+    },
+    "chop_tree": {
+      "args": {
+        "bot": {
+          "default": "Bot",
+          "type": "string"
+        },
+        "x": {
+          "default": null,
+          "type": "number"
+        },
+        "y": {
+          "default": null,
+          "type": "number"
+        },
+        "z": {
+          "default": null,
+          "type": "number"
+        },
+        "radius": {
+          "default": 6,
+          "type": "number"
+        },
+        "timeout": {
+          "default": 8,
+          "type": "number"
+        },
+        "settle": {
+          "default": 1,
+          "type": "number"
+        },
+        "reach": {
+          "default": 4.2,
+          "type": "number"
+        }
+      },
+      "markers": [],
+      "line": 2322,
+      "long_running": false,
+      "comment": null
+    },
+    "dig": {
+      "args": {},
+      "markers": [],
+      "line": 2481,
+      "long_running": false,
+      "comment": "-- --- 作业 ---------------------------------------------------------------- --"
+    },
+    "dig_up": {
+      "args": {},
+      "markers": [],
+      "line": 2483,
+      "long_running": false,
+      "comment": null
+    },
+    "dig_down": {
+      "args": {},
+      "markers": [],
+      "line": 2485,
+      "long_running": false,
+      "comment": null
+    },
+    "place": {
+      "args": {},
+      "markers": [],
+      "line": 2487,
+      "long_running": false,
+      "comment": null
+    },
+    "place_up": {
+      "args": {},
+      "markers": [],
+      "line": 2489,
+      "long_running": false,
+      "comment": null
+    },
+    "place_down": {
+      "args": {},
+      "markers": [],
+      "line": 2491,
+      "long_running": false,
+      "comment": null
+    },
+    "attack": {
+      "args": {},
+      "markers": [],
+      "line": 2493,
+      "long_running": false,
+      "comment": null
+    },
+    "drop": {
+      "args": {},
+      "markers": [],
+      "line": 2495,
+      "long_running": false,
+      "comment": null
+    },
+    "suck": {
+      "args": {},
+      "markers": [],
+      "line": 2497,
+      "long_running": false,
+      "comment": null
+    },
+    "suck_up": {
+      "args": {},
+      "markers": [],
+      "line": 2499,
+      "long_running": false,
+      "comment": null
+    },
+    "suck_down": {
+      "args": {},
+      "markers": [],
+      "line": 2501,
+      "long_running": false,
+      "comment": null
+    },
+    "select": {
+      "args": {
+        "slot": {
+          "default": null,
+          "type": "number"
+        }
+      },
+      "markers": [],
+      "line": 2504,
+      "long_running": false,
+      "comment": null
+    },
+    "refuel": {
+      "args": {
+        "n": {
+          "default": 1,
+          "type": "number"
+        }
+      },
+      "markers": [],
+      "line": 2511,
+      "long_running": false,
+      "comment": null
+    },
+    "status": {
+      "args": {},
+      "markers": [],
+      "line": 2518,
+      "long_running": false,
+      "comment": "-- --- 感知 ---------------------------------------------------------------- --"
+    },
+    "players": {
+      "args": {
+        "radius": {
+          "default": null,
+          "type": "number"
+        }
+      },
+      "markers": [],
+      "line": 2550,
+      "long_running": false,
+      "comment": null
+    },
+    "scan": {
+      "args": {
+        "radius": {
+          "default": 8,
+          "type": "number"
+        }
+      },
+      "markers": [],
+      "line": 2575,
+      "long_running": false,
+      "comment": null
+    },
+    "block_info": {
+      "args": {},
+      "markers": [],
+      "line": 2600,
+      "long_running": false,
+      "comment": null
+    },
+    "inv_list": {
+      "args": {},
+      "markers": [],
+      "line": 2616,
+      "long_running": false,
+      "comment": null
+    },
+    "inv_man": {
+      "args": {
+        "op": {
+          "default": "list",
+          "type": "string"
+        }
+      },
+      "markers": [],
+      "line": 2628,
+      "long_running": false,
+      "comment": null
+    },
+    "player_pos": {
+      "args": {
+        "name": {
+          "default": null,
+          "type": "unknown"
+        }
+      },
+      "markers": [],
+      "line": 2651,
+      "long_running": false,
+      "comment": "-- 玩家绝对坐标。\n-- 这台计算机自己不知道自己在哪（CC 没有绝对坐标），但 Player Detector 能给出\n-- 玩家的坐标 —— 有了它，Agent 就能把\"相对移动\"锚定到世界坐标上。"
+    },
+    "geo_status": {
+      "args": {},
+      "markers": [],
+      "line": 2665,
+      "long_running": false,
+      "comment": "-- 外设运行状态（燃料/冷却），便于 Agent 判断\"为什么某条指令失败了\""
+    },
+    "locate": {
+      "args": {
+        "timeout": {
+          "default": 2,
+          "type": "number"
+        }
+      },
+      "markers": [],
+      "line": 2672,
+      "long_running": false,
+      "comment": "-- GPS 定位：主计算机自己的绝对坐标。\n-- 依据 CC 的 gps 库源码：需要至少 4 台 GPS 主机在范围内。"
+    },
+    "discover_turtles": {
+      "args": {
+        "wait": {
+          "default": 2,
+          "type": "number"
+        }
+      },
+      "markers": [],
+      "line": 2684,
+      "long_running": false,
+      "comment": "-- 发现海龟：广播一次，收集应答。\n-- 为什么需要：海龟的 rednet id 是它自己的 computer id，服务端侧无从\"登记\"，\n-- 与其让用户手工抄 id，不如每次现问（问出来的 id 直接用于 args.target）。"
+    },
+    "say": {
+      "args": {
+        "text": {
+          "default": "",
+          "type": "string"
+        }
+      },
+      "markers": [],
+      "line": 2704,
+      "long_running": false,
+      "comment": null
+    },
+    "chat_read": {
+      "args": {},
+      "markers": [],
+      "line": 2712,
+      "long_running": false,
+      "comment": null
+    },
+    "quit": {
+      "args": {},
+      "markers": [
+        "EXIT_NOW"
+      ],
+      "line": 2725,
+      "long_running": false,
+      "comment": "-- 远程退出 / 远程关机（清理\"跑错程序\"的机器用）。\n-- 背景：曾经因为把主程序误跑在其他机器上，导致多台机器抢同一个 who，\n-- 而从外部既看不到是哪台、也停不掉它。有了这两个动作就能自己收拾现场。"
+    },
+    "shutdown": {
+      "args": {},
+      "markers": [
+        "EXIT_NOW"
+      ],
+      "line": 2731,
+      "long_running": false,
+      "comment": null
+    },
+    "place_face": {
+      "args": {
+        "bot": {
+          "default": "Bot",
+          "type": "string"
+        },
+        "x": {
+          "default": null,
+          "type": "number"
+        },
+        "y": {
+          "default": null,
+          "type": "number"
+        },
+        "z": {
+          "default": null,
+          "type": "number"
+        },
+        "refx": {
+          "default": null,
+          "type": "number"
+        },
+        "refy": {
+          "default": null,
+          "type": "number"
+        },
+        "refz": {
+          "default": null,
+          "type": "number"
+        },
+        "item": {
+          "default": null,
+          "type": "unknown"
+        }
+      },
+      "markers": [],
+      "line": 2753,
+      "long_running": false,
+      "comment": "-- 自我更新：从网关拉最新版 → **先做语法自检** → 覆盖本地副本 → 重启计算机。\n-- 目的：让\"Agent 改完代码\"不再需要人到游戏里手动重载 —— 这是本项目最大的效率瓶颈\n-- （每改一行都要人肉重载，半小时的活被拖成几小时）。\n-- 语法自检很重要：宁可不更新，也不能把机器刷成砖 ✗。\n-- --- 按指定面精确放置 ------------------------------------------------------- --\n-- 与 place_adjacent 的分工：\n--   place_adjacent 让**射线自己决定**贴在哪个面 ✗ —— 摆产线时不行 ✗（落点会飘 ✓）\n--   这里给定\"落点 + 要点的那个邻居方块\" ✓ ⇒ 点的是哪一面、方块朝向是什么，全确定 ✓\n--\n-- 为什么朝向能确定（查过 1.20.1 源）：\n--   漏斗/发射器这类方块 `getStateForPlacement` = `clickedFace.getOpposite()` ✓\n--   ⇒ **方块朝向 = 指向你点的那个方块** ✓\n--   所以\"让漏斗朝东\"的做法是：点它**东边那个方块**的西面 ✓（不是点西边的方块 ✗）\n--   ⇒ 参数故意用 ref（被点的方块）而不是面编号 ✓ —— 少一层心智负担 ✓\n--\n-- 自证：放完读回落点，`placed` 只看**格子真的变了** ✓ 不看指令回显 ✓"
+    },
+    "pebble_farm": {
+      "args": {
+        "bot": {
+          "default": "Bot",
+          "type": "string"
+        },
+        "x": {
+          "default": null,
+          "type": "number"
+        },
+        "y": {
+          "default": null,
+          "type": "number"
+        },
+        "z": {
+          "default": null,
+          "type": "number"
+        },
+        "clicks": {
+          "default": 20,
+          "type": "number"
+        },
+        "dumpx": {
+          "default": null,
+          "type": "number"
+        },
+        "dumpy": {
+          "default": null,
+          "type": "number"
+        },
+        "dumpz": {
+          "default": null,
+          "type": "number"
+        }
+      },
+      "markers": [
+        "jobNote"
+      ],
+      "line": 2831,
+      "long_running": true,
+      "comment": "-- --- 石砾农场：把 ATM9 那条\"潜行空手右键泥土掉石砾\"变成**一条指令** --------- --\n--\n-- 规则出处（不是猜的 ✓）：实例里的\n--   kubejs/server_scripts/mods/exdeorum/pebbles.js ✓\n--   条件三条：主手**空** ✓ 玩家**潜行** ✓ 方块带 `minecraft:dirt` 标签 ✓\n--   掉落：`block.popItemFromFace(dropItem, facing)` —— 从**被点的那个面**弹出来 ✓\n--   ⚠ 这个整合包里 `minecraft:dirt` 标签**包含 grass_block** ✓\n--     （让游戏自己回答：`/execute if block x y z #minecraft:dirt` ✓ 返回 1 ✓）\n--   ⚠ 战利品表的随机下标会**越界**：`loot[Math.floor(random*12)]` 只有 6 项 ✓\n--     ⇒ 越界的 6 种情况落到 `?? \"exdeorum:stone_pebble\"` ✓\n--     ⇒ **石砾恰好占 50%** ✓ 其余 6 种各 1/12 ✓（做圆石只要 stone_pebble ✓）\n--\n-- ── 四个实测坑（每个都表现为\"看起来正常但颗粒无收\" ✗）────────────────────\n--   1) 假人**能**触发这个事件 ✓ —— KubeJS 探针实测：\n--      `cls=carpet.patches.EntityPlayerMPFake … empty=true dirtTag=true shift=true` ✓\n--      之前\"没反应\"跟事件投递无关 ✗ 是下面 2/3 条 ✗\n--   2) **弹出来的石砾会被自己捡走** ✗ → 手不再空 ✗ → 之后每次点击都被\n--      `!item.isEmpty()` 挡掉 ✓ **而且一声不响** ✗ —— 这才是\"机制失效\"的真相 ✓\n--      拾取落点（实测 + 源码）：**编号最小的空快捷槽** ✓\n--      ⇒ 站方块正上方点：必被捡 ✓ 必须清手 ✓\n--      ⇒ 清手手法：把手里的东西**朝走道沟丢下去** ✓\n--        沟底比脚底低 1 格 ⇒ 高度差让假人**够不到** ✓（不用担心又被捡回来 ✓）\n--      附：若那只手的下一格正好是同种石砾 → 会**并进那一堆** ✓ 手保持空 ✓\n--          ⇒ 只要低号槽里已有同种，就能连点 ✓✓（本动作因此不必每次都清 ✓）\n--   3) 从 3 格外点能避免被捡 ✓ 但**射线必须真的落在土方块上** ✗\n--      实测：射线被 framedblocks 的台阶边挡住 ✗ 而对那格的右键**根本不触发事件** ✗\n--      （探针一条日志都没有 ✓）而 Jade 准星却报\"打在台阶边上\" ✓\n--      ⇒ **\"准星说打到了\"不能当依据** ✗ 以事件日志/掉落物为准 ✓\n--   4) 潜行状态要**每次重设** ✓（tp / 丢东西之后不要假定它还蹲着 ✓）\n--\n-- 自证：每轮读一次背包（NBT 权威 ✓），返回前后石砾总数与分类 ✓"
+    },
+    "snapshot": {
+      "args": {
+        "x0": {
+          "default": 0,
+          "type": "number"
+        },
+        "y0": {
+          "default": 0,
+          "type": "number"
+        },
+        "z0": {
+          "default": 0,
+          "type": "number"
+        },
+        "x1": {
+          "default": 0,
+          "type": "number"
+        },
+        "y1": {
+          "default": 0,
+          "type": "number"
+        },
+        "z1": {
+          "default": 0,
+          "type": "number"
+        },
+        "maxcells": {
+          "default": 900,
+          "type": "number"
+        },
+        "air": {
+          "default": null,
+          "type": "boolean"
+        },
+        "match": {
+          "default": null,
+          "type": "string"
+        }
+      },
+      "markers": [],
+      "line": 2929,
+      "long_running": false,
+      "comment": "-- --- 区域快照：把\"读世界\"从零散射线升级成**结构化快照** --------------------- --\n-- 参考对象（用户点名的方向 ✓）：Create 的蓝图与蓝图大炮 ✓\n--   蓝图大炮有**两半** ✓：① 一份蓝图（结构化数据 ✓）② 一门会飞过去逐块放的炮 ✓\n--   这个动作是\"①读图\"的那一半 ✓ `A.blueprint_build` 是\"②放图\"那一半 ✓\n--\n-- 为什么不再一格一格 readBlock ✗：\n--   实测一片 16×4×16 逐格读要几十秒 ✗ 而 `commands.getBlockInfos` **一次读一整块** ✓\n--   两条既有结论（都验证过 ✓ 见 docs/carpet-route-progress.md）：\n--     a) 体积上限：17³ 直接 `Too many blocks` ✗ ⇒ 按 **4³ 分块** ✓\n--     b) 返回项**不带坐标** ✗ ⇒ 顺序 = **y（最外）→ z（中）→ x（最内）** ✓\n--        （用\"批量 vs 单点逐格\"对照 + 穷举 6 种排列定下来的 ✓ 不能靠猜 ✗）\n--\n-- 自证：返回 solid_n + air_n + 逐类 counts ✓ 外部还能与单点读法抽查比对 ✓"
+    },
+    "blueprint_build": {
+      "args": {
+        "bot": {
+          "default": "Bot",
+          "type": "string"
+        },
+        "plan": {
+          "default": null,
+          "type": "unknown"
+        },
+        "url": {
+          "default": null,
+          "type": "string"
+        },
+        "x": {
+          "default": 0,
+          "type": "number"
+        },
+        "y": {
+          "default": 0,
+          "type": "number"
+        },
+        "z": {
+          "default": 0,
+          "type": "number"
+        },
+        "fly": {
+          "default": true,
+          "type": "boolean"
+        },
+        "max": {
+          "default": 48,
+          "type": "number"
+        },
+        "force": {
+          "default": null,
+          "type": "boolean"
+        }
+      },
+      "markers": [
+        "jobNote"
+      ],
+      "line": 3018,
+      "long_running": true,
+      "comment": "-- --- 蓝图大炮（放图那一半）：读蓝图 → 查缺料 → 飞过去逐块放 ----------------- --\n-- 蓝图形状（子路径由网关 /files/blueprints/<名>.json 下发 ✓ 见 gateway §files）：\n--   { \"name\":\"x\", \"cells\":[ {\"dx\":0,\"dy\":0,\"dz\":0,\"block\":\"minecraft:oak_planks\"}, … ] }\n--\n-- 与 Create 蓝图大炮逐条对照（这就是\"仿照\"的具体内容 ✓）：\n--   * 炮要装一份蓝图 ✓ → 我们从网关**下载 JSON** ✓（`url=` ✓）\n--   * 炮有**缺料清单** ✓ → 开工前先比对背包 ✓ 不够就**拒绝**并列出缺什么 ✓（不是硬试 ✗）\n--   * 炮**跳过已经对的地方** ✓ → 每格先读回 ✓ 已经一致就跳过 ✓\n--   * 炮会**沿着轨道飞** ✓ → 我们让假人 **tp 到可站的观察位** ✓（悬空平台上这就是唯一可行解 ✓）\n--   * 炮**慢慢来、可中断** ✓ → `max=` 限制本次放几块 ✓ 再跑一次自动接着放 ✓（幂等 ✓）\n--\n-- ⚠ 观察位必须\"脚下有支撑\" ✓ 否则假人会直接坠入虚空 ✗（真实风险 ✓ 所以硬校验 ✓）"
+    },
+    "path_plan": {
+      "args": {
+        "bot": {
+          "default": "Bot",
+          "type": "string"
+        },
+        "x": {
+          "default": null,
+          "type": "number"
+        },
+        "y": {
+          "default": null,
+          "type": "number"
+        },
+        "z": {
+          "default": null,
+          "type": "number"
+        },
+        "radius": {
+          "default": 6,
+          "type": "number"
+        },
+        "max_drop": {
+          "default": 3,
+          "type": "number"
+        },
+        "dig": {
+          "default": null,
+          "type": "boolean"
+        },
+        "place": {
+          "default": null,
+          "type": "boolean"
+        },
+        "max_nodes": {
+          "default": 3000,
+          "type": "number"
+        },
+        "timeout": {
+          "default": 12,
+          "type": "number"
+        },
+        "scan_timeout": {
+          "default": null,
+          "type": "number"
+        },
+        "max_scan": {
+          "default": 24000,
+          "type": "number"
+        },
+        "exact": {
+          "default": null,
+          "type": "boolean"
+        }
+      },
+      "markers": [
+        "jobNote"
+      ],
+      "line": 3378,
+      "long_running": true,
+      "comment": "-- A*：节点 = \"能站的格子\" ✓ 边 = 移动基元（走平/上台阶/下落/挖穿/搭桥 ✓）"
+    },
+    "path_follow": {
+      "args": {
+        "bot": {
+          "default": "Bot",
+          "type": "string"
+        },
+        "x": {
+          "default": null,
+          "type": "number"
+        },
+        "y": {
+          "default": null,
+          "type": "number"
+        },
+        "z": {
+          "default": null,
+          "type": "number"
+        },
+        "timeout": {
+          "default": 120,
+          "type": "number"
+        },
+        "warp": {
+          "default": true,
+          "type": "boolean"
+        },
+        "replans": {
+          "default": 2,
+          "type": "number"
+        },
+        "radius": {
+          "default": null,
+          "type": "unknown"
+        },
+        "dig": {
+          "default": null,
+          "type": "unknown"
+        },
+        "place": {
+          "default": null,
+          "type": "unknown"
+        },
+        "max_drop": {
+          "default": null,
+          "type": "unknown"
+        },
+        "plan_timeout": {
+          "default": 8,
+          "type": "number"
+        },
+        "scan_timeout": {
+          "default": null,
+          "type": "number"
+        },
+        "exact": {
+          "default": null,
+          "type": "boolean"
+        }
+      },
+      "markers": [
+        "budget",
+        "jobNote"
+      ],
+      "line": 3572,
+      "long_running": true,
+      "comment": "-- --- 沿路走（执行器）：逐格走过去 ✓ 卡住就重规划 ✓ 最后才允许\"回传\" ✓ ---------- --"
+    },
+    "step_to": {
+      "args": {
+        "bot": {
+          "default": "Bot",
+          "type": "string"
+        },
+        "x": {
+          "default": null,
+          "type": "number"
+        },
+        "y": {
+          "default": null,
+          "type": "number"
+        },
+        "z": {
+          "default": null,
+          "type": "number"
+        },
+        "timeout": {
+          "default": 6,
+          "type": "number"
+        },
+        "reach": {
+          "default": 0.6,
+          "type": "number"
+        }
+      },
+      "markers": [],
+      "line": 3812,
+      "long_running": false,
+      "comment": "-- --- 走一格（寻路执行器的**原子操作** ✓ 自带成败判定）------------------------ --\n-- 为什么要单独做成一个动作（真实教训 ✓）：\n--   一开始我让执行器\"发一条 move forward 然后祈祷\" ✗ ⇒ 现象是**规划成功、人一步没动** ✗\n--   而这正是 `dig_at` 早就解决过的问题 ✓：**每个动作都要能自己判定成败** ✓\n--   ⇒ 走路也一样：下指令 → 轮询位置 → **位置真的变了才算成功** ✓ 否则如实报失败 ✗\n--\n-- 踩过的三个细节（都写在这里免得再犯 ✓）：\n--   1) 走之前必须 `unsneak` ✓（摆方块时按下的潜行会拖慢/卡住移动 ✓）\n--   2) 每轮都要**重新** look + move ✓（与 walk_to 同一手法 ✓\n--      —— 只发一次时它只会挪一点点就停 ✗）\n--   3) 防坠崖 ✓：y 掉超过 1.2 立刻停手 ✓（天空岛铁律 ✓）"
+    },
+    "nest_probe": {
+      "args": {
+        "x": {
+          "default": null,
+          "type": "number"
+        },
+        "y": {
+          "default": null,
+          "type": "number"
+        },
+        "z": {
+          "default": null,
+          "type": "number"
+        },
+        "bot": {
+          "default": "Bot",
+          "type": "string"
+        },
+        "radius": {
+          "default": null,
+          "type": "number"
+        },
+        "plan_timeout": {
+          "default": 8,
+          "type": "number"
+        },
+        "dig": {
+          "default": null,
+          "type": "unknown"
+        },
+        "place": {
+          "default": null,
+          "type": "unknown"
+        },
+        "max_drop": {
+          "default": null,
+          "type": "unknown"
+        }
+      },
+      "markers": [
+        "jobNote"
+      ],
+      "line": 3878,
+      "long_running": true,
+      "comment": "-- ═══ 临时动作 nest_probe（\"嵌套调用\"的最小实验 ✓ 2026-09-20 ✓ 诊断完就删 ✗）═══════\n-- 要回答的唯一问题（别夹带别的 ✗）：**动作内部调用另一个动作，到底跑不跑得通** ✓\n--   现场现象（真实事故 ✓）：`path_follow` 一调用 **90 秒不返回** ✗ 假人**一步没动** ✗\n--     而新加的\"硬看门狗\"**根本没触发** ✗\n--   为什么看门狗没触发 ✓（读代码得出的假设 ✗ 待验证 ✓）：\n--     `hardDeadline` 只在 **attempt 循环的开头**判一次 ✗\n--     ⇒ 只要卡在 `A.path_plan(...)` 这一句里面，看门狗就永远轮不到 ✗\n--   ⇒ 所以先别改执行器 ✗：**先问清\"卡在哪一段\"** ✓\n-- 纪律（本项目最值钱的一条 ✓）：**先让程序自己报位置，再读代码** ✗ 不要反过来 ✗\n--\n-- 打点去处 = 机器本地 `job.log` ✓（真实教训 D2/G6 ✓）：\n--   回传会丢 ✗ 网关会挂 ✗ 但**机器自己写的磁盘文件不会骗人** ✓\n--   读法：`py tools/cc_logs.py 2`    或   `py tools/read_joblog.py 2 20`\n--   ⚠ 判读法 ✓：**有哪几行、缺哪一行** ✗ 比\"最后一行是什么\"更重要 ✓\n--     例：只有 `nest.plan_begin` 没有 `nest.plan_done` ⇒ **就卡在 path_plan 里** ✓✓\n--\n-- 用法：\n--   py tools/act.py nest_probe x=<tx> z=<tz> radius=6 plan_timeout=8\n--   （想更小：radius=2 ⇒ 扫描量掉到 1/27 ✓ 先证明\"通路\"✓ 再谈\"性能\"✗）"
+    },
+    "self_update": {
+      "args": {
+        "name": {
+          "default": "agent_bridge.lua",
+          "type": "string"
+        },
+        "localname": {
+          "default": "bridge_local",
+          "type": "string"
+        }
+      },
+      "markers": [
+        "EXIT_NOW"
+      ],
+      "line": 3932,
+      "long_running": false,
+      "comment": null
+    },
+    "reboot": {
+      "args": {},
+      "markers": [
+        "EXIT_NOW"
+      ],
+      "line": 3951,
+      "long_running": false,
+      "comment": "-- 远程重启（配合 self_update 使用）"
+    },
+    "rediscover": {
+      "args": {},
+      "markers": [],
+      "line": 3962,
+      "long_running": false,
+      "comment": "-- 强制重新发现外设。\n-- 真实事故：开机自启那一刻 discover() 只看到 1 个 modem，5 个 Advanced Peripherals\n-- 全部\"消失\"；而手动启动时完全正常 —— 因为计算机的方块实体比相邻外设更早被创建，\n-- 开机瞬间扫描存在**时序竞争**。主循环里也会定期重扫（见 tick % 20），\n-- 这个动作用于需要立刻刷新时（例如刚放好外设）。"
+    },
+    "broadcast_cmd": {
+      "args": {
+        "cmd": {
+          "default": null,
+          "type": "unknown"
+        },
+        "target": {
+          "default": null,
+          "type": "number"
+        },
+        "wait": {
+          "default": 8,
+          "type": "number"
+        }
+      },
+      "markers": [],
+      "line": 3974,
+      "long_running": false,
+      "comment": "-- 广播下发：把一条指令通过 rednet **广播**发给所有海龟并收集应答。\n--\n-- 为什么需要（实测）：本项目的 **广播 + 应答** 一直可靠，而 rednet 的\n-- **定向发送**（按 id 发）在实测中不稳定 —— 广播能收到、定向却超时 ✗。\n-- 用广播 + 按 id 过滤应答，就能达到\"定向\"的效果，且走的是那条可靠的路径。\n-- 长指令（如 chop_log）请把 wait 调大（默认 8 秒）。"
+    },
+    "peripheral_api": {
+      "args": {
+        "name": {
+          "default": null,
+          "type": "unknown"
+        }
+      },
+      "markers": [],
+      "line": 4002,
+      "long_running": false,
+      "comment": "-- 自省：让游戏把外设**真正提供的方法名**报上来。\n-- 为什么需要：外设 API 名在各版本/各模组间有差异（本次 block_info 返回 nil 就是候选名不对），\n-- 与其在外部猜方法名，不如直接从游戏里问一次（纪律：接口语法必须来自权威来源）。"
+    },
+    "sleep": {
+      "args": {
+        "ms": {
+          "default": 500,
+          "type": "number"
+        }
+      },
+      "markers": [],
+      "line": 4015,
+      "long_running": false,
+      "comment": null
+    },
+    "go_relative": {
+      "args": {
+        "dx": {
+          "default": 0,
+          "type": "number"
+        },
+        "dz": {
+          "default": 0,
+          "type": "number"
+        },
+        "dy": {
+          "default": 0,
+          "type": "number"
+        }
+      },
+      "markers": [],
+      "line": 4022,
+      "long_running": false,
+      "comment": "-- --- 高层动作 ------------------------------------------------------------ --"
+    },
+    "tunnel": {
+      "args": {
+        "dir": {
+          "default": "forward",
+          "type": "string"
+        },
+        "length": {
+          "default": 4,
+          "type": "number"
+        }
+      },
+      "markers": [],
+      "line": 4059,
+      "long_running": false,
+      "comment": null
+    },
+    "mine_column": {
+      "args": {
+        "depth": {
+          "default": 5,
+          "type": "number"
+        }
+      },
+      "markers": [],
+      "line": 4086,
+      "long_running": false,
+      "comment": null
+    }
+  }
+}

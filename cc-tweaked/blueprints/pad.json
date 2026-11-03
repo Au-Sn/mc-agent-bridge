@@ -1,0 +1,83 @@
+{
+ "name": "pad",
+ "kind": "pad",
+ "size": {
+  "x": 4,
+  "y": 1,
+  "z": 3
+ },
+ "cells": [
+  {
+   "dx": 0,
+   "dy": 0,
+   "dz": 0,
+   "block": "minecraft:oak_planks"
+  },
+  {
+   "dx": 0,
+   "dy": 0,
+   "dz": 1,
+   "block": "minecraft:oak_planks"
+  },
+  {
+   "dx": 0,
+   "dy": 0,
+   "dz": 2,
+   "block": "minecraft:oak_planks"
+  },
+  {
+   "dx": 1,
+   "dy": 0,
+   "dz": 0,
+   "block": "minecraft:oak_planks"
+  },
+  {
+   "dx": 1,
+   "dy": 0,
+   "dz": 1,
+   "block": "minecraft:oak_planks"
+  },
+  {
+   "dx": 1,
+   "dy": 0,
+   "dz": 2,
+   "block": "minecraft:oak_planks"
+  },
+  {
+   "dx": 2,
+   "dy": 0,
+   "dz": 0,
+   "block": "minecraft:oak_planks"
+  },
+  {
+   "dx": 2,
+   "dy": 0,
+   "dz": 1,
+   "block": "minecraft:oak_planks"
+  },
+  {
+   "dx": 2,
+   "dy": 0,
+   "dz": 2,
+   "block": "minecraft:oak_planks"
+  },
+  {
+   "dx": 3,
+   "dy": 0,
+   "dz": 0,
+   "block": "minecraft:oak_planks"
+  },
+  {
+   "dx": 3,
+   "dy": 0,
+   "dz": 1,
+   "block": "minecraft:oak_planks"
+  },
+  {
+   "dx": 3,
+   "dy": 0,
+   "dz": 2,
+   "block": "minecraft:oak_planks"
+  }
+ ]
+}

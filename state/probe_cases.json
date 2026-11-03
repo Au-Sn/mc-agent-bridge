@@ -1,0 +1,146 @@
+{
+ "schema": "dshbridge/probe_cases@1",
+ "frozen_at": "2026-10-05",
+ "why": "★可达性探针的用例库（用户定的第 0 步）：每条**真值必须带出处**（没出处就不许写真值）；一号用例是 ㉘★",
+ "cases": [
+  {
+   "id": 1,
+   "name": "㉘ 洞 (4103,69,20)",
+   "kind": "user_led_walk",
+   "truth_source": "★你领 bot 走那趟 ✗ dsh 记完整路线✗★",
+   "target": [
+    4103,
+    69,
+    20
+   ],
+   "start": null,
+   "expect": null,
+   "status": "pending_user_walk",
+   "note": "★一号用例 ✗ 它同时是'可达性真值'的第一份参照 ✗ 也是欠账 ㉘ 的正面解决✗★"
+  },
+  {
+   "id": 2,
+   "name": "平地 → 平地（基线）",
+   "kind": "flat_to_flat",
+   "truth_source": "★基线 ✗ 应当 yes ／ layers=0✗★",
+   "target": null,
+   "start": null,
+   "expect": {
+    "reachable": "yes",
+    "layers": 0
+   },
+   "status": "pending_run",
+   "truth": "yes/0 层",
+   "provenance": "★构造用例（平地）★ 判据 R7 已过，出处 §79.159"
+  },
+  {
+   "id": 3,
+   "name": "树冠下的目标",
+   "kind": "under_canopy",
+   "truth_source": "★§79.150 那批树叶（★2.5D 答不出 ✗ 而人知道中间没有虚空✗★）✗★",
+   "target": [
+    4123,
+    74,
+    8
+   ],
+   "start": null,
+   "expect": null,
+   "status": "pending_run",
+   "note": "★这一条是 2.5D 误报'隔着虚空'的现场✗★",
+   "truth": "yes",
+   "provenance": "★§79.150 实测★：走手报 「不在连通区／隔着虚空」，而它**同一趟**把假人从 x=4106 送到了 (4123.42,71.00,9.56)（树叶正下方）⇒ **没有虚空**；2.5D 每列只记一个可站层，所以它答不了带层高的可达性"
+  },
+  {
+   "id": 4,
+   "name": "洞穴里的目标",
+   "kind": "in_cave",
+   "truth_source": "★`cave_air` 那类 ✗ 盒内下方疑似空腔✗★",
+   "target": null,
+   "start": null,
+   "expect": null,
+   "status": "pending_run"
+  },
+  {
+   "id": 5,
+   "name": "屋顶上的目标",
+   "kind": "on_roof",
+   "truth_source": "★向上 3+ 层 ✗ 走手只上 1 层✗★",
+   "target": null,
+   "start": null,
+   "expect": null,
+   "status": "pending_run"
+  },
+  {
+   "id": 6,
+   "name": "1.5 墙后的目标",
+   "kind": "behind_wall_15",
+   "truth_source": "★`fence_15` 那类 ✗ 应当 `wall_too_high`✗★",
+   "target": null,
+   "start": null,
+   "expect": {
+    "reachable": "no",
+    "why_not": "wall_too_high"
+   },
+   "status": "pending_run",
+   "truth": "no/wall_too_high",
+   "provenance": "★构造用例（1.5 栅栏 fence_15）★ 判据 R8 已过，出处 §79.159"
+  },
+  {
+   "id": 7,
+   "name": "竖直井",
+   "kind": "vertical_shaft",
+   "truth_source": "★向下 N 层 ✗ 下比上容易但有上限✗★",
+   "target": null,
+   "start": null,
+   "expect": null,
+   "status": "pending_run"
+  },
+  {
+   "id": 8,
+   "name": "★走手说「不在连通区」而实际走得到（§79.150）★",
+   "kind": "walker_gave_up_but_reachable",
+   "truth_source": "★★§79.150 实测★★：★§79.150 实测★：走手报 「不在连通区／隔着虚空」，而它**同一趟**把假人从 x=4106 送到了 (4123.42,71.00,9.56)（树叶正下方）⇒ **没有虚空**；2.5D 每列只记一个可站层，所以它答不了带层高的可达性",
+   "start": [
+    4106,
+    71,
+    2
+   ],
+   "target": [
+    4123,
+    74,
+    8
+   ],
+   "expect": {
+    "reachable": "yes"
+   },
+   "truth": "yes",
+   "provenance": "★同一趟行走的**真位置**（dshdigest 读的，不是推的），出处 §79.150★",
+   "status": "truth_known",
+   "note": "★历史族「假 unreachable」里一个**带坐标带真值**的成员，影子验证要拿它回放★"
+  },
+  {
+   "id": 9,
+   "name": "★贴墙时「就地侧移」不算绕障，要先退一步（P32）★",
+   "kind": "hug_wall_needs_step_back",
+   "truth_source": "★错题本 P32（v2.7.0 实测）：真人绕墙不会左右横跳，贴墙时必须**先退一步**再绕★",
+   "start": null,
+   "target": null,
+   "expect": null,
+   "truth": null,
+   "provenance": "★错题本 P32 及 模组-容器存取与假人手.md:539（detours=0 的现场）★",
+   "status": "needs_coords",
+   "note": "★这一条考的不是「能不能到」而是「**怎么到**」，探针只答前者 ⇒ 先登记，不当判据★ ｜ ★2026-10-05：我曾拿它当『过不去』的用例 ✗ 切片查明那段`mcwfences` 只有 **5 格**（不是墙）⇒ 探针答 `yes`（绕过去）是**对的** ✗ **该用例撤回** ✗ 见 §79.167★"
+  }
+ ],
+ "count": 9,
+ "upgraded_at": "2026-10-05",
+ "withdrawn_at": "2026-10-05",
+ "withdrawn": [
+  {
+   "id": null,
+   "name": "非正式：x=4114 那段 1.5 格桩子当『墙』",
+   "why": "★切片 780 格内只有 5 格 `mcwfences:sandstone_grass_topped_wall` ⇒ 不是屏障 ✗ 探针绕行答 yes 是对的✗★",
+   "at": "§79.167"
+  }
+ ]
+}

@@ -1,0 +1,17 @@
+# ── 修复 cc0（我在清理"重复 ComputerId"时把它的两份方块都删了 ✗）──────────────
+# 它的 5 个 AP 外设全都还在原位 ✓ 文件系统也还在磁盘上（computer/0/ ✓）
+# 目标：把主机放回去，并让它**用回同一个 ComputerId=0**（= 同一套文件 ✓ 同一套 startup ✓）
+# 1) 先 On:0b（文件系统对接好之前不开机）
+setblock 4122 71 5 computercraft:computer_advanced{On:0b}
+# 2) setblock 指定不了 ComputerId ✗ —— 但 /data merge block 也许可以 ✓（本轮就是验证这件事）
+data merge block 4122 71 5 {ComputerId:0}
+# 3) 核对 id 到底改没改
+data get block 4122 71 5
+# 4) 顶上那只调制解调器（四个侧面 + 下方都被 AP 外设占着 ✓ 只剩顶面）
+setblock 4122 72 5 computercraft:wireless_modem_normal
+data get block 4122 72 5
+# 5) 开机
+computercraft turn-on 0
+# 6) 最终核对
+data get block 4122 71 5
+computercraft dump

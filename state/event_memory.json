@@ -1,0 +1,12 @@
+{
+ "schema": "dshbridge/event_memory@1",
+ "seq": 0,
+ "days": {},
+ "events": [],
+ "saved_at": null,
+ "retention": {
+  "max_events": 2000,
+  "max_per_day": 500,
+  "keep_days": 14
+ }
+}
