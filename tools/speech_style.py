@@ -382,6 +382,14 @@ def _strip_ai_tells(text: str, profile: dict) -> str:
     out = "".join(kept).strip()
     # 再去掉客服式残句/括号旁白/引号
     out = re.sub(r"（(?:作为|身为)?(?:一个)?(?:AI|人工智能|语言模型|大模型|助手)[^）]*）", "", out)
+    # ★兜底去客服尾巴✗★（2026-11-03 联调：模型常带"希望以上回答对您有帮助"这类整句，
+    #   而 profile 的 ai_tells 正则未必覆盖"您/帮到您"变体 ⇒ 这里做一次通用裁剪）
+    out = re.sub(r"(希望)?(以上|上述)(回答|内容)?(对|能帮到)(您|你)(有|有所)?(帮助)?[。！!]?",
+                 "", out)
+    out = re.sub(r"(如果|如)(?:(您|你))?还?有(任何)?(问题|疑问)[^。！？!?]*[。！!]?", "", out)
+    out = re.sub(r"(很)?高兴(为|为您)(您)?(服务|解答)[。！!]?", "", out)
+    out = re.sub(r"^(作为|身为)(一个)?(AI|人工智能|语言模型|大模型|助手)[，,、]?",
+                 "", out)
     out = out.strip(" \t\r\n\"'“”‘’`")
     out = re.sub(r"\s+", " ", out)
     return out
@@ -535,7 +543,7 @@ def failure_line(reason: str = "", ctx=None, rng=None, profile=None) -> str:
 # ── 调试 CLI ──────────────────────────────────────────────────────────────
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description="语言表现层调试（纯离线）")
-    ap.add_argument("--guide", metavar="PROFILE",
+    ap.add_argument("--guide", nargs="?", const="", metavar="PROFILE",
                     help="打印某 profile 的风格约束（省略=默认）")
     ap.add_argument("--post", metavar="TEXT", help="对一句话做后处理")
     ap.add_argument("--failure", metavar="REASON", help="生成失败诚实话术")
