@@ -45,9 +45,28 @@ except Exception:
     pass
 
 BOT = "Bot"
-DEFAULT_ANCHOR = "4121 71 16"          # ★重生锚点✗★：家/屋外侧的安全落脚（与 respawn_bot 旧口径一致 ✓）
+DEFAULT_ANCHOR = "4121 71 16"          # ★本机旧默认✗★（无 world_profile 时才用，且会**打印**用了它）
 DEFAULT_FLAGS = ROOT / "logs"
 RELAY_HOLD = "relay_hold"
+
+
+def default_anchor(profile_path=None) -> str:
+    """★锚点解析（唯一口径）✗★：world_profile.anchor 优先；无档案 ⇒ 本机旧默认＋**明确打印**
+
+    换整合包只改 `state/world_profile.json`；这里**不静默**用本机默认（用户口径 2026-11-03）。
+    """
+    try:
+        import world_profile as WP
+        val, source, why = WP.resolve_anchor("anchor", path=profile_path)
+    except Exception as exc:              # ★不许静默✗★
+        print("recover: world_profile 解析失败 (%s: %s) ⇒ 用默认锚点（本机世界）%s"
+              % (type(exc).__name__, str(exc)[:120], DEFAULT_ANCHOR), file=sys.stderr)
+        return DEFAULT_ANCHOR
+    if val is not None:
+        return "%d %d %d" % val
+    print("recover: %s ⇒ 用默认锚点（本机世界）%s" % (why, DEFAULT_ANCHOR),
+          file=sys.stderr)
+    return DEFAULT_ANCHOR
 
 
 # ---------------------------------------------------------------- 默认通道（直连）
@@ -250,7 +269,8 @@ def _print_report(res: dict) -> None:
 
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(add_help=True)
-    ap.add_argument("--anchor", default=DEFAULT_ANCHOR, help="Bot 重生坐标（默认 %(default)s）")
+    ap.add_argument("--anchor", default=None,
+                    help="Bot 重生坐标（默认取 world_profile.anchor；无档案时用本机默认，会打印说明）")
     ap.add_argument("--dry-run", action="store_true", help="只探测/报告，不发 spawn/gamemode/删旗")
     ap.add_argument("--json", action="store_true", help="机器可读输出")
     ap.add_argument("--attempts", type=int, default=3, help="spawn 后回读次数（默认 3）")
@@ -260,7 +280,8 @@ def main(argv=None) -> int:
         print("RECOVER: HARD-FAIL（--attempts 必须 ≥1）")
         return 2
     try:
-        res = recover(DirectTransport(), anchor=a.anchor, flags_dir=Path(a.flags_dir),
+        res = recover(DirectTransport(), anchor=a.anchor or default_anchor(),
+                      flags_dir=Path(a.flags_dir),
                       dry_run=a.dry_run, attempts=a.attempts)
     except Exception as e:      # ★连通道构造都失败 ⇒ 硬故障，但要说清是什么✗★
         print("RECOVER: HARD-FAIL（未预期异常：%s: %s）" % (type(e).__name__, str(e)[:120]))

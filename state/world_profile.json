@@ -1,0 +1,58 @@
+{
+ "schema": "dshbridge/world_profile@1",
+ "pack_name": "ATM9Sky",
+ "anchor": [
+  4121,
+  71,
+  16
+ ],
+ "soak_anchor": [
+  4152,
+  71,
+  13
+ ],
+ "test_platform": {
+  "center": [
+   4152,
+   71,
+   13
+  ],
+  "radius": 3,
+  "box": [
+   4145,
+   70,
+   2,
+   4160,
+   72,
+   17
+  ]
+ },
+ "no_dig_zones": [
+  {
+   "name": "家",
+   "box": [
+    4115,
+    71,
+    19,
+    4129,
+    79,
+    32
+   ],
+   "why": "这是家，挖了就没地方住"
+  },
+  {
+   "name": "CC计算机",
+   "box": [
+    4119,
+    71,
+    10,
+    4119,
+    71,
+    10
+   ],
+   "why": "桥接计算机，挖了整条链路就断"
+  }
+ ],
+ "contract_fixture": "state/contracts",
+ "notes": "示例（由本机当前世界实测值生成）：换整合包/换存档后必须改 anchor/soak_anchor/test_platform/no_dig_zones；本文件禁止写本机绝对路径；换机先跑一次本工具 --init 再按新世界改。"
+}

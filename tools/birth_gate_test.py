@@ -99,6 +99,12 @@ for p in TOOLS:
 #     ★⇒ 一个**崭新的、既没登记也没声明**的模块 ⇒ **当场红**✗★ ✓
 _NEWEST_N = 20
 DECLARED_UNREG = {
+    "speech_style.py": "aliveness round: speech profile/style guide/postprocess/proactive lines (not a judge; judge is speech_alive_test, sec 79.543)",
+    "speech_alive_test.py": "aliveness round: speech rubric offline judge, 12 checks (sec 79.543)",
+    "persona_pack.py": "publish round: SillyTavern V2 character-card import/export/switch (not a judge; the judge is persona_pack_test, sec 79.540)",
+    "persona_pack_test.py": "publish round: persona pack offline judge, 10 checks (sec 79.540)",
+    "world_profile.py": "cross-modpack readiness: state/world_profile.json world profile reader (not a judge; the judge is world_profile_test, sec 79.541)",
+    "world_profile_test.py": "cross-modpack readiness: world profile offline judge, 6 checks (sec 79.541)",
     "direct_test.py": "direct mod HTTP client judge (sec 79.513)",
     "direct.py": "direct Python to mod HTTP client (sec 79.513)",
     "bulk_guard_test.py": "bulk-op guard judge incl. the CC-computer accident replay (sec 79.512)",

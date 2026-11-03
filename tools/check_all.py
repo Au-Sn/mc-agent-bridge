@@ -209,6 +209,10 @@ GATE = [
     ("recover_test.py", "★D4 一条命令恢复判据★：health 不通不 spawn／spawn 失败如实退出／已就绪幂等／relay 旗处理／exit 0/1/2（RE1~RE10 ✗ 离线 ✗ §79.531✗★）", "quick／offline／fast"),
     # ── 2026-11-03 发布准备轮新增（开源发布：换机器能跑 ✗ Lead 统一进 GATE ✗ 见 §79.536）──
     ("cold_start_test.py", "★D8 冷启动判据★：干净副本缺什么——必需文件（DIST）／禁止物（工具链·第三方 jar·日志·dsh.env）／本机绑定泄漏／离线数据完整／大文件＞50MB（离线 ✗ --fast 默认不连游戏 ✗ §79.536✗★）", "quick／offline／fast"),
+    # ── 2026-11-03 组件化/产品感轮新增（人格档案包 + 跨包世界档案 ✗ 见 §79.540/§79.541）──
+    ("persona_pack_test.py", "★人格档案包判据★：SillyTavern V2 角色卡 JSON/PNG 导入导出／--use 渲染兼容 talk.py／注入 warn 不静默／超大与坏输入必红／幂等／template 可回读（离线 ✗ §79.540✗★）", "quick／offline／fast"),
+    ("world_profile_test.py", "★世界档案判据★：无档案不兜底／recover·soak·doctor 三处接线可测／坏档案必红／--init 幂等／CLI>profile>默认优先级／档案里不许本机绝对路径（离线 ✗ §79.541✗★）", "quick／offline／fast"),
+    ("speech_alive_test.py", "★语言表现层判据（活人感）★：去 AI 腔／长度预算／十轮去重／失败不谎报／上下文引用／口癖概率／5 场景主动发言／人格不串味／talk 接线点（离线 ✗ §79.543✗★）", "quick／offline／fast"),
 ]
 
 

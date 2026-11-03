@@ -38,6 +38,11 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from channel import Channel, BridgeError      # noqa: E402
+# ★★2026-11-03（§79.543 联调时发现，HEAD 既有 bug）✗★★：`channel.py` 会
+#   `sys.path.insert(0, tools/)` 并 `import paths` ⇒ 此时 `memory` 会先解析到
+#   `tools/memory.py`（没有 Facts/GoalStack/Journal）⇒ `py tools/talk.py --help` 直接崩 ✗
+#   ⇒ 在这几个同名模块前**再把 agent/ 放回最前**（agent/memory.py 才是这里要的 ✓）。
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 from memory import Facts, GoalStack, Journal   # noqa: E402
 from reflex import Reflex                      # noqa: E402
 from skills import Skills                      # noqa: E402

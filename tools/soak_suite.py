@@ -77,12 +77,28 @@ SCHEMA = "dshbridge/soak_scorecard@1"
 MIX = {"idle": 0.20, "walk": 0.30, "work": 0.50}
 FULL_BAR_CALLS_DEFAULT = 2000
 
-# ★测试区锚点✗★：家附近（x4115..4129 z19..32 是家/屋 ⇒ 锚点取家门外那块平台）
+# ★测试区锚点✗★：默认值只是**本机旧默认**；有 `state/world_profile.json` 时以档案 `soak_anchor` 为准
 HOME_ANCHOR = (4121, 71, 15)
 SAFE_START_RADIUS = 16.0
 # ★虚空平台✗★：x4145..4160 z2..17 y=70（另一块 256 格 stone，别往里走）
 VOID_PLATFORM_BOX = (4145, 70, 2, 4160, 70, 17)
 HOME_FALLBACK_BOX = (4115, 71, 19, 4129, 79, 32)
+
+
+def default_anchor(profile_path=None) -> tuple:
+    """★锚点解析（唯一口径）✗★：world_profile.soak_anchor 优先；无档案 ⇒ 本机旧默认＋**明确打印**"""
+    try:
+        import world_profile as WP
+        val, source, why = WP.resolve_anchor("soak_anchor", path=profile_path)
+    except Exception as exc:              # ★不许静默✗★
+        print("soak: world_profile 解析失败 (%s: %s) ⇒ 用本机默认 soak 锚点 %s"
+              % (type(exc).__name__, str(exc)[:120], HOME_ANCHOR), file=sys.stderr)
+        return HOME_ANCHOR
+    if val is not None:
+        return tuple(val)
+    print("soak: %s ⇒ 用本机默认 soak 锚点 %s（world_profile 未配置）" % (why, HOME_ANCHOR),
+          file=sys.stderr)
+    return HOME_ANCHOR
 
 PLACEABLE = [
     "minecraft:cobblestone", "minecraft:dirt", "minecraft:gravel", "minecraft:sand",
@@ -2175,8 +2191,9 @@ def build_parser() -> argparse.ArgumentParser:
     ap.add_argument("--seed", type=int, default=7)
     ap.add_argument("--max-calls", type=int, default=FULL_BAR_CALLS_DEFAULT,
                     help="满档门槛（调用数 >= 它才算满档；短跑只记实际次数）")
-    ap.add_argument("--anchor", default="%d,%d,%d" % HOME_ANCHOR,
-                    help="测试区锚点 x,y,z（起点必须在它半径 16 内）")
+    ap.add_argument("--anchor", default=None,
+                    help="测试区锚点 x,y,z（默认取 world_profile.soak_anchor；"
+                         "无档案时用本机默认 4121,71,15，会打印说明；起点必须在它半径 16 内）")
     ap.add_argument("--allow-void-platform", action="store_true",
                     help="允许在虚空测试平台（x4145..4160 z2..17 y=70）上跑；"
                          "平台模式会加 3×3 空旷 preflight + 平台安全盒 + idle 先回锚点")
@@ -2198,7 +2215,10 @@ def main(argv) -> int:
     if ns.freeze == "check":
         return freeze_check(Path(ns.freeze_file))
     try:
-        anchor = tuple(int(v) for v in str(ns.anchor).split(","))
+        if ns.anchor is not None and str(ns.anchor).strip():
+            anchor = tuple(int(v) for v in str(ns.anchor).split(","))
+        else:
+            anchor = tuple(default_anchor())          # ★world_profile 优先✗★
         if len(anchor) != 3:
             raise ValueError("anchor 必须是 x,y,z")
     except Exception as exc:

@@ -14,6 +14,7 @@
   D6 健康     直连端口 `paths.health_url()` 的 `/health` 能不能通（**读 only**；连不上 = unknown 不判死）
   D7 进程     有没有 java/javaw 进程（判不了一律 unknown ✗ 不猜）
   D8 判据     关键判据入口在不在、能不能编译
+  D9 世界档案 `state/world_profile.json`（跨整合包：锚点/测试平台/no_dig；无 ⇒ unknown 不判死）
 退出码：**0 全好 / 1 有硬问题 / 2 部分未知**（★不知道 ≠ 通过✗★）。`--json` 给机器读。
 """
 from __future__ import annotations
@@ -190,6 +191,32 @@ def _judges_check(root: pathlib.Path) -> dict:
                "缺/坏：%s" % (bad or "无"))
 
 
+def _world_profile_check(root, path=None) -> dict:
+    """★世界档案（跨整合包）✗★：不存在 ⇒ unknown（不算失败）；存在但坏 ⇒ fail
+
+    换包/换存档只改 `state/world_profile.json`；没配时 recover/soak 会打印"用本机默认"。
+    """
+    wp = pathlib.Path(path) if path else (pathlib.Path(root) / "state" / "world_profile.json")
+    if not wp.is_file():
+        return _ck("world_profile", "世界档案 world_profile", UNKNOWN,
+                   "不存在（本机旧默认仍可用；换包/新机跑 "
+                   "`py tools/world_profile.py --init` 再按新世界改值）— 不算失败")
+    try:
+        import world_profile as WP
+        doc, reason = WP.load(str(wp))
+    except Exception as exc:              # ★不许静默✗★
+        return _ck("world_profile", "世界档案 world_profile", FAIL,
+                   "读不了（%s: %s）" % (type(exc).__name__, str(exc)[:120]))
+    if doc is None:
+        return _ck("world_profile", "世界档案 world_profile", FAIL, reason[:240])
+    tp = doc.get("test_platform") or {}
+    return _ck("world_profile", "世界档案 world_profile", OK,
+               "pack=%s anchor=%s soak=%s radius=%s zones=%d"
+               % (doc.get("pack_name"),
+                  WP._fmt_pt(doc.get("anchor")), WP._fmt_pt(doc.get("soak_anchor")),
+                  tp.get("radius"), len(doc.get("no_dig_zones") or [])))
+
+
 def run_doctor(root=None, home=None, health_fn=None, process_fn=None,
                no_net: bool = False, save_name=None, token_files=None) -> dict:
     """★跑全套检查✗★（可注入 ⇒ 判据完全不碰真网络/真进程/真盘）"""
@@ -213,6 +240,7 @@ def run_doctor(root=None, home=None, health_fn=None, process_fn=None,
     checks.append(_ck("save", "存档目录 SAVE_DIR",
                       OK if save.is_dir() else FAIL, str(save)))
     checks.append(_data_check(root))
+    checks.append(_world_profile_check(root))
     checks.append(_version_check(root, home))
     checks.append(_token_check(home, candidates=token_files))
 

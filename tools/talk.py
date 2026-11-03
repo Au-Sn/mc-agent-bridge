@@ -76,6 +76,7 @@ import speech_loop as SL                   # noqa: E402
 import jobs_store as JS                    # noqa: E402  ★我们自己的任务账本 ✓（不是模组事件 ✗）
 import memory3 as M3                       # noqa: E402  ★人／承诺／地 ✓（用户第 4 条 ✓）
 import corpus as CO                        # noqa: E402  ★出口的字符收口（P136 ✓）
+import speech_style as SS                  # noqa: E402  ★语言表现层（活人感）✓ 纯函数/可注入 ✓
 
 try:
     # `line_buffering=True` ✗（实测教训 ✓）：后台跑的时候 stdout **不是 TTY** ✓
@@ -356,7 +357,7 @@ def _load_persona_file(name: str) -> str | None:
                 if t:
                     return t
         except Exception:
-            continue
+            print("★忽略异常（talk 内部容错，已记录位置 ✗★）", file=sys.stderr); continue
     return None
 
 
@@ -402,7 +403,7 @@ def last_round_brief(rec: dict | None, limit: int = 160) -> str:
         for m in re.finditer(r"\[mc_mcp\]\s+(\w+)\s+[\d.]+s\s+(\w+)", err):
             tools.append(m.group(1) + ("" if m.group(2) == "ok" else "(失败)"))
     except Exception:
-        pass
+        print("★忽略异常（talk 内部容错，已记录位置 ✗★）", file=sys.stderr)
     ans = (rec.get("out_text") or "").strip()
     if not ans:
         try:
@@ -481,6 +482,12 @@ class Talk:
         self.profile = str(args.get("profile") or "mcbot")    # harness 用哪个剖面 ✓
         self.persona_name = str(args.get("persona") or DEFAULT_PERSONA)
         self.persona = load_persona(self.persona_name)        # ★这就是"定制角色"✓
+        # ── ★语言表现层（活人感）★ ✓：profile 从 personas/<名>.speech.json／角色卡
+        #    extensions.dsh_speech 读；卡里没有就给默认值 ✓（风格层是"前端"，人设只是输入 ✓）
+        self.speech = SS.load_for_persona(PERSONA_DIR, self.persona_name)
+        self.recent_said: list[str] = []      # ★最近说过的话（十轮去重 ✓）✗
+        self.sleep_fn = None                  # ★节奏延迟可注入 sleep✗★（默认不睡 ⇒ 不改对外节奏 ✓）
+        self._last_say_t = 0.0
         self.harness_timeout = float(args.get("timeout") or 240)
         # ★"垫话"★ ✓：模型动手前**不一定**记得先用 `say` 吱一声 ✗（实测漏了 ⇒ 对面干等 87 秒 ✗）
         #   ⇒ 别指望模型自觉 ✗ ⇒ 由**中继层**兜住 ✓（真人也会说「我看看」✓）
@@ -528,6 +535,7 @@ class Talk:
         self.render_cfg = PR.load(PERSONA_DIR / (self.persona_name + ".render.json")) \
             if (PERSONA_DIR / (self.persona_name + ".render.json")).is_file() else PR.load()
         self.render_rng = _random.Random()
+        self.style_rng = _random.Random()     # ★风格层 rng（口癖/emoji 概率；可注入 ✓）
 
     # ── 与世界打交道 ─────────────────────────────────────────────────────────
     def bot_cmd(self, text: str, t: float = 60.0) -> str:
@@ -602,6 +610,28 @@ class Talk:
         except Exception as e:      # ★★§79.403✗★ 关不掉 canned 快嘴 ⇒ **可能双声**✗ 必须吵✗★
             print("[talk] ★关 canned 快嘴失败✗★（★可能双声★）：%r" % (e,), file=sys.stderr)
 
+    def _style_task_persona(self) -> str:
+        """★人设 ＋ 说话风格约束（给 prompt）✗★ —— 风格层让"怎么说"不靠模型自觉"""
+        return self.persona + "\n\n" + SS.render_style_guide(self.speech)
+
+    def _style_reply(self, txt: str, force: bool = False, tools: int = 0) -> str:
+        """★回复后处理✗★：去 AI 腔／截长／口癖（概率）／十轮去重；空话回退
+
+        ★不改"没输出就沉默"的旧行为✗★（调用方先判 raw 非空再进来）；
+        这里只处理"有输出但不像人话"的情况（AI 腔/超长/重复）。
+        """
+        if not (txt or "").strip():
+            return ""
+        styled = SS.postprocess(txt, self.speech, rng=self.style_rng,
+                                recent=self.recent_said)
+        if not styled:
+            styled = SS.failure_line("", rng=self.style_rng, profile=self.speech) \
+                if (force and tools == 0) else ""
+        if styled:
+            self.recent_said.append(styled)
+            self.recent_said = self.recent_said[-10:]
+        return styled
+
     def say(self, text: str) -> str:
         """★出口也要转义★ ✗（v2.8.2 起模组会解回来 ✓）
 
@@ -616,6 +646,19 @@ class Talk:
              —— 模型回复**不走** `persona_render` ✓ 只有这里能拦 ✓）
         """
         text = CO.strip_marks(text)
+        # ★语言表现层的出口节奏✗★：按字数算 0.3~1.2s（只算 ✓ 默认**不睡** ✗
+        #   sleep_fn 可注入 ⇒ 判据/测试能确定性验证；不改变对外可见节奏 ✓）
+        try:
+            delay = SS.rhythm_delay(text)
+            now = time.time()
+            if now - self._last_say_t < 2.0:
+                delay = max(delay, 2.0 - (now - self._last_say_t))
+            self._last_say_t = now
+            if self.sleep_fn is not None:
+                self.sleep_fn(delay)
+        except Exception as exc:              # ★不许静默✗★
+            print("[talk] ★节奏函数失败✗★（继续说话 ✓ 原因）：%r" % (exc,),
+                  file=sys.stderr)
         esc = "".join(ch if 32 <= ord(ch) < 127 else "\\u%04x" % ord(ch) for ch in text)
         esc = esc.replace('"', "'")
         # ⚠ **不要**再包一层引号 ✗（v2.8.2 实测 ✓）：`dshsay` 的参数是 Brigadier 的
@@ -714,6 +757,9 @@ class Talk:
         out = (rec.get("out_text") or dshrun.read_round_text(rec)[0]).strip()
         txt = honest_reply(clean(out, limit=80), bool(rec.get("force")),
                            int(rec.get("tools") or 0))
+        if out.strip():                       # ★有输出才走后处理✗（没有就保持沉默✓）
+            txt = self._style_reply(txt, force=bool(rec.get("force")),
+                                    tools=int(rec.get("tools") or 0))
         rec["spoken"] = True
         if not txt:
             print("      [!] 上一轮（rid=%s）没有可说的话 ✗ ⇒ 保持沉默 ✓ 只记一笔 ✓" % rid)
@@ -784,7 +830,7 @@ class Talk:
         prev = last_round_brief(dshrun.load_round())
         if prev:
             print("      （把上一轮的真实情况也塞进去了 ✓：%s…）" % prev[:70])
-        task = build_task(self.persona, self.state[:400], convo, who, msg,
+        task = build_task(self._style_task_persona(), self.state[:400], convo, who, msg,
                           force=force, prev=prev)
         t0 = time.time()
         r, dt = self._run_session(task, t0)
@@ -819,6 +865,9 @@ class Talk:
         #   ⇒ 再套一层**诚实兜底** ✓：是指令却 0 次调用 ⇒ 那句话前面加「（我还没真动手 ✗）」
         #     （不改模型的话 ✓ 只把真相标出来 ✓ —— 免得它说"我去弄了"而世界没变 ✗）
         txt = honest_reply(clean(r.get("out") or "", limit=80), force, tools)
+        if (r.get("out") or "").strip():
+            # ★风格层后处理✗★：去 AI 腔/超长/重复 → 口癖（概率）；有输出才动（不改沉默语义✓）
+            txt = self._style_reply(txt, force=force, tools=tools)
         rrec = r.get("rec") or {}
         if rrec:
             # ★把"这一轮是不是指令 / 动了几次手"也落进 round.json★ ✗
@@ -855,6 +904,7 @@ class Talk:
             self.log({"kind": "error", "who": who, "msg": msg, "err": str(e)[:300]})
             return ""
         txt = clean(out.get("content") or "")
+        txt = self._style_reply(txt, force=False, tools=0)     # ★风格层后处理（同一条出口✓）
         dt = time.time() - t0
         self.log({"kind": "reply", "who": who, "heard": msg, "said": txt,
                   "sec": round(dt, 2), "usage": self.llm.usage.copy(),
@@ -893,7 +943,7 @@ class Talk:
             drops = int(float(self._dget("drops", "0")))
             tm = int(float(self._dget("time", "6000")))
         except Exception:
-            return None                      # 读不到 ⇒ ★宁可沉默 ✓ 也不瞎说 ✗
+            print("★忽略异常（talk 内部容错，已记录位置 ✗★）", file=sys.stderr); return None                      # 读不到 ⇒ ★宁可沉默 ✓ 也不瞎说 ✗
         cands: list[tuple[str, str, str]] = []
         if host > 0:                         # ★危险优先★ ✓ 越急的排越前 ✓
             cands.append(("mob", "附近有 %d 只怪 ⇒ 喊一声提醒他 ✓" % host, "附近有怪"))
@@ -928,7 +978,7 @@ class Talk:
             prev = last_round_brief(dshrun.load_round(), limit=80)
         except Exception:
             prev = ""
-        task = (self.persona + "\n\n"
+        task = (self._style_task_persona() + "\n\n"
                 + "──────── 你现在这一轮的处境（★刚查的实况 ✓ 不是记忆 ✗）────────\n"
                 + (self.state or "")[:400] + "\n\n"
                 + (("──────── 你**上一轮**做过什么（真实记录 ✓）────────\n" + prev + "\n\n")
@@ -954,6 +1004,9 @@ class Talk:
         if (not out) or any(w in out for w in IDLE_NO_WORDS):
             print("      ~ 它自己觉得没什么好说的 ✓ ⇒ 保持沉默 ✓（★不硬凑★ ✓）")
             self.log({"kind": "idle_skip", "brain": self.brain, "cue": cue})
+            return ""
+        out = self._style_reply(out)          # ★自己起话头也走同一条风格出口✗★
+        if not out:
             return ""
         self.log({"kind": "idle_say", "brain": self.brain, "persona": self.persona_name,
                   "cue": cue, "said": out, "sec": round(dt, 2), "tools": acted})
@@ -1009,6 +1062,8 @@ class Talk:
             if t:
                 self.persona = t
                 self.persona_mtime = m
+                # ★语言表现层也跟着换✗★（改人设 = 改声音：profile 文件可能同时变）
+                self.speech = SS.load_for_persona(PERSONA_DIR, self.persona_name)
                 print("      ★人设文件被换过了 ✓ 已重新读入（%d 字 ✓）⇒ 从这一轮起就是新声音 ✓"
                       % len(t))
 
@@ -1033,10 +1088,11 @@ class Talk:
                                     "chars": len(text), "head": text[:60]},
                                    ensure_ascii=False) + "\n")
         except Exception:
-            pass
+            print("★忽略异常（talk 内部容错，已记录位置 ✗★）", file=sys.stderr)
         self.persona = text                      # ★当轮生效★ ✓
         self.persona_name = "current"
         self.persona_source = str(p)
+        self.speech = SS.load_for_persona(PERSONA_DIR, "current")  # ★风格 profile 同步找✗★
         return len(text)
 
     def count_tool_calls(self, since: float) -> int:
@@ -1055,7 +1111,7 @@ class Talk:
                     rec = json.loads(line)
                     ts = time.mktime(time.strptime(rec.get("at", ""), "%Y-%m-%d %H:%M:%S"))
                 except Exception:
-                    continue
+                    print("★忽略异常（talk 内部容错，已记录位置 ✗★）", file=sys.stderr); continue
                 if ts >= since - 2.0:
                     n += 1
         except Exception:

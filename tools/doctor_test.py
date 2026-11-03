@@ -55,6 +55,19 @@ def make_fixture(td: pathlib.Path, *, with_home=True, jar_ver="2.56.0",
         json.dumps({"entries": [1, 2, 3]}), encoding="utf-8")
     (root / "state" / "export_snapshots" / "2.56.0__dshbridge_registry_blocks@1__20261102.json"
      ).write_text(json.dumps({"count": snap_count, "blocks": {}}), encoding="utf-8")
+    # 2026-11-03 跨整合包就绪轮（§79.541）：doctor 新增 D9 world_profile ⇒ 全好夹具必须带**合法**档案，
+    # 否则"无档案 = unknown" 会让 D1（exit 0）假红。
+    (root / "state" / "world_profile.json").write_text(json.dumps({
+        "schema": "dshbridge/world_profile@1",
+        "pack_name": "fixture",
+        "anchor": [0, 64, 0],
+        "soak_anchor": [0, 64, 0],
+        "test_platform": {"center": [0, 64, 0], "radius": 3,
+                          "box": [-5, 63, -5, 5, 66, 5]},
+        "no_dig_zones": [{"name": "home", "box": [0, 64, 0, 0, 64, 0]}],
+        "contract_fixture": "state/contracts",
+        "notes": "fixture",
+    }), encoding="utf-8")
     (root / "mod" / "gradle.properties").write_text(
         "minecraft_version=1.20.1\nmod_version=%s\n" % gradle, encoding="utf-8")
     (home / "mods" / ("dshbridge-%s.jar" % jar_ver)).write_bytes(b"jar")
@@ -177,6 +190,15 @@ def main() -> int:
                        "tags=%s export=%s"
                        % (counts.get("tags", {}).get("count"),
                           counts.get("export", {}).get("count"))))
+
+        # D12 世界档案坏 ⇒ 1（2026-11-03 §79.541：D9 world_profile 坏档必须 fail，不许 unknown 混过去）
+        root12, home12 = make_fixture(td / "badwp")
+        (root12 / "state" / "world_profile.json").write_text("{bad json", encoding="utf-8")
+        r12 = run_fixture(root12, home12)
+        checks.append(("D12 世界档案坏 ⇒ 退出码 1（world_profile=fail）",
+                       r12["exit"] == 1 and _status(r12, "world_profile") == "fail",
+                       "exit=%s world_profile=%s"
+                       % (r12["exit"], _status(r12, "world_profile"))))
 
     # D10 CLI --no-net --json（真仓库只读；不碰网络）
     import subprocess
