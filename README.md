@@ -142,8 +142,12 @@ mc-agent-bridge/
 
 ## 许可证与致谢
 
-- 本仓库默认 **MIT** 许可，见 [LICENSE](LICENSE)。仓库**不包含** Minecraft、Forge、Carpet、
-  CC:Tweaked、ATM9 整合包或其它第三方 mod 的二进制；使用前请自行安装并遵守其许可证。
+- 本仓库默认 **MIT** 许可，见 [LICENSE](LICENSE)。**适用范围**：源代码（`mod/`、`tools/`、`agent/`、
+  `gateway/`、`cc-tweaked/` 脚本等）、文档（`docs/`、README、INSTALL、CONTRIBUTING）与项目自产数据
+  （`build/recipes.json`、`state/` 下的分类/例外表等）如无另行声明均按 MIT 提供；引用/再分发第三方资料时以各自原始许可证为准。
+  判据与实测数据按现状提供，不构成可用性/安全性担保。
+- 仓库**不包含** Minecraft、Forge、Carpet、CC:Tweaked、ATM9 整合包或其它第三方 mod 的二进制；
+  使用前请自行安装并遵守其许可证（详见 [docs/开源发布-清单.md](docs/开源发布-清单.md)）。
 - 致谢：[Carpet](https://github.com/gnembon/fabric-carpet)（假人概念与服务端权威行为）、
   [Forge](https://forums.minecraftforge.net/)（模组框架）、
   [CC:Tweaked](https://tweaked.cc/)（后备链路与早期探索）、

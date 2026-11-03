@@ -19,17 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-
-适用范围说明（以上为许可证正文；以下是补充说明，不改变 MIT 条款）：
-
-- 本仓库的源代码（`mod/` 下的 Forge 模组、`tools/` 下的 Python 工具、`agent/`、
-  `gateway/`、`cc-tweaked/` 脚本等）默认按 **MIT** 授权。
-- 文档（`docs/`、`README.md`、`INSTALL.md`、`CONTRIBUTING.md`）与项目自产的数据文件
-  （`build/recipes.json`、`state/` 下的分类/例外表等）如无另行声明，也按 **MIT** 提供；
-  再分发其中引用的第三方资料时，以各自原始许可证为准。
-- 本仓库**不包含** Minecraft、Forge、Carpet、CC:Tweaked、All the Mods 9（ATM9）整合包
-  或其它第三方 mod 的二进制/源代码。使用本项目时需要自行安装这些组件，并遵守其各自
-  的许可证（详见 `docs/开源发布-清单.md`）。
-- 项目中的「判据」与实测数据是研究过程的产物，按现状提供，不构成任何可用性/安全性担保。
