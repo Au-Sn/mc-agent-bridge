@@ -395,6 +395,23 @@ def _strip_ai_tells(text: str, profile: dict) -> str:
     return out
 
 
+_FACT_DIGIT = re.compile(r"\d")
+_FACT_UNIT = re.compile(r"(株|个|块|格|颗|只|桶|箱|组|次|天|分钟|秒|点|%|熟|剩|坐标|掉落|级)")
+
+
+def _fact_score(sent: str) -> int:
+    """★"具体"打分✗★：活人感 = 具体事实，不是寒暄（2026-11-03 联调：截断不能只剩"你好呀"）"""
+    s = str(sent or "")
+    score = 0
+    if _FACT_DIGIT.search(s):
+        score += 2
+    if _FACT_UNIT.search(s):
+        score += 1
+    if ("主人" in s) or ("你" in s):
+        score += 1
+    return score
+
+
 def _clip_budget(text: str, profile: dict) -> str:
     s = profile.get("sentence") or {}
     max_chars = int(s.get("max_chars", 60))
@@ -402,24 +419,38 @@ def _clip_budget(text: str, profile: dict) -> str:
     sents = _sentences(text)
     if not sents:
         return ""
-    out = []
-    total = 0
-    for sent in sents[:max_sents]:
+    if len(sents) <= max_sents and sum(len(x) for x in sents) <= max_chars:
+        res = "".join(sents)
+        if res and res[-1] not in "。！？!?…~～":
+            res += "。"      # ★不补标点会把下一句粘过来✗★（2026-11-03 联调：world_unreachable我换个法子。）
+        return res
+    # ★截断先挑"带具体事实"的句子，再按原顺序拼✗★
+    #   （旧实现按开头顺序砍 ⇒ 模型啰嗦时只剩"你好呀！"这类寒暄，观感反而更空）
+    order = sorted(range(len(sents)), key=lambda i: (-_fact_score(sents[i]), i))
+    chosen, total = [], 0
+    for i in order:
+        if len(chosen) >= max_sents:
+            break
+        sent = sents[i]
         if total + len(sent) <= max_chars:
-            out.append(sent)
+            chosen.append(i)
             total += len(sent)
             continue
-        room = max_chars - total
-        if room <= 2:
+        if not chosen:
+            # ★最高优先级句子本身超预算 ⇒ 先选它，最后统一按预算截✗★
+            #   （否则短句人设会把"33 株/27 熟"这条事实整句丢掉，只剩"你好呀"）
+            chosen.append(i)
+            total = max_chars
             break
-        cut = sent[:room]
+    if not chosen:
+        chosen = [0]
+    res = "".join(sents[i] for i in sorted(chosen)).strip()
+    if len(res) > max_chars:
+        cut = res[:max_chars]
         m = re.search(r"[，,、。！？!?；;：:]", cut[::-1])
         if m and len(cut) - m.start() > 3:
             cut = cut[:len(cut) - m.start()]
-        out.append(cut.rstrip("，,、；;：: "))
-        total = max_chars
-        break
-    res = "".join(out).strip()
+        res = cut.rstrip("，,、；;：: ")
     if res and res[-1] not in "。！？!?…~～":
         res += "。"
     return res
